@@ -36,4 +36,6 @@
 ehthumbs.db
 Thumbs.db
 vendor/
-.idea
+.idea/
+web/image/cache/
+cache/
