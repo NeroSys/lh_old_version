@@ -1,0 +1,132 @@
+--- opencart/opencart/upload/admin/controller/extension/analytics.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/analytics.php	(date 1521447008000)
+@@ -115,7 +115,7 @@
+ 		
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/analytics/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/analytics/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/captcha.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/captcha.php	(date 1521447008000)
+@@ -110,7 +110,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/captcha/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/captcha/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/feed.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/feed.php	(date 1521447008000)
+@@ -110,7 +110,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/feed/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/feed/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/fraud.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/fraud.php	(date 1521447008000)
+@@ -110,7 +110,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/fraud/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/fraud/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/module.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/module.php	(date 1521447008000)
+@@ -145,7 +145,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/module/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/module/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/payment.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/payment.php	(date 1521447008000)
+@@ -115,7 +115,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/payment/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/payment/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/shipping.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/shipping.php	(date 1521447008000)
+@@ -115,7 +115,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/shipping/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/shipping/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/theme.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/theme.php	(date 1521447008000)
+@@ -115,7 +115,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/theme/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/theme/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/admin/controller/extension/total.php	(date 1521447008000)
++++ opencart/opencart/upload/admin/controller/extension/total.php	(date 1521447008000)
+@@ -113,7 +113,7 @@
+ 
+ 		$data['extensions'] = array();
+ 
+-		$files = glob(DIR_APPLICATION . 'controller/total/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/total/*.php');
+ 
+ 		if ($files) {
+ 			foreach ($files as $file) {
+
+--- opencart/opencart/upload/catalog/controller/account/account.php	(date 1521447013000)
++++ opencart/opencart/upload/catalog/controller/account/account.php	(date 1521447013000)
+@@ -55,7 +55,7 @@
+ 		
+ 		$data['credit_cards'] = array();
+ 		
+-		$files = glob(DIR_APPLICATION . 'controller/credit_card/*.php');
++		$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . 'controller/credit_card/*.php');
+ 		
+ 		foreach ($files as $file) {
+ 			$code = basename($file, '.php');
+
+--- opencart/opencart/upload/catalog/controller/checkout/cart.php	(date 1521447013000)
++++ opencart/opencart/upload/catalog/controller/checkout/cart.php	(date 1521447013000)
+@@ -242,7 +242,7 @@
+ 
+ 			$data['modules'] = array();
+ 			
+-			$files = glob(DIR_APPLICATION . '/controller/total/*.php');
++			$files = \App\Helper\GlobRewriter::glob(DIR_APPLICATION . '/controller/total/*.php');
+ 
+ 			if ($files) {
+ 				foreach ($files as $file) {
+

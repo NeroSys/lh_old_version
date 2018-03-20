@@ -1,0 +1,27 @@
+{
+  "name": "tymosh/lh",
+  "require": {
+    "opencart/opencart": "2.2.0.0",
+    "vaimo/composer-patches": "^3.25"
+  },
+  "authors": [
+    {
+      "name": "tymosh",
+      "email": "mrtimosh@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": "bin/"
+    }
+  },
+  "extra": {
+    "patches": {
+      "opencart/opencart": {
+        "global glob func rewrite": "patches/glob_func_rewrites.patch",
+        "exists file checks rewrites": "patches/file_exists_rewrites.patch",
+        "permissions file exists rewrites": "patches/user_permission_rewrites.patch"
+      }
+    }
+  }
+}

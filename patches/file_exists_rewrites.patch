@@ -1,0 +1,36 @@
+
+--- opencart/opencart/upload/admin/controller/extension/theme.php	(date 1521451051000)
++++ opencart/opencart/upload/admin/controller/extension/theme.php	(date 1521451051000)
+@@ -101,7 +101,7 @@
+ 		$extensions = $this->model_extension_extension->getInstalled('theme');
+ 
+ 		foreach ($extensions as $key => $value) {
+-			if (!file_exists(DIR_APPLICATION . 'controller/theme/' . $value . '.php')) {
++			if (!\App\Helper\FileExiststRewriter::fileExists(DIR_APPLICATION . 'controller/theme/' . $value . '.php')) {
+ 				$this->model_extension_extension->uninstall('theme', $value);
+ 
+ 				unset($extensions[$key]);
+
+--- opencart/opencart/upload/catalog/controller/event/theme.php	(date 1521467092000)
++++ opencart/opencart/upload/catalog/controller/event/theme.php	(date 1521467092000)
+@@ -16,7 +16,7 @@
+ 			$directory = $this->config->get('config_theme');
+ 		}
+ 
+-		if (is_file(DIR_TEMPLATE . $directory . '/template/' . $view . '.tpl')) {
++		if (\App\Helper\FileExiststRewriter::fileExists(DIR_TEMPLATE . $directory . '/template/' . $view . '.tpl')) {
+ 			$view = $directory . '/template/' . $view;
+ 		} else {
+ 			$view = 'default/template/' . $view;
+
+--- opencart/opencart/upload/admin/controller/extension/module.php	(date 1521467181000)
++++ opencart/opencart/upload/admin/controller/extension/module.php	(date 1521467181000)
+@@ -134,7 +134,7 @@
+ 		$extensions = $this->model_extension_extension->getInstalled('module');
+ 
+ 		foreach ($extensions as $key => $value) {
+-			if (!file_exists(DIR_APPLICATION . 'controller/module/' . $value . '.php')) {
++			if (!\App\Helper\FileExiststRewriter::fileExists(DIR_APPLICATION . 'controller/module/' . $value . '.php')) {
+ 				$this->model_extension_extension->uninstall('module', $value);
+ 
+ 				unset($extensions[$key]);
