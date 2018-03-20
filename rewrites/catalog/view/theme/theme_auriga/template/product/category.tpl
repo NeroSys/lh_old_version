@@ -118,83 +118,32 @@
            
             <div class="row">
 
-           
-                <script type="text/javascript">
-                    
-                    /*$(document).ready(function() {
-                                $('.popup-gallery').magnificPopup({
-                                    type:'image',
-                                    delegate: 'a',
-                                    gallery: {
-                                            enabled:true
-                                    }
-                                });
-                            });
-                            
-                         if($( document ).width()>1024){    
-                            
-                            var swiper = new Swiper('.swiper-container', {
-                                paginationHide:false,
-                                pagination: '.swiper-pagination',
-                                paginationType: "fraction",
-                                 paginationClickable: true,
-                                nextButton: '.swiper-button-next',
-                                prevButton: '.swiper-button-prev',
-                                spaceBetween: 30,
-                                autoplay: 4000,
-                            });
-                          
-                        }*/
-                </script>
                 <div class="col-xs-5 col-sm-4 category-image">
-                    <?php if($parent_category_info['image'])?><div class="brand-logo"><img src="<?php echo $parent_category_info['image']; ?>" alt="<?php echo $parent_category_info['name']; ?>"></div>
-                           
-                    <?php  if ($images) { ?>
-                      <script>
-                            $(document).ready(function () {
-                                $('.popup-gallery').magnificPopup({
-                                    type: 'image',
-                                    gallery: {
-                                        enabled: true
-                                    }
-                                });
-                            });
+                    <?php if($parent_category_info['image'])?>
+                    <div class="brand-logo"><img src="<?php echo $parent_category_info['image']; ?>"
+                                                 alt="<?php echo $parent_category_info['name']; ?>"></div>
 
-                        </script>
-
-            
-                    <div><a class="thumbnail popup-gallery" href="<?php echo $images[0]['full_image']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $images[0]['full_image']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>"></a></div>
-                           <?php } ?>     
-                           <div class="swiper-container" style="display:none">
-                        <div class="swiper-wrapper">
-                             <?php  $images_slider=1;
-                            if ($images) {
-                                foreach ($images as $image) {
-                                if($image['predmetka']) {continue;}
-                                $images_slider++;?>
-                                <div class="swiper-slide"><a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['full_image']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a></div>
-                                <?php 
+                    <?php  if ($thumb && (int) $parent !== 0) { ?>
+                    <script>
+                        $(document).ready(function () {
+                            $('.popup-gallery').magnificPopup({
+                                type: 'image',
+                                gallery: {
+                                    enabled: true
                                 }
-                            }?>
-                        </div>
-                       <?php 
-                       if($images_slider>1){ ?>
-                        <!-- Add Pagination -->
-                        <div class="swiper-pagination"></div>
-                        <!-- Add Arrows -->
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
-                        
-                    
+                            });
+                        });
+
+                    </script>
+
+
+                    <div>
+                        <a class="thumbnail popup-gallery" href="<?php echo $category_image; ?>" title="<?php echo $heading_title; ?>">
+                            <img src="<?php echo $thumb ?>" title="<?php echo $heading_title; ?>"  alt="<?php echo $heading_title; ?>">
+                        </a>
+                    </div>
                     <?php } ?>
-                    </div>
-                     <div class="additional_images" style="display:none">
-	            <?php foreach ($images as $image) { if($image['predmetka'] == 0) { continue; } ?>
-                        <a class="thumbnail-additional thumbnail" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
-	            <?php } ?>
-                    </div>
-                   
-	
+
                 </div>
            
 
@@ -222,7 +171,7 @@
            
             <?php if (!$categories && !$products) { ?>
             <p style="display: none"><?php echo $text_empty; ?></p>
-            <div class="buttons">
+            <div class="buttons" style="display: none;">
                 <div class="pull-right"><a href="<?php echo $continue; ?>" class="btn btn-primary"><?php echo $button_continue; ?></a></div>
             </div>
             <?php } ?>

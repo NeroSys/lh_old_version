@@ -1,27 +1,23 @@
+--- opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521534355000)
++++ opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521534355000)
+@@ -354,7 +354,7 @@
+ 		$files = array();
 
---- opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521474899000)
-+++ opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521474899000)
-@@ -360,7 +360,7 @@
+ 		// Make path into an array
+-		$path = array(DIR_APPLICATION . 'controller/*');
++        $path = array(DIR_APPLICATION . 'controller/*', LOCAL_DIR_APPLICATION . 'controller/*');
+
+ 		// While the path array is still populated keep looping through
  		while (count($path) != 0) {
- 			$next = array_shift($path);
- 
--			foreach (glob($next) as $file) {
-+			foreach (\App\Helper\GlobRewriter::glob($next) as $file) {
- 				// If directory add to path array
- 				if (is_dir($file)) {
- 					$path[] = $file . '/*';
-
---- opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521474899000)
-+++ opencart/opencart/upload/admin/controller/user/user_permission.php	(date 1521474899000)
 @@ -377,9 +377,8 @@
  		sort($files);
- 					
+
  		foreach ($files as $file) {
 -			$controller = substr($file, strlen(DIR_APPLICATION . 'controller/'));
 -
 -			$permission = substr($controller, 0, strrpos($controller, '.'));
 +            $controller = explode('/controller/', $file);
-+			$permission = substr($controller[1], 0, strrpos($controller[1], '.'));
++            $permission = substr($controller[1], 0, strrpos($controller[1], '.'));
  
  			if (!in_array($permission, $ignore)) {
  				$data['permissions'][] = $permission;

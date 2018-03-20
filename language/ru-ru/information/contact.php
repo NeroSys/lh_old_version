@@ -1,6 +1,6 @@
 <?php
 // Heading
-$_['heading_title']  = 'ОПТ';
+$_['heading_title']  = 'Магазины';
 
 // Text
 $_['text_location']  = 'Наш офис';

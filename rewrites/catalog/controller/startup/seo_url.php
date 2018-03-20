@@ -94,53 +94,52 @@ class ControllerStartupSeoUrl extends Controller {
 
 		parse_str($url_info['query'], $data);
 
-		foreach ($data as $key => $value) {
-			if (isset($data['route'])) {
-				if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'newsblog/article' && $key == 'newsblog_article_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
-					$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
-
-					if ($query->num_rows && $query->row['keyword']) {
-						$url .= '/' . $query->row['keyword'];
-
-						unset($data[$key]);
-					}
-				}
-            } elseif ($key == 'newsblog_path') {
-                $categories = explode('_', $value);
-
-                foreach ($categories as $category) {
-                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'newsblog_category_id=" . (int)$category . "'");
+        foreach ($data as $key => $value) {
+            if (isset($data['route'])) {
+                if (($data['route'] == 'product/product' && $key == 'product_id') || (($data['route'] == 'product/manufacturer/info' || $data['route'] == 'product/product') && $key == 'manufacturer_id') || ($data['route'] == 'newsblog/article' && $key == 'newsblog_article_id') || ($data['route'] == 'information/information' && $key == 'information_id')) {
+                    $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($key . '=' . (int)$value) . "'");
 
                     if ($query->num_rows && $query->row['keyword']) {
                         $url .= '/' . $query->row['keyword'];
-                    } else {
-                        $url = '';
 
-                        break;
+                        unset($data[$key]);
                     }
+                } elseif ($key == 'newsblog_path') {
+                    $categories = explode('_', $value);
+
+                    foreach ($categories as $category) {
+                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'newsblog_category_id=" . (int)$category . "'");
+
+                        if ($query->num_rows && $query->row['keyword']) {
+                            $url .= '/' . $query->row['keyword'];
+                        } else {
+                            $url = '';
+
+                            break;
+                        }
+                    }
+
+                    unset ($data[$key]);
+                } elseif ($key == 'path') {
+                    $categories = explode('_', $value);
+
+                    foreach ($categories as $category) {
+                        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int)$category . "'");
+
+                        if ($query->num_rows && $query->row['keyword']) {
+                            $url .= '/' . $query->row['keyword'];
+                        } else {
+                            $url = '';
+
+                            break;
+                        }
+                    }
+
+                    unset($data[$key]);
                 }
-
-                unset ($data[$key]);
             }
-				elseif ($key == 'path') {
-					$categories = explode('_', $value);
 
-					foreach ($categories as $category) {
-						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = 'category_id=" . (int)$category . "'");
-
-						if ($query->num_rows && $query->row['keyword']) {
-							$url .= '/' . $query->row['keyword'];
-						} else {
-							$url = '';
-
-							break;
-						}
-					}
-
-					unset($data[$key]);
-				}
-
-		}
+        }
 
 		if ($url) {
 			unset($data['route']);
