@@ -49,9 +49,9 @@
                     </select>
                 </div>
             </div>	  
-            <div class="row products-category">
+            <div class="row products-category grid">
                 <?php foreach ($products as $product) { ?>
-                <div class="product-layout product-list col-xs-12">
+                <div class="product-layout product-list col-xs-12 ">
                     <div class="product-container">
                         <div class="item-inner">
                             <div class="left-block">

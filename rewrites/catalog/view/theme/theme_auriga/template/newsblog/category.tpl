@@ -53,7 +53,7 @@
       <?php } ?>
       <?php } ?>
       <?php if ($articles) { ?>
-      <div class="articles-list">
+      <div class="articles-list grid">
         <?php foreach ($articles as $article) { ?>
         <div class="row">
             

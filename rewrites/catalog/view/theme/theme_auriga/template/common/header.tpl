@@ -23,7 +23,7 @@
     <script src="/catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="/catalog/view//javascript/loadcss.js" type="text/javascript"></script>
     <link href="/catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" href="/catalog/view/theme/tt_auriga/stylesheet/global_red.css?d2">
+    <link rel="stylesheet" type="text/css" href="/catalog/view/theme/tt_auriga/stylesheet/global_red.css?d22">
     <script>
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/fonts/font-awesome-4.7.0/css/font-awesome.min.css");
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/animate.css");
@@ -87,7 +87,7 @@
                 <a href="tel:+38(044)593-33-53" class="phone-header"><i class="fa fa-phone-square"></i> (044) 593-33-53</a>
             </div>
 
-            <div class="col-md-9 col-sm-5 col-xs-7 col-logo">
+            <div class="col-md-9 col-sm-5 col-xs-7" style="display: none !important;">
                 <div class="cart-search">
                     <div class="top-cart">
                         <?php echo $cart; ?>

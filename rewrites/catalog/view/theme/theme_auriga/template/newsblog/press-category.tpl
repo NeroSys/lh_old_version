@@ -29,7 +29,8 @@
            <!-- Articles -->
             <?php if ($articles) { ?>
 
-            <div class="press-post-list">
+            <div class="press-post-list grid">
+                <div class="row">
             <?php foreach ($articles as $article) { ?>
 
                 <div class="col-md-4 press-post-item">
@@ -43,6 +44,7 @@
                     </div>
                 </div>
             <?php } ?>
+                </div>
             </div>
             <!--end Articles -->
 

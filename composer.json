@@ -1,8 +1,23 @@
 {
   "name": "tymosh/lh",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/timtimosh/erp-exchange-reader"
+    }
+  ],
   "require": {
     "opencart/opencart": "2.2.0.0",
-    "vaimo/composer-patches": "^3.25"
+    "vaimo/composer-patches": "^3.25",
+    "deployer/deployer": "^6.1",
+    "symfony/console": "^3.0|^4.0",
+    "byjg/migration": "^2.0",
+    "php-activerecord/php-activerecord": "^1.2",
+    "lhgroup/from1ctoweb": "~v1.0.1"
   },
   "authors": [
     {
@@ -12,7 +27,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "App\\": "bin/"
+      "App\\": "src/"
     }
   },
   "extra": {
