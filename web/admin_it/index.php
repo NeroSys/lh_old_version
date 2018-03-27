@@ -7,9 +7,8 @@ require_once(__DIR__ . '/../../vendor/autoload.php');
 define('VERSION', '2.2.0.0');
 
 // Configuration
-if (is_file(__DIR__.'/../../config/config_backend.php')) {
-    require_once(__DIR__.'/../../config/config_backend.php');
-}
+define('WEBSITE_TYPE', "BACKEND");
+require_once(dirname(__DIR__,2) . '/config/config.php');
 
 $application_config = 'admin';
 // Startup

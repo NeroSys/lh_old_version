@@ -1,4 +1,5 @@
 <?php
+
 namespace Deployer;
 
 require 'recipe/common.php';
@@ -7,10 +8,10 @@ require 'recipe/common.php';
 set('application', 'Little-House');
 
 // Project repository
-set('repository', 'https://mrtimosh@bitbucket.org/little-house/little-house.com.ua_2.2.git');
+set('repository', 'git@bitbucket.org:little-house/little-house.com.ua_2.2.git');
 
 // [Optional] Allocate tty for git clone. Default value is false.
-set('git_tty', true); 
+set('git_tty', true);
 
 // Shared files/dirs between deploys 
 set('shared_files', []);
@@ -22,12 +23,13 @@ set('allow_anonymous_stats', false);
 
 // Hosts
 
-host('prod')
+host('little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
+    ->stage('prod')
     ->hostname('192.168.102.79')
     ->user('admin')
     ->port(22)
-   // ->configFile('~/.ssh/config')
+    // ->configFile('~/.ssh/config')
     ->identityFile('~/.ssh/id_rsa')
     ->forwardAgent(true)
     ->multiplexing(true)
@@ -66,6 +68,14 @@ task('deploy', [
     'success'
 ]);
 
+task('notifyDeploySuccess', function () {
+    mail("mrtimosh@gmail.com", "Deploy success", "Congrats, deploy successfuly done");
+});
+
+task('notifyDeployFailed', function () {
+    mail("mrtimosh@gmail.com", "Deploy failed", "Sorry, deploy failed");
+});
+
 /*task('reload:php-fpm', function () {
     run('sudo /usr/sbin/service php7-fpm reload');
 });
@@ -74,5 +84,5 @@ after('deploy', 'reload:php-fpm');*/
 // [Optional] If deploy fails automatically unlock.
 
 after('deploy:failed', 'deploy:unlock');
-after('success', 'notify');
-after('deploy:failed', 'notify');
+after('success', 'notifyDeploySuccess');
+after('deploy:failed', 'notifyDeployFailed');

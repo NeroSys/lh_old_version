@@ -1,0 +1,7 @@
+DB_DRIVER: mysqli
+DB_HOSTNAME: localhost
+DB_USERNAME: root
+DB_PASSWORD: 121331
+DB_DATABASE: lh-test
+DB_PORT: 3306
+DB_PREFIX: oc_

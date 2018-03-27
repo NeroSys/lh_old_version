@@ -7,9 +7,10 @@ require_once(__DIR__ . '/../vendor/autoload.php');
 define('VERSION', '2.2.0.0');
 
 // Configuration
-if (is_file(__DIR__.'/../config/config_frontend.php')) {
-    require_once(__DIR__.'/../config/config_frontend.php');
-}
+define('WEBSITE_TYPE', "FRONTEND");
+
+require_once(dirname(__DIR__,1) . '/config/config.php');
+
 
 // Startup
 require_once(DIR_SYSTEM . 'startup.php');

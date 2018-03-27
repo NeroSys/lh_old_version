@@ -1,22 +1,29 @@
 <?php
-define('DEBUG', 0);
-define('LOCAL_DIR_OPENCART', dirname(__DIR__)."/");
-define('LOCAL_DIR_OPENCART_REWRITES', LOCAL_DIR_OPENCART.'rewrites/');
 
-define('DIR_OPENCART', LOCAL_DIR_OPENCART.'vendor/opencart/opencart/upload/');
-define('DIR_SYSTEM', DIR_OPENCART.'system/');
-define('LOCAL_DIR_SYSTEM', LOCAL_DIR_OPENCART_REWRITES.'system/');
+use M1\Vars\Vars;
 
-define('DIR_CONFIG', DIR_OPENCART.'system/config/');
+$appConfig = new Vars([__DIR__.'/web/basic.yml', __DIR__.'/database/database.yml'],
+    [
+        'cache' => false,
+    ]);
 
-define('PUBLIC_WEB', LOCAL_DIR_OPENCART.'/web/');
-define('DIR_MODIFICATION', LOCAL_DIR_OPENCART.'rewrites/');
+switch (WEBSITE_TYPE) {
+    case 'FRONTEND':
+        require_once __DIR__.'/web/config_frontend.php';
+    break;
+    default:
+        require_once __DIR__.'/web/config_backend.php';
 
-define('DIR_IMAGE', PUBLIC_WEB.'/image/');
-define('DIR_CACHE', LOCAL_DIR_OPENCART.'/cache/');
-define('DIR_DOWNLOAD', PUBLIC_WEB.'/storage/download/');
-define('DIR_LOGS', LOCAL_DIR_OPENCART.'/logs/');
+}
 
-define('DIR_UPLOAD', PUBLIC_WEB.'/storage/upload/');
+$appConfig->addResource(__DIR__.'/web/local.yml');
 
-require_once(__DIR__."/database.php");
+opencartConfigInit($appConfig);
+
+function opencartConfigInit(Vars $config)
+{
+    foreach ($config->getContent() as $variable => $varValue){
+        define($variable, $varValue);
+    }
+
+}
