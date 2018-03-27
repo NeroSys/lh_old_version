@@ -39,3 +39,4 @@ vendor/
 .idea/
 web/image/cache/
 cache/
+config/local.yml
