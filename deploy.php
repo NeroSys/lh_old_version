@@ -77,7 +77,7 @@ task('notifyDeployFailed', function () {
 });
 
 task('clear:cache', function () {
-    run('ls');
+    run('ls -la ');
 });
 
 after('deploy', 'clear:cache');
