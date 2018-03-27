@@ -2,11 +2,6 @@
 
 require_once __DIR__."/basic.php";
 
-// HTTP
-$appConfig->set('HTTP_SERVER', 'http://lh-test.loc/');
-
-// HTTPS
-$appConfig->set('HTTPS_SERVER', 'https://lh-test.loc/');
 $appConfig->set('ASSETS_WEB_PATH', 'assets/');
 // DIR
 $appConfig->set('DIR_APPLICATION', $appConfig->get('DIR_OPENCART').'catalog/');

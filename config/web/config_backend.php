@@ -1,9 +1,7 @@
 <?php
 require_once __DIR__."/basic.php";
 
-$appConfig->set('HTTP_SERVER', 'http://lh-test.loc/admin_it/');
-$appConfig->set('HTTP_CATALOG', 'http://lh-test.loc/');
-
+$appConfig->set('HTTP_SERVER',  $appConfig->get('CURRENT_HTTP_DOMAIN').'/admin_it/');
 $appConfig->set('DIR_APPLICATION', $appConfig->get('DIR_OPENCART').'admin/');
 $appConfig->set('LOCAL_DIR_APPLICATION', $appConfig->get('DIR_MODIFICATION').'admin/');
 

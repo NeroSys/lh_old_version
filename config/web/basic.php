@@ -17,3 +17,7 @@ $appConfig->set('DIR_DOWNLOAD', $appConfig->get('PUBLIC_WEB').'/storage/download
 $appConfig->set('DIR_LOGS', $appConfig->get('LOCAL_DIR_OPENCART').'/logs/');
 
 $appConfig->set('DIR_UPLOAD', $appConfig->get('PUBLIC_WEB').'/storage/upload/');
+
+$appConfig->set('HTTP_CATALOG', $appConfig->get('CURRENT_HTTP_DOMAIN'));
+$appConfig->set('HTTP_SERVER',  $appConfig->get('CURRENT_HTTP_DOMAIN'));
+$appConfig->set('HTTPS_SERVER',  $appConfig->get('CURRENT_HTTPS_DOMAIN'));
