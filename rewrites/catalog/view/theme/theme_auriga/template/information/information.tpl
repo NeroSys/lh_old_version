@@ -17,7 +17,7 @@
       <h1><?php echo $heading_title; ?></h1>
       <?php echo $description; ?><?php echo $content_bottom; ?>
       <?php
-      if($information_id == 4){
+      if(isset($information_id) && $information_id == 4){
     ?>
       <div class="row" style="margin-top:20px">
         <div class="col-sm-8"> <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?sid=PVrlWPW4uvoVC0iYWQ1x9zsuko5VhQK8&amp;width=100%&amp;height=400&amp;lang=ru_RU&amp;sourceType=constructor&amp;scroll=true"></script>

@@ -14,8 +14,8 @@ set('repository', 'git@bitbucket.org:little-house/little-house.com.ua_2.2.git');
 set('git_tty', true);
 
 // Shared files/dirs between deploys 
-set('shared_files', []);
-set('shared_dirs', ['logs']);
+set('shared_files', ['config/local.yml']);
+set('shared_dirs', ['logs', 'web/image', 'web/storage']);
 
 // Writable dirs by web server 
 set('writable_dirs', ['logs', 'cache', 'web/storage', 'web/image']);
@@ -76,11 +76,11 @@ task('notifyDeployFailed', function () {
     mail("mrtimosh@gmail.com", "Deploy failed", "Sorry, deploy failed");
 });
 
-/*task('reload:php-fpm', function () {
-    run('sudo /usr/sbin/service php7-fpm reload');
+task('clear:cache', function () {
+    run('ls');
 });
 
-after('deploy', 'reload:php-fpm');*/
+after('deploy', 'clear:cache');
 // [Optional] If deploy fails automatically unlock.
 
 after('deploy:failed', 'deploy:unlock');

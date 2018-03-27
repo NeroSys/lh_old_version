@@ -1,4 +1,12 @@
 CURRENT_HTTP_DOMAIN: http://lh-test.loc/
 CURRENT_HTTPS_DOMAIN: http://lh-test.loc/
 
+DB_DRIVER: mpdo
+DB_HOSTNAME: localhost
+DB_USERNAME: root
+DB_PASSWORD: 121331
+DB_DATABASE: lh-test
+DB_PORT: 3306
+DB_PREFIX: oc_
+
 
