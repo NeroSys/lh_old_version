@@ -21,26 +21,27 @@ $port = DB_PORT;
     );
 });
 
+$ampqConfig = new \LHGroup\From1cToWeb\ConnectionConfig(
+    RABBIT_MQ_HOST,
+    RABBIT_MQ_PORT,
+    RABBIT_MQ_USER,
+    RABBIT_MQ_PASSWORD,
+    RABBIT_MQ_VHOST
+);
 
-    // connect your database here first
-    //
+$itemEntity = \LHGroup\From1cToWeb\Item\ProductItem::class;
 
-    // Actual code starts here
-$ar_adapter = ActiveRecord\ConnectionManager::get_connection();
-    $sql = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES
-        WHERE TABLE_SCHEMA = '".DB_DATABASE."'
-        AND ENGINE = 'MyISAM'";
+$itemFactory = new \LHGroup\From1cToWeb\Item\Unserializer\XmlItemFactory(
+    $itemEntity,
+    new \App\ErpIntegration\IntegrationEventNotify($output),
+    new \LHGroup\From1cToWeb\Item\Validator\ProductValidator(),
+    new \App\ErpIntegration\Processors\ProductProcessor()
+);
 
-    $rs = $ar_adapter->query($sql);
+$reader = new \Tymosh\ErpExchangeReader\Reader\Xml($itemFactory);
 
-    foreach ($rs as $row)
-    {
-        $tbl = $row['table_name'];
-        echo "ALTER TABLE `$tbl` ENGINE=INNODB";
-        echo '<br>';
 
-    }
-
+$reader->processString($xmlMessage);
 
 $product = \App\Entity\Product::find(50);
 var_dump($product->categories);

@@ -17,9 +17,10 @@
     "symfony/console": "^3.0|^4.0",
     "byjg/migration": "~2.0.4",
     "php-activerecord/php-activerecord": "^1.2",
-    "lhgroup/from1ctoweb": "~v1.0.1",
+    "lhgroup/from1ctoweb": "~v1.0.2",
     "m1/vars": "~1.1.2",
-    "hellogerard/jobby": "~3.4.0"
+    "hellogerard/jobby": "~3.4.0",
+    "symfony/var-dumper": "^3.0|^4.0"
   },
   "authors": [
     {

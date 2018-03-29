@@ -25,7 +25,7 @@ set('allow_anonymous_stats', false);
 
 host('dev.little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
-    ->stage('dev')
+    ->stage('dev-products_upload_from_erp')
     ->hostname('192.168.102.79')
     ->user('admin')
     ->port(22)
@@ -35,7 +35,7 @@ host('dev.little-house.com.ua')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
-    ->set('branch', 'master');
+    ->set('branch', 'dev-products_upload_from_erp');
 
 host('demo.little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
@@ -49,7 +49,7 @@ host('demo.little-house.com.ua')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
-    ->set('branch', 'demo');
+    ->set('branch', 'master');
 
 desc('Deploy Little-house');
 task('deploy', [
