@@ -38,7 +38,7 @@ host('dev.little-house.com.ua')
     ->set('branch', 'dev-products_upload_from_erp');
 
 host('demo.little-house.com.ua')
-    ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
+    ->set('deploy_path', '/home/admin/web/demo.little-house.com.ua/public_html')
     ->stage('demo')
     ->hostname('192.168.102.120')
     ->user('admin')
