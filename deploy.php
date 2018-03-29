@@ -81,15 +81,12 @@ task('deploy:clear-cache', function () {
 });
 
 task('deploy:db-migrations', function () {
-    $migrationsResult = run('cd ' . get('release_path') . ' && command php ./bin/console.php migration:update');
+    $migrationsResult = run('cd ' . get('release_path') . ' && command php ./bin/console.php migration:update -v');
     if (strpos($migrationsResult, 'Error migrating tables') !== false) {
         throw new \Exception("DB Migration failed: ".$migrationsResult);
     }
 });
 
-task('getWorkingPath', function () {
-    echo get('working_path');
-});
 
 after('deploy:symlink', 'deploy:db-migrations');
 after('deploy', 'deploy:clear-cache');

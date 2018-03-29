@@ -48,6 +48,7 @@ $application->add(
  */
 
 putenv("MIGRATE_CONNECTION=".\ActiveRecord\Config::instance()->get_default_connection_string());
+$application->add((new \ByJG\DbMigration\Console\InstallCommand())->setName("migration:install-migration-package"));
 $application->add((new \ByJG\DbMigration\Console\UpCommand())->setName("migration:up"));
 $application->add((new \ByJG\DbMigration\Console\DownCommand())->setName("migration:down"));
 $application->add((new \ByJG\DbMigration\Console\DatabaseVersionCommand())->setName("migration:db-version"));
