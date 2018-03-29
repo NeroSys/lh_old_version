@@ -49,7 +49,7 @@ host('demo.little-house.com.ua')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
-    ->set('branch', 'master');
+    ->set('branch', 'dev');
 
 desc('Deploy Little-house');
 task('deploy', [
