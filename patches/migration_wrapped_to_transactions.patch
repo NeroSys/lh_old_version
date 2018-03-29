@@ -1,0 +1,46 @@
+--- byjg/migration/src/Migration.php	(date 1522247160000)
++++ byjg/migration/src/Migration.php	(date 1522247160000)
+@@ -265,6 +265,7 @@
+             throw new DatabaseIsIncompleteException('Database was not fully updated. Use --force for migrate.');
+         }
+ 
++        $sql_query = '';
+         while ($this->canContinue($currentVersion, $upVersion, $increment)
+             && file_exists($file = $this->getMigrationSql($currentVersion, $increment))
+         ) {
+@@ -272,11 +273,13 @@
+                 call_user_func_array($this->callableProgress, ['migrate', $currentVersion]);
+             }
+ 
+-            $this->getDbCommand()->setVersion($currentVersion, 'partial ' . ($increment>0 ? 'up' : 'down'));
+-            $this->getDbCommand()->executeSql(file_get_contents($file));
+-            $this->getDbCommand()->setVersion($currentVersion, 'complete');
++            $sql_query.= file_get_contents($file);
+             $currentVersion = $currentVersion + $increment;
+         }
++        if('' !== $sql_query) {
++            $this->getDbCommand()->executeSql($sql_query);
++            $this->getDbCommand()->setVersion($currentVersion, 'complete');
++        }
+     }
+ 
+     /**
+
+--- byjg/migration/src/Database/MySqlDatabase.php	(date 1522071121000)
++++ byjg/migration/src/Database/MySqlDatabase.php	(date 1522071121000)
+@@ -46,6 +46,14 @@
+
+     public function executeSql($sql)
+     {
+-        $this->getDbDriver()->execute($sql);
++        try {
++            $this->getDbDriver()->beginTransaction();
++            $this->getDbDriver()->execute($sql);
++            $this->getDbDriver()->commitTransaction();
++        }
++        catch (\Throwable $e){
++            $this->getDbDriver()->rollbackTransaction();
++            throw $e;
++        }
+     }
+ }
