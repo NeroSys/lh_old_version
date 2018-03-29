@@ -1,5 +1,6 @@
 <?php
 class DB {
+    use App\Helper\ActiveRecordTrait;
 	private $adaptor;
 
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = NULL) {
@@ -11,15 +12,8 @@ class DB {
 			throw new \Exception('Error: Could not load database adaptor ' . $adaptor . '!');
 		}
 
-        \ActiveRecord\Config::initialize(function($cfg) use ($hostname, $username, $password, $database, $port)
-        {
-            $cfg->set_model_directory(LOCAL_DIR_OPENCART.'/src/Entity');
-            $cfg->set_connections(
-                array(
-                    'production' => 'mysql://'.$username.':'.$password.'@'.$hostname.'/'.$database
-                )
-            );
-        });
+        App\Helper\ActiveRecord::initializeActiveRecord($hostname, $username, $password, $database, $port);
+
 	}
 
 	public function query($sql, $params = array()) {
