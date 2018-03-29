@@ -34,7 +34,7 @@ class GlobRewriter
      * @param $flags
      * @return array
      */
-    protected function globWithMatches($pattern, $flags): array
+    protected function globWithMatches($pattern, $flags = null): array
     {
         $files = [];
         foreach (glob($pattern, $flags) as $originFilePath) {
