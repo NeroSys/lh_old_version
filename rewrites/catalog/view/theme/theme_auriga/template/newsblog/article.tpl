@@ -22,9 +22,9 @@
           	<?php echo $description; ?>
                     
                    <?php if ($images) { ?>
-                   <div class="popup-gallery">
+                   <div class="">
 	            <?php foreach ($images as $image) { ?>
-	            <a class="thumbnail-additional thumbnail" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+	            <a class="thumbnail-additional thumbnail popup-gallery" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>"> <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
 	            <?php } ?>
                     </div>
 	            <?php } ?>
@@ -32,9 +32,9 @@
 
         <div class="col-sm-4">
         	<?php if ($thumb || $images) { ?>
-          	<div class="popup-gallery thumbnails">
+          	<div class="thumbnails">
 	            <?php if ($thumb) { ?>
-	            <a class="thumbnail" href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
+	            <a class="thumbnail popup-gallery" href="<?php echo $popup; ?>" title="<?php echo $heading_title; ?>"><img src="<?php echo $thumb; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>
 	            <?php } ?>
 	         
           	</div>
@@ -49,6 +49,18 @@
 	          	<?php } ?>
             <?php } ?>
         </div>
+        <script>
+            $(document).ready(function () {
+                $('.popup-gallery').magnificPopup({
+                    type: 'image',
+                    gallery: {
+                        enabled: true
+                    }
+                });
+            });
+
+        </script>
+
       </div>
 
   	  <?php if ($articles) { ?>
@@ -153,15 +165,4 @@
     <?php echo $column_right; ?></div>
 </div>
 
-<script type="text/javascript"><!--
-$(document).ready(function() {
-	$('.popup-gallery').magnificPopup({
-		type:'image',
-		delegate: 'a',
-		gallery: {
-			enabled:true
-		}
-	});
-});
-//--></script>
 <?php echo $footer; ?>

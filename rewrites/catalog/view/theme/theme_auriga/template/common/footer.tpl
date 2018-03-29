@@ -131,13 +131,7 @@ Please donate via PayPal to donate@opencart.com
 <script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/Swiper-3.4.0/dist/js/swiper.min.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.popup-gallery').magnificPopup({
-            type: 'ajax'
-        });
-    });
-</script>
+
 
 
 <!-- Yandex.Metrika counter -->
