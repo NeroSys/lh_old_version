@@ -1,9 +1,5 @@
-<?php
-
-return [
-    "host" => '192.168.xxx.xxx',
-    "port" => '5672',
-    "user" => 'your-user',
-    "password" => 'yourpassword',
-    "vhost" => 'your-vhost'
-];
+RABBIT_MQ_HOST: 192.168.xxx.xxx
+RABBIT_MQ_PORT: 5672
+RABBIT_MQ_USER: your-user
+RABBIT_MQ_PASSWORD: yourpassword
+RABBIT_MQ_VHOST: your-vhost
