@@ -25,7 +25,7 @@ set('allow_anonymous_stats', false);
 
 host('dev.little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
-    ->stage('dev-products_upload_from_erp')
+    ->stage('dev')
     ->hostname('192.168.102.79')
     ->user('admin')
     ->port(22)
