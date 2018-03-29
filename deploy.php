@@ -23,7 +23,7 @@ set('allow_anonymous_stats', false);
 
 // Hosts
 
-host('little-house.com.ua')
+host('dev.little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
     ->stage('dev')
     ->hostname('192.168.102.79')
@@ -37,7 +37,7 @@ host('little-house.com.ua')
     ->addSshOption('StrictHostKeyChecking', 'no')
     ->set('branch', 'master');
 
-host('little-house.com.ua')
+host('demo.little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/dev.little-house.com.ua/public_html')
     ->stage('demo')
     ->hostname('192.168.102.120')
@@ -50,20 +50,6 @@ host('little-house.com.ua')
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
     ->set('branch', 'demo');
-
-/*host('dev')
-    ->set('deploy_path', '~/dev.little-house.com.ua')
-    ->hostname('dev.little-house.com.ua')
-    ->user('name')
-    ->port(22)
-  //  ->configFile('~/.ssh/config')
-    ->identityFile('~/.ssh/id_rsa')
-    ->forwardAgent(true)
-    ->multiplexing(true)
-    ->addSshOption('UserKnownHostsFile', '/dev/null')
-    ->addSshOption('StrictHostKeyChecking', 'no');*/
-
-// Tasks
 
 desc('Deploy Little-house');
 task('deploy', [
@@ -82,29 +68,29 @@ task('deploy', [
     'success'
 ]);
 
-task('notifyDeploySuccess', function () {
+task('deploy:notifyDeploySuccess', function () {
     mail("mrtimosh@gmail.com", "Deploy success", "Congrats, deploy successfuly done");
 });
 
-task('notifyDeployFailed', function () {
+task('deploy:notifyDeployFailed', function () {
     mail("mrtimosh@gmail.com", "Deploy failed", "Sorry, deploy failed");
 });
 
-task('clear:cache', function () {
+task('deploy:clear-cache', function () {
     run('ls -la ');
 });
 
-task('db:migrations', function () {
-    $migrationsResult = run('php bin/console.php migration:update');
+task('deploy:db-migrations', function () {
+    $migrationsResult = run('php ./bin/console.php migration:update');
     if (strpos($migrationsResult, 'Error migrating tables') !== false) {
         throw new \Exception("DB Migration failed: ".$migrationsResult);
     }
 });
 
-before('deploy:symlink', 'db:migrations');
-after('deploy', 'clear:cache');
+after('deploy:symlink', 'deploy:db-migrations');
+after('deploy', 'deploy:clear-cache');
 // [Optional] If deploy fails automatically unlock.
 
 after('deploy:failed', 'deploy:unlock');
-after('success', 'notifyDeploySuccess');
-after('deploy:failed', 'notifyDeployFailed');
+after('success', 'deploy:notifyDeploySuccess');
+after('deploy:failed', 'deploy:notifyDeployFailed');
