@@ -1,6 +1,5 @@
 <?php
 class DB {
-    use App\Helper\ActiveRecordTrait;
 	private $adaptor;
 
 	public function __construct($adaptor, $hostname, $username, $password, $database, $port = NULL) {
