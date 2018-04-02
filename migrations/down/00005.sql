@@ -1,0 +1,1 @@
+ALTER TABLE `oc_product_option_group` DROP COLUMN id_erp;

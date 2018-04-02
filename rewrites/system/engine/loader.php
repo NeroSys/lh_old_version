@@ -2,6 +2,8 @@
 final class Loader {
 	protected $registry;
     protected $modelLoader;
+    public $data;
+
 	public function __construct($registry) {
 		$this->registry = $registry;
 		$this->modelLoader = new App\Engine\Loader\ModelLoader();
@@ -56,7 +58,9 @@ final class Loader {
 		
 		// Trigger the post e
 		$result = $this->registry->get('event')->trigger('view/' . $route . '/after', array(&$route, &$data, &$output));
-		
+
+		$this->data = $data;
+
 		if ($result) {
 			return $result;
 		}
