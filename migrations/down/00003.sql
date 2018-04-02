@@ -1,0 +1,1 @@
+ALTER TABLE `oc_product_option_value` DROP FOREIGN KEY FK_option_value_group
