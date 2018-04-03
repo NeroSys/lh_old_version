@@ -13,4 +13,8 @@ class Category extends \ActiveRecord\Model
     );
 
     static $table_name = DB_PREFIX . 'category';
+
+    public function set_category_description(CategoryDescription $categoryDescription){
+        $this->category_description = $categoryDescription;
+    }
 }
