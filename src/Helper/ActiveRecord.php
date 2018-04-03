@@ -10,11 +10,9 @@ class ActiveRecord
             $cfg->set_model_directory(LOCAL_DIR_OPENCART . '/src/Entity');
             $cfg->set_connections(
                 array(
-                    'development' => 'mysql://' . $username . ':' . $password . '@' . $hostname . '/' . $database.'?charset=utf8'
+                    'development' => 'mysql://' . $username . ':' . $password . '@' . $hostname . '/' . $database.';charset=utf8'
                 )
             );
-            $cfg->get_connection()->query("SET NAMES 'utf8';");
-            $cfg->get_connection()->query("SET CHARACTER SET utf8;");
         });
     }
 

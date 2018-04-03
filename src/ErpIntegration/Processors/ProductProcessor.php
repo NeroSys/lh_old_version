@@ -30,8 +30,9 @@ class ProductProcessor implements ProcessorInterface
             $wardrobeCategoryTreater->treat($category, self::OPENCART_STOREID);
         }
 
-        /*$wardrobeBrandTreater = new BrandTreat();
-        $wardrobeBrandTreater->treat($product->getManufacturer(), self::OPENCART_STOREID);*/
-        dump($product);
+        $wardrobeBrandTreater = new BrandTreat();
+        $wardrobeBrandTreater->treat($product->getManufacturer(), self::OPENCART_STOREID);
+
+
     }
 }

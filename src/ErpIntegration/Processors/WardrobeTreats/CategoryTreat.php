@@ -31,10 +31,6 @@ class CategoryTreat extends AbstractTreater
    }
 
    protected function createCategory(Category $category, int $storeId){
-       ini_set('display_errors', 1);
-       ini_set('display_startup_errors', 1);
-       error_reporting(E_ALL);
-
        $entity = new ARCategoryEntity();
        $entity->category_description = new CategoryDescription();
 
@@ -57,8 +53,14 @@ class CategoryTreat extends AbstractTreater
    }
 
    protected function updateCategory(Category $category, ARCategoryEntity $entity, int $storeId){
+       if($entity->category_description->name === $category->name){
+           return;
+       }
        $entity->category_description->name = $category->name;
        $entity->date_modified = ActiveRecord::currentDatetimeCreate();
-       $entity->save();
+       $entity::transaction(function() use ($entity) {
+           $entity->save();
+           $entity->category_description->save();
+       });
    }
 }

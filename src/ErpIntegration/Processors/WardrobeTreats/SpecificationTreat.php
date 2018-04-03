@@ -3,25 +3,27 @@
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\ManufacturerToStore;
+use App\Entity\Option;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\Entity\Manufacturer as ARManufacturerEntity;
+use LHGroup\From1cToWeb\Item\Product\Characteristic;
 use LHGroup\From1cToWeb\Item\Product\Manufacturer;
 
-class BrandTreat extends AbstractTreater
+class SpecificationTreat extends AbstractTreater
 {
 
     public function treat($item, int $storeId)
     {
         parent::treat($item, $storeId);
-        $this->treatManufacturer($item, $storeId);
+        $this->treatSpecification($item);
     }
 
-    public function findManufacturerByIdErp(string $idErp): ?ARCategoryEntity
+    public function findCharacteristicByName(string $name): ?Option
     {
         return ARManufacturerEntity::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
     }
 
-    protected function treatManufacturer(Manufacturer $manufacturer, $storeId)
+    protected function treatSpecification(Characteristic $specification)
     {
         if ($entity = $this->findManufacturerByIdErp($manufacturer->getIdErp())) {
             return $this->updateManufacturer($manufacturer, $entity, $storeId);

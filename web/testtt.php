@@ -11,15 +11,9 @@ $username = DB_USERNAME;
 $password = DB_PASSWORD;
 $database = DB_DATABASE;
 $port = DB_PORT;
-\ActiveRecord\Config::initialize(function($cfg) use ($hostname, $username, $password, $database, $port)
-{
-    $cfg->set_model_directory(LOCAL_DIR_OPENCART.'/src/Entity');
-    $cfg->set_connections(
-        array(
-            'development' => 'mysql://'.$username.':'.$password.'@'.$hostname.'/'.$database
-        )
-    );
-});
+
+use App\Helper\ActiveRecord as ARInitializer;
+ARInitializer::initializeActiveRecord($hostname, $username, $password, $database, $port);
 
 $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
 <root>
