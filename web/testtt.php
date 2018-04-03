@@ -26,7 +26,10 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
     <item>
         <id_erp>6f33c700-4a5e-11e6-80db-00155d66a124</id_erp>
         <name>Носки Falke SuperMegaDeluxNoski</name>
-        <brand>Falke</brand>
+         <brand>
+            <id_erp>12123faff3</id_erp>
+            <name>Falke</name>
+        </brand>
         <type>wardrobe</type>
         <categories>
             <category>
@@ -225,15 +228,10 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
     </item>
 </root>';
 
-$ampqConfig = new \LHGroup\From1cToWeb\ConnectionConfig(
-    RABBIT_MQ_HOST,
-    RABBIT_MQ_PORT,
-    RABBIT_MQ_USER,
-    RABBIT_MQ_PASSWORD,
-    RABBIT_MQ_VHOST
-);
+
 
 $itemEntity = \LHGroup\From1cToWeb\Item\ProductItem::class;
+$output = new Symfony\Component\Console\Output\NullOutput();
 
 $itemFactory = new \LHGroup\From1cToWeb\Item\Unserializer\XmlItemFactory(
     $itemEntity,
@@ -247,5 +245,7 @@ $reader = new \Tymosh\ErpExchangeReader\Reader\Xml($itemFactory);
 
 $reader->processString($xmlMessage);
 
-$product = \App\Entity\Product::find(50);
-var_dump($product->categories);
+
+
+//$product = \App\Entity\Product::find(50);//
+//var_dump($product->categories);

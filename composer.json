@@ -14,10 +14,10 @@
     "opencart/opencart": "2.2.0.0",
     "vaimo/composer-patches": "^3.25",
     "deployer/deployer": "~6.1",
-    "symfony/console": "^3.0|^4.0",
+    "symfony/console": "^3.0",
     "byjg/migration": "~2.0.4",
     "php-activerecord/php-activerecord": "^1.2",
-    "lhgroup/from1ctoweb": "~v1.0.2",
+    "lhgroup/from1ctoweb": "~v1.0.3",
     "m1/vars": "~1.1.2",
     "hellogerard/jobby": "~3.4.0",
     "symfony/var-dumper": "^3.0|^4.0"
