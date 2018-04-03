@@ -30,39 +30,21 @@
 
                 </div>
             </div>
-            <div class="column col2 col-xs-12 col-sm-12 col-md-3">
-                <div class="">   
-                    <div class="footer-title">
-                        <h3>Магазины</h3>
-                    </div>
-                    <div class="adress1"><b>ТЦ «Гулливер»</b> Киев,<br>ул. Спортивная площадь 1а</div>
-                    <div class="adress2"><b>ТЦ «ЦУМ»</b> Киев, ул. Крещатик, 38</div>
-                </div>
-            </div>
 
-    <!--
-    <div class="column col2 col-xs-12 col-sm-6 col-md-3">
+
+    <div class="column col2 col-xs-12 col-sm-12 col-md-3">
        <div class="footer-title"><h3><?php echo $text_extra; ?></h3></div>
       <div class="footer-content">
        <ul class="toggle-footer">
-         <li><a href="<?php echo $contact; ?>"><?php echo $text_contact; ?></a></li>
-         <li><a href="<?php echo $special; ?>"><?php echo $text_special; ?></a></li>
-         <li><a href="<?php echo $newsletter; ?>"><?php echo $text_newsletter; ?></a></li>
+           <li><a href="/contacts"><span>Магазины</span></a></li>
+           <li class="hidden-lg hidden-md"><a href="/our_brands"><span>Бренды</span></a></li>
+           <li class="hidden-lg hidden-md"><a href="/our-activity"><span>Новости</span></a></li>
+           <li class="hidden-lg hidden-md"><a href="/press"><span>Пресс-центр</span></a></li>
+           <li><a href="/opt"><span>ОПТ</span></a></li>
        </ul>
       </div>
     </div>
-    <div class="column col3 col-xs-12 col-sm-6 col-md-3">
-      <div class="footer-title"><h3><?php echo $text_account; ?></h3></div>
-      <div class="footer-content">
-       <ul class="toggle-footer">
-         <li><a href="<?php echo $account; ?>"><?php echo $text_account; ?></a></li>
-         <li><a href="<?php echo $order; ?>"><?php echo $text_order; ?></a></li>
-         <li><a href="<?php echo $wishlist; ?>"><?php echo $text_wishlist; ?></a></li>
-         
-       </ul>
-      </div>
-    </div>
-        -->
+
     </div>
   </div>
 </div>
