@@ -13,8 +13,6 @@ class ActiveRecord
                     'development' => 'mysql://' . $username . ':' . $password . '@' . $hostname . '/' . $database.'?charset=utf8'
                 )
             );
-            $cfg->get_connection()->query("SET NAMES 'utf8';");
-            $cfg->get_connection()->query("SET CHARACTER SET utf8;");
         });
     }
 
