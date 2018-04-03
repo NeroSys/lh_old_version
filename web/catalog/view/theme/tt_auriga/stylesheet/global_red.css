@@ -1073,13 +1073,15 @@ header .col-logo{
 }
 
 #menu {
-    background-color: #229ac8;
-    background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
+    background-color: rgba(0,0,0,1);
     background-repeat: repeat-x;
-    border-color: #1f90bb #1f90bb #145e7a;
     min-height: 40px;
+    color: #ccc;
+    border-color: #222;
 }
-
+#menu a {
+    color: #ccc;
+}
 #menu .nav > li > a {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -3769,7 +3771,7 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     padding: 10px 20px 10px;
     font-weight: 300;
     font-size: 14px;
-    line-height: 32px;
+    line-height: 20px;
     text-decoration: none;
     text-transform: uppercase;
     display: block;
@@ -4070,14 +4072,14 @@ header .subheader {
 
 @media (max-width: 767px) {
     .header li a {
-        padding: 2px 0px 2px;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 23px;
+        /*padding: 2px 0px 2px;*/
+        /*font-weight: 300;*/
+        /*font-size: 14px;*/
+        /*line-height: 23px;*/
     }
 
     header .phone a {
-        padding: 2px 0px 2px;
+        /*padding: 2px 0px 2px;*/
     }
 
     .header ul {
@@ -4769,3 +4771,59 @@ div.pt_menu .parentMenu a, .parentMenu .block-title {
 header .phones {text-align: left; margin:0;}
 header .phones li:first-child a {padding-left: 0}
 header .phone-header {line-height: 50px}
+
+
+
+.content{
+    padding-top:45px;
+}
+nav:not(.mm-menu)
+{
+    display: none;
+}
+
+header.fixed
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    z-index: 91;
+}
+
+header a.menu-button
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 52px;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    display: block;
+    width: 45px;
+    height: 18px;
+    padding: 11px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+header a.menu-button:before,
+header a.menu-button:after
+{
+    content: '';
+    display: block;
+    background: #fff;
+    height: 2px;
+}
+header a.menu-button span
+{
+    background: #fff;
+    display: block;
+    height: 2px;
+    margin: 6px 0;
+}
+.mm-menu .mm-listview .mm-btn_next:after {
+    border-color: rgba(255,255,255,.3);
+}

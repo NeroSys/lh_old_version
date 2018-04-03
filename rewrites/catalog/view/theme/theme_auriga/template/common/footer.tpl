@@ -62,11 +62,12 @@
 		</div>
 	</div>
 </div>
+
+</div> <!-- .content -->
+
 <div id="back-top" class="hidden-phone" style="display: block;"> </div>
-<!--
-OpenCart is open source software and you are free to remove the powered by OpenCart if you want, but its generally accepted practise to make a small donation.
-Please donate via PayPal to donate@opencart.com
-//--> 
+
+</div> <!-- #page -->
 
 <!-- Theme created by Welford Media for OpenCart 2.0 www.welfordmedia.co.uk -->
 <script type="text/javascript">
@@ -102,6 +103,13 @@ Please donate via PayPal to donate@opencart.com
 <script src="/catalog/view/javascript/opentheme/hozmegamenu/mobile_menu.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/elevatezoom/jquery.elevatezoom.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/common.js" type="text/javascript"></script>
+
+<script src="/catalog/view/javascript/mmenu/jquery.mmenu.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function() {
+        $('nav#menu').mmenu();
+    });
+</script>
 
 <?php foreach ($scripts as $script) { ?>
 <script src="<?php echo $script; ?>" type="text/javascript"></script>

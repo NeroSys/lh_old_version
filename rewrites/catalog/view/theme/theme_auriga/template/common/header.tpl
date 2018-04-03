@@ -29,6 +29,7 @@
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/animate.css");
         loadCSS("/catalog/view/javascript/Swiper-3.4.0/dist/css/swiper.min.css");
         loadCSS("/catalog/view/javascript/jquery/magnific/magnific-popup.css");
+        loadCSS("/catalog/view/javascript/mmenu/jquery.mmenu.css");
     </script>
 
     <?php foreach($styles as $style):?>
@@ -46,16 +47,18 @@
     <?php } ?>
 </head>
 <body class="<?php echo $class; ?>">
-<header>
+<div id="page">
+
+<nav id="menu">
+    <?php include_once("menu-left.tpl")?>
+</nav>
+<header class="fixed">
+    <a class="menu-button" href="#menu"><span></span></a>
     <div class="header">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 hidden-sm">
-                    <ul class="list-inline phones">
-                        <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-9 col-sm-12 hidden-xs">
+
+                <div class="col-md-9 hidden-xs hidden-sm pull-right">
                     <ul class="list-inline links">
                         <li class="first"><a href="/about_us"> <span>О нас</span></a></li>
                         <li><a href="/contacts"><span>Магазины</span></a></li>
@@ -65,10 +68,18 @@
                         <li class="last"><a href="/opt"><span>ОПТ</span></a></li>
                     </ul>
                 </div>
-
+                <div class="col-md-3 col-sm-12 pull-right">
+                    <ul class="list-inline phones">
+                        <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
+
+</header>
+
+<div class="content">
     <div class="container subheader">
         <div class="row">
             <div class="col-md-3 col-sm-4 col-xs-5 col-logo">
@@ -83,9 +94,6 @@
                     <?php } ?>
                 </div>
             </div>
-            <div class="col-sm-3 visible-sm">
-                <a href="tel:+38(044)593-33-53" class="phone-header"><i class="fa fa-phone-square"></i> (044) 593-33-53</a>
-            </div>
 
             <div class="col-md-9 col-sm-5 col-xs-7" style="display: none !important;">
                 <div class="cart-search">
@@ -97,7 +105,6 @@
             </div>
         </div>
     </div>
-</header>
 <?php include_once("menu.tpl")?>
 <?php if ($categories) { ?>
 <?php } ?>

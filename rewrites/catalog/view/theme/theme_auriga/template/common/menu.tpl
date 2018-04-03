@@ -1,47 +1,4 @@
 <?php if ($categories) { ?>
-
-<div class="ma-nav-mobile-container visible-xs">
-    <div class="container">
-        <div class="navbar">
-            <div id="navbar-inner" class="navbar-inner navbar-inactive">
-                <div class="menu-mobile">
-                    <a class="btn btn-navbar navbar-toggle">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <span class="brand navbar-brand">Категории</span>
-                </div>
-                <div id="wrap-ma-mobilemenu" class="mobilemenu nav-collapse collapse">
-                    <ul id="ma-mobilemenu" class="mobilemenu nav-collapse collapse">
-                        <?php
-                       foreach ($categories as $category):?>
-                        <li>
-                            <span class=" button-view1 collapse1">
-                                 <a href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a>
-                            </span>
-                            <?php if ($category['children']): ?>
-                            <ul class="level2">
-                                <?php foreach (array_chunk($category['children'], ceil(count($category['children']) / $category['column'])) as $children) { ?>
-                                <?php foreach ($children as $child) { ?>
-                                <li><span class="button-view2   no-close">
-                                        <a href="<?php echo $child['href']?>"><?php echo $child['name']?></a>
-                                    </span>
-                                </li>
-                                <?php } ?>
-                                <?php } ?>
-                            </ul>
-                            <?php else: ?>
-                            <?php endif; ?>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="container">
     <div class="nav-container visible-lg visible-md">
         <div class="nav1">
