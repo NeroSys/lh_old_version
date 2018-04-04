@@ -29,7 +29,8 @@
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/animate.css");
         loadCSS("/catalog/view/javascript/Swiper-3.4.0/dist/css/swiper.min.css");
         loadCSS("/catalog/view/javascript/jquery/magnific/magnific-popup.css");
-        loadCSS("/catalog/view/javascript/mmenu/jquery.mmenu.css");
+        loadCSS("/catalog/view/javascript/mmenu/jquery.mmenu.all.css");
+        loadCSS("/catalog/view//theme/tt_auriga/stylesheet/hamburgers.css");
     </script>
 
     <?php foreach($styles as $style):?>
@@ -49,12 +50,15 @@
 <body class="<?php echo $class; ?>">
 <div id="page">
 
-<nav id="menu">
-    <?php include_once("menu-left.tpl")?>
-</nav>
-<header class="fixed">
-    <a class="menu-button" href="#menu"><span></span></a>
-    <div class="header">
+<div class="header Fixed">
+    <span id="hamburger" class="Sticky">
+        <a href="#menu" class="hamburger hamburger--collapse">
+            <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+            </span>
+        </a>
+    </span>
+    <div>
         <div class="container">
             <div class="row">
 
@@ -65,10 +69,10 @@
                         <li><a href="/our_brands"><span>Бренды</span></a></li>
                         <li><a href="/our-activity"><span>Новости</span></a></li>
                         <li><a href="/press"><span>Пресс-центр</span></a></li>
-                        <li class="last"><a href="/opt"><span>ОПТ</span></a></li>
+                        <li class="last"><a href="/opt"><span>Опт</span></a></li>
                     </ul>
                 </div>
-                <div class="col-md-3 col-sm-12 pull-right">
+                <div class="col-md-3 pull-right">
                     <ul class="list-inline phones">
                         <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
                     </ul>
@@ -77,7 +81,7 @@
         </div>
     </div>
 
-</header>
+</div>
 
 <div class="content">
     <div class="container subheader">
@@ -106,5 +110,3 @@
         </div>
     </div>
 <?php include_once("menu.tpl")?>
-<?php if ($categories) { ?>
-<?php } ?>

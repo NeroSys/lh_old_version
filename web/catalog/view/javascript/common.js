@@ -27,15 +27,15 @@ $(document).ready(function() {
 
 	// increase number of product
 	 function minus(){
-	   if(document.getElementById("input-quantity").value <= 0) {
+	   if(document.getElementById('input-quantity').value <= 0) {
 	  return false;
 	   }
-		document.getElementById("input-quantity").value --;
-	 };
+		document.getElementById('input-quantity').value --;
+	 }
 	// decrease of product
 	 function plus(){
-	   document.getElementById("input-quantity").value ++;
-	 };
+	   document.getElementById('input-quantity').value ++;
+	 }
 	 $('#minus').click(function(){
 	  minus();
 	 });
@@ -64,11 +64,11 @@ $(document).ready(function() {
 	
 	// zoom
 		 $(".thumbnails-image img").elevateZoom({
-		 zoomType : "inner",
-		 cursor: "crosshair",
+		 zoomType : 'inner',
+		 cursor: 'crosshair',
 		 gallery:'gallery_01', 
 		 cursor: 'crosshair', 
-		 galleryActiveClass: "active", 
+		 galleryActiveClass: 'active',
 		 imageCrossfade: true,
 		 });
 	// slider
@@ -257,6 +257,59 @@ function display(view) {
 	$(document).ajaxStop(function() {
 		$('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 	});
+
+    // hide #back-top first
+    $("#back-top").hide();
+    // fade in #back-top
+    $(function () {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 100) {
+                $('#back-top').fadeIn();
+            } else {
+                $('#back-top').fadeOut();
+            }
+        });
+        // scroll body to 0px on click
+        $('#back-top').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
+
+    $(function() {
+
+        function e() {
+            n.attr("href", "#page").addClass("hamburger--collapse is-active");
+        }
+
+        function t() {
+            n.attr("href", "#menu").removeClass("hamburger--arrow is-active").addClass("hamburger--collapse");
+        }
+
+        if ($.fn.mmenu) {
+            var a = $('nav#menu').mmenu({
+                    navbar: {
+                        title: 'Меню',
+                        drag 		: true,
+                    }
+                }, {
+					offCanvas: {pageSelector: '#page'},
+					searchfield: {clear: !0}
+				}).data('mmenu'),
+                n = $("#hamburger").children(".hamburger");
+            a.bind('close:finish', function () {
+                setTimeout(t, 0);
+            }),
+			a.bind('open:start', function () {
+				$('nav#menu').css('opacity', 1);
+			}),
+			a.bind('open:finish', function () {
+                setTimeout(e, 0);
+            });
+        }
+    });
 });
 
 // Cart add remove functions
@@ -596,3 +649,4 @@ $(document).delegate('.agree', 'click', function(e) {
  })
  
 })(window.jQuery);
+

@@ -98,7 +98,7 @@ p {
 }
 
 .fa {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 h1 {
@@ -775,7 +775,7 @@ div.required .control-label:before {
     text-align: left;
 }
 
-header .col-logo{
+.header .col-logo{
     height: 55px;
 }
 
@@ -3765,7 +3765,7 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     text-align: right;
 }
 
-.header a, header .address {
+.header li a, .header .address {
     text-align: left;
     font-family: "Arial", serif;
     padding: 10px 20px 10px;
@@ -3785,31 +3785,31 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     color: #e84c3d;
 }
 
-header .phone a {
+.header .phone a {
     font-size: 15px;
 }
 
-header .address {
+.header .address {
     text-align: right;
 }
 
-header .phone, header .address {
+.header .phone, .header .address {
     color: #666;
 }
 
-header .last a {
+.header .last a {
     padding-right: 0px;
 }
 
-header .first a {
+.header .first a {
     padding-left: 0px;
 }
 
-header .address {
+.header .address {
     padding-left: 14px;
 }
 
-header .subheader {
+.header .subheader {
     margin-top: 6px;
 }
 
@@ -4078,7 +4078,7 @@ header .subheader {
         /*line-height: 23px;*/
     }
 
-    header .phone a {
+    .header .phone a {
         /*padding: 2px 0px 2px;*/
     }
 
@@ -4087,7 +4087,7 @@ header .subheader {
         margin-bottom: 4px;
     }
 
-    header .address {
+    .header .address {
         text-align: left;
     }
 
@@ -4768,62 +4768,36 @@ div.pt_menu .parentMenu a, .parentMenu .block-title {
     margin-bottom:0;
 }
 .press-post-item .press-post-title span {padding: 10px; display: block; width: 100%;}
-header .phones {text-align: left; margin:0;}
-header .phones li:first-child a {padding-left: 0}
-header .phone-header {line-height: 50px}
+.header .phones {text-align: left; margin:0; }
+.header .phones li a {font-size: 1.45em;}
+.header .phones li:first-child a {padding-left: 0}
+.header .phone-header {line-height: 50px}
 
 
 
 .content{
     padding-top:45px;
 }
-nav:not(.mm-menu)
-{
-    display: none;
-}
 
-header.fixed
-{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width:100%;
-    z-index: 91;
-}
-
-header a.menu-button
-{
-    font-size: 16px;
-    font-weight: bold;
-    color: #fff;
-    line-height: 52px;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    display: block;
-    width: 45px;
-    height: 18px;
-    padding: 11px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 99999;
-}
-header a.menu-button:before,
-header a.menu-button:after
-{
-    content: '';
-    display: block;
-    background: #fff;
-    height: 2px;
-}
-header a.menu-button span
-{
-    background: #fff;
-    display: block;
-    height: 2px;
-    margin: 6px 0;
-}
 .mm-menu .mm-listview .mm-btn_next:after {
     border-color: rgba(255,255,255,.3);
+}
+
+#hamburger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.header {position: fixed; top: 0}
+
+.mm-menu .mm-listitem_selected>a:not(.mm-btn_next), .mm-menu .mm-listitem_selected>span{
+    background: rgba(255,255,255,.1);
+}
+#menu {
+    opacity: 0;
+}
+#menu:not(.mm-menu){
+    display: none;
 }

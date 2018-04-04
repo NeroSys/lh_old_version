@@ -65,51 +65,19 @@
 
 </div> <!-- .content -->
 
+<nav id="menu">
+    <?php echo $mobile_menu; ?>
+</nav>
 <div id="back-top" class="hidden-phone" style="display: block;"> </div>
 
 </div> <!-- #page -->
 
-<!-- Theme created by Welford Media for OpenCart 2.0 www.welfordmedia.co.uk -->
-<script type="text/javascript">
-	$(document).ready(function(){
-
-	 // hide #back-top first
-	 $("#back-top").hide();
-	 
-	 // fade in #back-top
-	 $(function () {
-	  $(window).scroll(function () {
-	   if ($(this).scrollTop() > 100) {
-		$('#back-top').fadeIn();
-	   } else {
-		$('#back-top').fadeOut();
-	   }
-	  });
-	  // scroll body to 0px on click
-	  $('#back-top').click(function () {
-	   $('body,html').animate({
-		scrollTop: 0
-	   }, 800);
-	   return false;
-	  });
-	 });
-
-	});
-</script>
-
-
 
 <script src="/catalog/view/javascript/opentheme/hozmegamenu/custommenu.js" type="text/javascript"></script>
-<script src="/catalog/view/javascript/opentheme/hozmegamenu/mobile_menu.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/elevatezoom/jquery.elevatezoom.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/common.js" type="text/javascript"></script>
 
-<script src="/catalog/view/javascript/mmenu/jquery.mmenu.js" type="text/javascript"></script>
-<script type="text/javascript">
-    $(function() {
-        $('nav#menu').mmenu();
-    });
-</script>
+<script src="/catalog/view/javascript/mmenu/jquery.mmenu.all.js" type="text/javascript"></script>
 
 <?php foreach ($scripts as $script) { ?>
 <script src="<?php echo $script; ?>" type="text/javascript"></script>
@@ -122,37 +90,6 @@
 <script src="/catalog/view/javascript/Swiper-3.4.0/dist/js/swiper.min.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js" type="text/javascript"></script>
 
-
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter41869979 = new Ya.Metrika({
-                    id:41869979,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    trackHash:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/watch.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/41869979" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -28,5 +28,5 @@
     <li><a href="/our_brands"><span>Бренды</span></a></li>
     <li><a href="/our-activity"><span>Новости</span></a></li>
     <li><a href="/press"><span>Пресс-центр</span></a></li>
-    <li class="last"><a href="/opt"><span>ОПТ</span></a></li>
+    <li class="last"><a href="/opt"><span>Опт</span></a></li>
 </ul>
