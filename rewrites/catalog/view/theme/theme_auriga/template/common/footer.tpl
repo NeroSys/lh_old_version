@@ -6,7 +6,9 @@
                     <h3>Новости наших брендов на facebook</h3>
                 </div>
                 <div class="footer-content soc-icons">
-                    <a target="_blank" href="https://www.facebook.com/FalkeUkraine/"><img alt="Falke on Facebook" src="/catalog/view/theme/tt_auriga/image/soc-icons-fb-footer/falke.png"/></a>
+                    <a target="_blank" href="https://www.facebook.com/FalkeUkraine/">
+                        <img alt="Falke on Facebook" src="/catalog/view/theme/tt_auriga/image/soc-icons-fb-footer/falke.png"/>
+                    </a>
                     <a target="_blank" href="https://www.facebook.com/ROECKLUkraine/">
                         <img alt="Roeckl on Facebook" src="/catalog/view/theme/tt_auriga/image/soc-icons-fb-footer/roeckl.png"/>
                     </a>
@@ -22,12 +24,10 @@
                     <a target="_blank" href="https://www.facebook.com/ELSYUkraine/">
                         <img alt="Elsy on Facebook" src="/catalog/view/theme/tt_auriga/image/soc-icons-fb-footer/elsy.png"/>
                     </a>
-                    
-                    
+
                     <a target="_blank" href="https://www.facebook.com/TOPModelUkraine/">
                         <img alt="Top Model on Facebook" src="/catalog/view/theme/tt_auriga/image/soc-icons-fb-footer/top-model.png"/>
                     </a>
-
                 </div>
             </div>
 

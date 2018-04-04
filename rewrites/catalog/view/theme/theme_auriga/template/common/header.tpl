@@ -11,6 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#000">
     <title><?php echo $title; ?></title>
     <base href="<?php echo $base; ?>"/>
     <?php if ($description) { ?>
