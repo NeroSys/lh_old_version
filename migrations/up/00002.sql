@@ -20,7 +20,10 @@ ALTER TABLE `oc_category_path` ENGINE=INNODB;
 ALTER TABLE `oc_category_to_layout` ENGINE=INNODB;
 ALTER TABLE `oc_category_to_store` ENGINE=INNODB;
 ALTER TABLE `oc_country` ENGINE=INNODB;
-ALTER TABLE `oc_coupon` ENGINE=INNODB;
+ALTER TABLE `oc_coupon`
+  CHANGE COLUMN `date_start` `date_start` date NOT NULL DEFAULT '1970-01-01',
+  CHANGE COLUMN `date_end` `date_end` date NOT NULL DEFAULT '2100-01-01',
+  ENGINE=INNODB;
 ALTER TABLE `oc_coupon_category` ENGINE=INNODB;
 ALTER TABLE `oc_coupon_history` ENGINE=INNODB;
 ALTER TABLE `oc_coupon_product` ENGINE=INNODB;
@@ -66,7 +69,9 @@ ALTER TABLE `oc_manufacturer_to_store` ENGINE=INNODB;
 ALTER TABLE `oc_marketing` ENGINE=INNODB;
 ALTER TABLE `oc_modification` ENGINE=INNODB;
 ALTER TABLE `oc_module` ENGINE=INNODB;
-ALTER TABLE `oc_newsblog_article` ENGINE=INNODB;
+ALTER TABLE `oc_newsblog_article`
+  CHANGE COLUMN `date_available` `date_available` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ENGINE=INNODB;
 ALTER TABLE `oc_newsblog_article_attribute` ENGINE=INNODB;
 ALTER TABLE `oc_newsblog_article_description` ENGINE=INNODB;
 ALTER TABLE `oc_newsblog_article_image` ENGINE=INNODB;
@@ -93,10 +98,15 @@ ALTER TABLE `oc_order_recurring_transaction` ENGINE=INNODB;
 ALTER TABLE `oc_order_status` ENGINE=INNODB;
 ALTER TABLE `oc_order_total` ENGINE=INNODB;
 ALTER TABLE `oc_order_voucher` ENGINE=INNODB;
-ALTER TABLE `oc_product` ENGINE=INNODB;
+ALTER TABLE `oc_product`
+  CHANGE COLUMN `date_available` `date_available` date NOT NULL DEFAULT '1970-01-01',
+  ENGINE=INNODB;
 ALTER TABLE `oc_product_attribute` ENGINE=INNODB;
 ALTER TABLE `oc_product_description` ENGINE=INNODB;
-ALTER TABLE `oc_product_discount` ENGINE=INNODB;
+ALTER TABLE `oc_product_discount`
+  CHANGE COLUMN `date_start` `date_start` date NOT NULL DEFAULT '1970-01-01',
+  CHANGE COLUMN `date_end` `date_end` date NOT NULL DEFAULT '2100-01-01',
+  ENGINE=INNODB;
 ALTER TABLE `oc_product_filter` ENGINE=INNODB;
 ALTER TABLE `oc_product_image` ENGINE=INNODB;
 ALTER TABLE `oc_product_option` ENGINE=INNODB;
@@ -104,14 +114,19 @@ ALTER TABLE `oc_product_option_value` ENGINE=INNODB;
 ALTER TABLE `oc_product_recurring` ENGINE=INNODB;
 ALTER TABLE `oc_product_related` ENGINE=INNODB;
 ALTER TABLE `oc_product_reward` ENGINE=INNODB;
-ALTER TABLE `oc_product_special` ENGINE=INNODB;
+ALTER TABLE `oc_product_special`
+  CHANGE COLUMN `date_start` `date_start` date NOT NULL DEFAULT '1970-01-01',
+  CHANGE COLUMN `date_end` `date_end` date NOT NULL DEFAULT '2100-01-01',
+  ENGINE=INNODB;
 ALTER TABLE `oc_product_to_category` ENGINE=INNODB;
 ALTER TABLE `oc_product_to_download` ENGINE=INNODB;
 ALTER TABLE `oc_product_to_layout` ENGINE=INNODB;
 ALTER TABLE `oc_product_to_store` ENGINE=INNODB;
 ALTER TABLE `oc_recurring` ENGINE=INNODB;
 ALTER TABLE `oc_recurring_description` ENGINE=INNODB;
-ALTER TABLE `oc_return` ENGINE=INNODB;
+ALTER TABLE `oc_return`
+  CHANGE COLUMN `date_ordered` `date_ordered` date NOT NULL DEFAULT '2100-01-01',
+  ENGINE=INNODB;
 ALTER TABLE `oc_return_action` ENGINE=INNODB;
 ALTER TABLE `oc_return_history` ENGINE=INNODB;
 ALTER TABLE `oc_return_reason` ENGINE=INNODB;
@@ -135,4 +150,8 @@ ALTER TABLE `oc_voucher_theme_description` ENGINE=INNODB;
 ALTER TABLE `oc_weight_class` ENGINE=INNODB;
 ALTER TABLE `oc_weight_class_description` ENGINE=INNODB;
 ALTER TABLE `oc_zone` ENGINE=INNODB;
-ALTER TABLE `oc_zone_to_geo_zone` ENGINE=INNODB;
+UPDATE `oc_zone_to_geo_zone` SET `date_added` = CURRENT_TIMESTAMP, `date_modified` = CURRENT_TIMESTAMP;
+ALTER TABLE `oc_zone_to_geo_zone`
+  CHANGE COLUMN `date_added` `date_added` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  CHANGE COLUMN `date_modified` `date_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  ENGINE=INNODB;

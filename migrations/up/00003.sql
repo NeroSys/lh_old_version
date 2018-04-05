@@ -6,5 +6,5 @@ CREATE TABLE `oc_product_option_group` (
   `quantity` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-ALTER TABLE `oc_product_option_value` ADD product_option_group int(11) unsigned NOT NULL;
+ALTER TABLE `oc_product_option_value` ADD product_option_group int(11) unsigned;
 ALTER TABLE `oc_product_option_value` ADD INDEX `product_option_group_index` (`product_option_group`);
