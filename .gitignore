@@ -40,3 +40,4 @@ vendor/
 web/image/cache/
 cache/
 config/local.yml
+composer.phar
