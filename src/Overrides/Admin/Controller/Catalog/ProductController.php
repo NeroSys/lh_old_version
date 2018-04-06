@@ -34,7 +34,10 @@ class ProductController extends \ControllerCatalogProduct
 
     protected function getProductSpecifications(): ?array
     {
-        return $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
+        if(isset($this->request->get['product_id'])){
+            return $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
+        }
+        return null;
     }
 
     protected function getProductOptions(): array
