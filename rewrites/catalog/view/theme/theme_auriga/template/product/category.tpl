@@ -124,19 +124,6 @@
                                                  alt="<?php echo $parent_category_info['name']; ?>"></div>
 
                     <?php  if ($thumb && (int) $parent !== 0) { ?>
-                    <script>
-                        $(document).ready(function () {
-                            $('.popup-gallery').magnificPopup({
-                                type: 'image',
-                                gallery: {
-                                    enabled: true
-                                }
-                            });
-                        });
-
-                    </script>
-
-
                     <div>
                         <a class="thumbnail popup-gallery" href="<?php echo $category_image; ?>" title="<?php echo $heading_title; ?>">
                             <img src="<?php echo $thumb ?>" title="<?php echo $heading_title; ?>"  alt="<?php echo $heading_title; ?>">

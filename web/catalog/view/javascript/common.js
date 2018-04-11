@@ -61,16 +61,6 @@ $(document).ready(function() {
 
 		$('#currency').submit();
 	});
-	
-	// zoom
-		 $(".thumbnails-image img").elevateZoom({
-		 zoomType : 'inner',
-		 cursor: 'crosshair',
-		 gallery:'gallery_01', 
-		 cursor: 'crosshair', 
-		 galleryActiveClass: 'active',
-		 imageCrossfade: true,
-		 });
 	// slider
          if($().owlCarousel) {
 		$(".image-additional").owlCarousel({
@@ -310,6 +300,19 @@ function display(view) {
             });
         }
     });
+
+
+	$('.popup-gallery').magnificPopup({
+		type: 'ajax'
+	});
+
+    $('.popup-gallery').magnificPopup({
+        type: 'image',
+        gallery: {
+            enabled: true
+        }
+    });
+
 });
 
 // Cart add remove functions
