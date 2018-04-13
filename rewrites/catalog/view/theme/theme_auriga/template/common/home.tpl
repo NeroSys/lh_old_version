@@ -192,7 +192,7 @@
         <?php $class = 'col-sm-12'; ?>
         <?php } ?>
         <div id="content" class="<?php echo $class; ?>">
-            <div class="brand-slider-contain">
+            <div class="brand-text-container">
                 <div class="brand-title">
                     <h2>Наши бренды</h2>
                 </div>
