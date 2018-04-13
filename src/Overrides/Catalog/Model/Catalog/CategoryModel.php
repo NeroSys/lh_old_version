@@ -32,4 +32,9 @@ class CategoryModel extends \ModelCatalogCategory
         return array_reverse($breadcrumbs);
     }
 
+    public function getOneLevelCategories(int $category_id = 0, int $parent_id = 0){
+        $query = $this->db->query("SELECT *, (SELECT keyword FROM " . DB_PREFIX . "url_alias ua WHERE ua.query = concat('category_id=',c.category_id) LIMIT 1) as href FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int) $parent_id . "' AND cd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int) $this->config->get('config_store_id') . "'  AND c.status = '1' ORDER BY c.sort_order ASC, LCASE(cd.name)");
+        return $query->rows;
+    }
+
 }
