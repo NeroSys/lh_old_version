@@ -1,0 +1,1 @@
+ALTER TABLE `oc_attribute` DROP COLUMN id_erp;

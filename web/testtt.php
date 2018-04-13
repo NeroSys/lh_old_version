@@ -17,21 +17,21 @@ ARInitializer::initializeActiveRecord($hostname, $username, $password, $database
 
 $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
 <root>
-    <item>
-        <id_erp>6f33c700-4a5e-11e6-80db-00155d66a124</id_erp>
+     <item>
+        <id_erp>1234dsf</id_erp>
         <name>Носки Falke SuperMegaDeluxNoski</name>
-         <brand>
+        <brand>
             <id_erp>12123faff3</id_erp>
             <name>Falke</name>
         </brand>
         <type>wardrobe</type>
         <categories>
             <category>
-                <id_erp>6f33c700-4a5e-11e6-80db-00155d662324</id_erp>
+                <id_erp>32323</id_erp>
                 <name>Носки</name>
             </category>
             <category>
-                <id_erp>6f33c700-4a5e-11e6-80db-00155222132</id_erp>
+                <id_erp>a-3232323</id_erp>
                 <name>Женские</name>
             </category>
         </categories>
@@ -42,38 +42,26 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
         <specifications>
             <!--Набор характеристик-начений, которые влияют на цену. Спецификация имеет артикул. -->
             <specification>
-                <id_erp>6f33c700-4a5e-11e6-80db-00155222132</id_erp>
+                <id_erp>1230sdf-fds</id_erp>
                 <sku>1230sdf-fds</sku>
                 <ean>1euudf-fds</ean>
                 <characteristics>
                     <characteristic>
-                        <id_erp>6f33c700-4a5e-11e6-80db-011155222132</id_erp>
+                        <id_erp>f1fcdsfdfsf</id_erp>
                         <name>Размер</name>
-                        <value>31</value>
-                        <images>
-                            <image>
-                                <path>ссылка</path>
-                            </image>
-                        </images>
+                        <value>
+                            <id_erp>1f1f2cdsfdfsf</id_erp>
+                            <name>34</name>
+                        </value>
                     </characteristic>
                     <characteristic>
-                        <id_erp>6f33c700-4a5e-11e6-80db-00125222132</id_erp>
+                        <id_erp>34f1f2cdsfdfsf</id_erp>
                         <name>Цвет</name>
-                        <value>Желтый</value>
-                        <images>
-                            <image>
-                                <path>ссылка</path>
-                            </image>
-                        </images>
+                        <value>
+                            <id_erp>534f1f2cdsfdfsf</id_erp>
+                            <name>Желтый</name>
+                        </value>
                     </characteristic>
-                    <!--Цвет-->
-                    <!--Размер международный-->
-                    <!--Размер европейский-->
-                    <!--Рост-->
-                    <!--Обхват груди-->
-                    <!--Длина рукава-->
-                    <!--Обхват талии-->
-                    <!--Обхват бедер-->
                 </characteristics>
                 <price_base>350</price_base>
                 <price_discount></price_discount>
@@ -81,7 +69,7 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
                 <price_erp>350</price_erp>
                 <prices>
                     <price>
-                        <stock_erp_id>6f33c700-4a5e-11e6-80db-00153332132</stock_erp_id>
+                        <stock_erp_id>stock1</stock_erp_id>
                         <price_retail>
                             <!--Базовая цена для розницы-->
                             <price></price>
@@ -97,7 +85,7 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
                         <quantity>20</quantity>
                     </price>
                     <price>
-                        <stock_erp_id>6f33c700-4a5e-11e6-80db-00159222132</stock_erp_id>
+                        <stock_erp_id>stock2</stock_erp_id>
                         <price_retail>
                             <!--Базовая цена для розницы-->
                             <price></price>
@@ -113,102 +101,31 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
                         <quantity>10</quantity>
                     </price>
                 </prices>
-            </specification>
-            <specification>
-                <id_erp>6f33c700-4a5e-11e6-80db-00155222132</id_erp>
-                <sku>1230sdf-fds</sku>
-                <ean>1euudf-fds</ean>
-                <characteristics>
-                    <characteristic>
-                        <id_erp>6f33c700-4a5e-11e6-80db-011155222132</id_erp>
-                        <name>Размер</name>
-                        <value>31</value>
-                        <images>
-                            <image>
-                                <path>ссылка</path>
-                            </image>
-                        </images>
-                    </characteristic>
-                    <characteristic>
-                        <id_erp>6f33c700-4a5e-11e6-80db-00125222132</id_erp>
-                        <name>Цвет</name>
-                        <value>Желтый</value>
-                        <images>
-                            <image>
-                                <path>ссылка</path>
-                            </image>
-                        </images>
-                    </characteristic>
-                    <!--Цвет-->
-                    <!--Размер международный-->
-                    <!--Размер европейский-->
-                    <!--Рост-->
-                    <!--Обхват груди-->
-                    <!--Длина рукава-->
-                    <!--Обхват талии-->
-                    <!--Обхват бедер-->
-                </characteristics>
-                <price_base>350</price_base>
-                <price_discount></price_discount>
-                <price_discount_type></price_discount_type>
-                <price_erp>350</price_erp>
-                <prices>
-                    <price>
-                        <stock_erp_id>6f33c700-4a5e-11e6-80db-00153332132</stock_erp_id>
-                        <price_retail>
-                            <!--Базовая цена для розницы-->
-                            <price></price>
-                            <discount></discount>
-                            <discount_type></discount_type>
-                        </price_retail>
-                        <price_wholesale>
-                            <!--Базовая цена для опта-->
-                            <price></price>
-                            <discount></discount>
-                            <discount_type></discount_type>
-                        </price_wholesale>
-                        <quantity>20</quantity>
-                    </price>
-                    <price>
-                        <stock_erp_id>6f33c700-4a5e-11e6-80db-00159222132</stock_erp_id>
-                        <price_retail>
-                            <!--Базовая цена для розницы-->
-                            <price></price>
-                            <discount></discount>
-                            <discount_type></discount_type>
-                        </price_retail>
-                        <price_wholesale>
-                            <!--Базовая цена для опта-->
-                            <price></price>
-                            <discount></discount>
-                            <discount_type></discount_type>
-                        </price_wholesale>
-                        <quantity>10</quantity>
-                    </price>
-                </prices>
+                <images>
+                    <image>
+                        <path>ссылка</path>
+                    </image>
+                </images>
             </specification>
         </specifications>
         <properties>
             <!--Свойства номенклатуры, не влияющие на цену. Используются для фильтров-->
             <property>
-                <id_erp>q26f33c700-4a5e-11e6-80db-00155222132</id_erp>
-                <name>Ткань</name>
-                <value>Шерсть</value>
+                <id_erp>dfsdfs1</id_erp>
+                <name>Ткань2</name>
+                <value>
+                    <id_erp>f1f2cdsfdfsf</id_erp>
+                    <name>Шерсть</name>
+                </value>
             </property>
             <property>
-                <id_erp>6f33c700-4a5e-11e6-80db-0015522567</id_erp>
+                <id_erp>32dfsdfs</id_erp>
                 <name>Страна происхождения</name>
-                <value>Германия</value>
+                <value>
+                    <id_erp>f1f2cdsfdfsf</id_erp>
+                    <name>Германия</name>
+                </value>
             </property>
-            <!--Бренд-->
-            <!--Сезон-->
-            <!--Рукав-->
-            <!--Колекция-->
-            <!--Материал-->
-            <!--Модель-->
-            <!--Страна происхождения-->
-            <!--Пол-->
-            <!--Год создания-->
         </properties>
         <images>
             <image>
@@ -221,8 +138,6 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
         <weight></weight>
     </item>
 </root>';
-
-
 
 $itemEntity = \LHGroup\From1cToWeb\Item\ProductItem::class;
 $output = new Symfony\Component\Console\Output\NullOutput();

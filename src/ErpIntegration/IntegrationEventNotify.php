@@ -17,6 +17,7 @@ class IntegrationEventNotify implements NotifyInterface {
 
     public function notifyError(\Throwable $exception){
         $this->consoleOutput->writeln("<error>".$exception->getMessage()."</error>");
+        throw $exception;
     }
 
     public function notifyEvent(string $message, string $type = 'info', $event = null){
@@ -26,5 +27,6 @@ class IntegrationEventNotify implements NotifyInterface {
                 break;
         }
         $this->consoleOutput->writeln($message);
+        echo $message."<br>";
     }
 }

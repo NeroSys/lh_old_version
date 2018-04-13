@@ -1,7 +1,6 @@
 <?php
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
-use ActiveRecord\ConnectionManager;
 use App\Entity\CategoryDescription;
 use App\Entity\CategoryToStore;
 use App\ErpIntegration\Processors\AbstractTreater;
@@ -14,32 +13,35 @@ class CategoryTreat extends AbstractTreater
 {
     const OPENCART_TOP = 1;
 
-   public function treat($item, int $storeId)
+   public function treat($item, array $options = [])
    {
-       $this->treatCategory($item, $storeId);
+       $this->treatCategory($item, $options);
    }
 
-    public function findCategoryByIdErp(string $idErp):?ARCategoryEntity{
+    protected function findCategoryByIdErp(string $idErp):?ARCategoryEntity{
         return ARCategoryEntity::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
     }
 
-   protected function treatCategory(Category $category, $storeId){
+   protected function treatCategory(Category $category){
        if($entity = $this->findCategoryByIdErp($category->id_erp)){
-           return $this->updateCategory($category, $entity, $storeId);
+           return $this->updateCategory($category, $entity);
        }
-       return $this->createCategory($category, $storeId);
+       return $this->createCategory($category);
    }
 
-   protected function createCategory(Category $category, int $storeId){
+   protected function createCategory(Category $category){
        $entity = new ARCategoryEntity();
-       $entity->category_description = new CategoryDescription();
+
+       $storeId = ProductProcessor::OPENCART_STOREID;
 
        $entity::transaction(function() use ($entity, $category, $storeId) {
            $entity->image = '';
            $entity->parent_id = 0;
+           $entity->id_erp = $category->getIdErp();
            $entity->date_added = ActiveRecord::currentDatetimeCreate();
            $entity->top = self::OPENCART_TOP;
            $entity->save();
+           $entity->category_description = new CategoryDescription();
            $entity->category_description->category_id = $entity->id;
            $entity->category_description->name = $category->name;
            $entity->category_description->language_id = ProductProcessor::OPENCART_LANGUAGE_ID;
@@ -52,7 +54,7 @@ class CategoryTreat extends AbstractTreater
 
    }
 
-   protected function updateCategory(Category $category, ARCategoryEntity $entity, int $storeId){
+   protected function updateCategory(Category $category, ARCategoryEntity $entity){
        if($entity->category_description->name === $category->name){
            return;
        }
