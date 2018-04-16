@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "bddee360f7f06ec10aba149afaddf892",
+    "content-hash": "21ab7c7dd91095b588a77fbe656db540",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -1242,6 +1242,36 @@
             "time": "2018-02-09T05:55:25+00:00"
         },
         {
+            "name": "javiereguiluz/easyslugger",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/javiereguiluz/EasySlugger.git",
+                "reference": "11524a3fd70e3f0c98043755a0ffa228f2529211"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/javiereguiluz/EasySlugger/zipball/11524a3fd70e3f0c98043755a0ffa228f2529211",
+                "reference": "11524a3fd70e3f0c98043755a0ffa228f2529211",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "EasySlugger\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fast and easy to use slugger with full UTF-8 support.",
+            "time": "2015-04-12T19:57:10+00:00"
+        },
+        {
             "name": "jeremeamia/SuperClosure",
             "version": "2.4.0",
             "source": {
@@ -1517,16 +1547,16 @@
         },
         {
             "name": "lhgroup/from1ctoweb",
-            "version": "v1.0.1",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
                 "url": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration.git",
-                "reference": "5c264563a7f0b776d3e3050446bcba64c7a9a652"
+                "reference": "63972fbf2b50c605a07dd5a2ccb881bfa1c410bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration/get/5c264563a7f0b776d3e3050446bcba64c7a9a652.zip",
-                "reference": "5c264563a7f0b776d3e3050446bcba64c7a9a652",
+                "url": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration/get/63972fbf2b50c605a07dd5a2ccb881bfa1c410bd.zip",
+                "reference": "63972fbf2b50c605a07dd5a2ccb881bfa1c410bd",
                 "shasum": ""
             },
             "require": {
@@ -1554,9 +1584,9 @@
             ],
             "homepage": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration",
             "support": {
-                "source": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration/src/5c264563a7f0b776d3e3050446bcba64c7a9a652/?at=v1.0.1"
+                "source": "https://bitbucket.org/little-house/web-rabbit-mq-1c_integration/src/63972fbf2b50c605a07dd5a2ccb881bfa1c410bd/?at=v1.0.5"
             },
-            "time": "2018-03-15T16:00:15+00:00"
+            "time": "2018-04-16T09:31:13+00:00"
         },
         {
             "name": "m1/vars",

@@ -8,7 +8,7 @@ use App\Entity\Manufacturer as ARManufacturerEntity;
 use App\ErpIntegration\Processors\ProductProcessor;
 use LHGroup\From1cToWeb\Item\Product\Manufacturer;
 
-class BrandTreat extends AbstractTreater
+class ManufacturerTreat extends AbstractTreater
 {
 
     public function treat($item, array $options = [])

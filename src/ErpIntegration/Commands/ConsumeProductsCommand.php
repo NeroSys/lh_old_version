@@ -13,17 +13,23 @@ use LHGroup\From1cToWeb\QueueConsumer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use \LHGroup\From1cToWeb\Queue;
+use \App\ErpIntegration\Queue;
 use Tymosh\ErpExchangeReader\Reader;
 
 class ConsumeProductsCommand extends Command
 {
     protected $ampqConfig;
+    protected $cache;
 
-    public function __construct($name = null, ConnectionConfig $ampqConfig)
+    public function __construct(
+        $name = null,
+        ConnectionConfig $ampqConfig,
+        \Cache $cache
+    )
     {
         parent::__construct($name);
         $this->ampqConfig = $ampqConfig;
+        $this->cache = $cache;
     }
 
     protected function configure()
@@ -47,7 +53,8 @@ class ConsumeProductsCommand extends Command
         $reader = new Reader\Xml($itemFactory);
 
         $queue = new Queue\Product(
-            $reader
+            $reader,
+            $this->cache
         );
         $queueConsumer = new QueueConsumer(
             $this->ampqConfig,

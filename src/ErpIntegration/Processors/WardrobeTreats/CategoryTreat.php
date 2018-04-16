@@ -2,6 +2,8 @@
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\CategoryDescription;
+use App\Entity\CategoryPath;
+use App\Entity\CategoryToLayout;
 use App\Entity\CategoryToStore;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\ErpIntegration\Processors\ProductProcessor;
@@ -37,6 +39,7 @@ class CategoryTreat extends AbstractTreater
        $entity::transaction(function() use ($entity, $category, $storeId) {
            $entity->image = '';
            $entity->parent_id = 0;
+           $entity->status = 1;
            $entity->id_erp = $category->getIdErp();
            $entity->date_added = ActiveRecord::currentDatetimeCreate();
            $entity->top = self::OPENCART_TOP;
@@ -50,6 +53,13 @@ class CategoryTreat extends AbstractTreater
            $categoryToStore->category_id = $entity->id;
            $categoryToStore->store_id = $storeId;
            $categoryToStore->save();
+
+           $categoryToLayout = new CategoryToLayout();
+           $categoryToLayout->category_id = $entity->id;
+           $categoryToLayout->store_id = $storeId;
+           $categoryToLayout->layout_id = 0;
+           $categoryToLayout->save();
+
        });
 
    }
@@ -58,11 +68,15 @@ class CategoryTreat extends AbstractTreater
        if($entity->category_description->name === $category->name){
            return;
        }
+       /*elseif(!isset($entity->parent_id) || empty($entity->parent_id)){
+           return;
+       }*/
        $entity->category_description->name = $category->name;
        $entity->date_modified = ActiveRecord::currentDatetimeCreate();
        $entity::transaction(function() use ($entity) {
-           $entity->save();
            $entity->category_description->save();
+           $entity->save();
+
        });
    }
 }

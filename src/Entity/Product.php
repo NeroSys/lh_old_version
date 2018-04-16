@@ -14,4 +14,8 @@ class Product extends \ActiveRecord\Model
         array('product_option_group')
     );
     static $table_name = DB_PREFIX . 'product';
+
+    public function set_product_description(ProductDescription $productDescription){
+        $this->assign_attribute('product_description',$productDescription);
+    }
 }

@@ -5,11 +5,14 @@ namespace App\ErpIntegration\Processors\WardrobeTreats;
 use App\Entity\Manufacturer;
 use App\Entity\ProductAttribute;
 use App\Entity\ProductDescription;
+use App\Entity\ProductFilter;
 use App\Entity\ProductOption;
 use App\Entity\ProductOptionGroup;
-use App\Entity\ProductOptionValues;
+use App\Entity\ProductOptionValue;
 use App\Entity\ProductToCategory;
+use App\Entity\ProductToLayout;
 use App\Entity\ProductToStore;
+use App\Entity\UrlAlias;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\ErpIntegration\Processors\ProductProcessor;
 use App\Entity\Product as ARProductEntity;
@@ -19,22 +22,29 @@ use App\Entity\Option as AROptionEntity;
 use App\Entity\OptionValue as AROptionValueEntity;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\AttributeFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\CategoryFinder;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\FilterValueFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\ManufacturerFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionValueFinder;
 use Doctrine\Common\Collections\ArrayCollection;
 use LHGroup\From1cToWeb\Item\Product\Specification;
 use LHGroup\From1cToWeb\Item\ProductItem;
+use EasySlugger\Slugger;
+use App\Entity\Filter as ARFilterEntity;
 
 class ProductTreat extends AbstractTreater
 {
     const DEFAULT_PRODUCT_STATUS = 1;
-
+    /**
+     * @var \EasySlugger\Slugger
+     */
+    protected $slugger;
 
     public function treat($item, array $options = [])
     {
         parent::treat($item, $options);
         $this->treatProduct($item);
+        $this->slugger = new Slugger();
     }
 
     protected function findProductByIdErp(string $idErp): ?ARProductEntity
@@ -51,14 +61,14 @@ class ProductTreat extends AbstractTreater
         }
     }
 
-    protected function createProduct(ProductItem $productItem, int $storeId)
+    protected function createProduct(ProductItem $productItem)
     {
         $entity = new ARProductEntity();
-        $entity->product_description = new ProductDescription();
-        $entity->product_description->language_id = ProductProcessor::OPENCART_LANGUAGE_ID;
-
-        $this->updateProductRelations($entity, $productItem, $storeId);
-
+        $this->updateProductRelations($entity, $productItem);
+        $seoUrl = new UrlAlias;
+        $seoUrl->query = 'product_id='.$entity->id;
+        $seoUrl->keyword = $this->slugger::slugify($productItem->getName().'-'.$entity->erp_id);
+        $seoUrl->save();
     }
 
     protected function updateProduct(ProductItem $productItem, ARProductEntity $entity)
@@ -66,10 +76,13 @@ class ProductTreat extends AbstractTreater
         $this->updateProductRelations($entity, $productItem);
     }
 
-    protected function updateProductRelations(ARProductEntity $entity, ProductItem $productItem){
+    protected function updateProductRelations(ARProductEntity $entity, ProductItem $productItem)
+    {
         $entity->model = $productItem->getIdErp();
         $entity->sku = $productItem->getIdErp();
-        $entity->manufacturer_id = $this->findManufacturerByIdErp($productItem->getManufacturer()->getIdErp())->manucaturer_id;
+        $entity->manufacturer_id = $this->findManufacturerByIdErp(
+            $productItem->getManufacturer()->getIdErp()
+        )->manufacturer_id;
 
         $entity->weight = $productItem->getWeight();
         $entity->height = $productItem->getHeight();
@@ -79,15 +92,21 @@ class ProductTreat extends AbstractTreater
 
         $entity->status = self::DEFAULT_PRODUCT_STATUS;
 
-        $entity->quantity = $this->getTotalProductQuantity();
+        $entity->quantity = $this->getTotalProductQuantity($productItem);
         $entity->id_erp = $productItem->getIdErp();
 
-        $entity->product_description->name = $productItem->getName();
+
 
         $storeId = ProductProcessor::OPENCART_STOREID;
 
         $entity::transaction(function () use ($entity, $productItem, $storeId) {
             $entity->save();
+
+            if(null === $entity->product_description){ $entity->product_description = new ProductDescription(); }
+            $entity->product_description->product_id = $entity->id;
+            $entity->product_description->name = $productItem->getName();
+            $entity->product_description->language_id = ProductProcessor::OPENCART_LANGUAGE_ID;
+            $entity->product_description->save();
 
             ProductToCategory::delete_all(array('conditions' => array('product_id = ?', $entity->id)));
             foreach ($productItem->getCategories() as $category) {
@@ -111,17 +130,48 @@ class ProductTreat extends AbstractTreater
             $productToStore->product_id = $entity->id;
             $productToStore->layout_id = 0;
             $productToStore->save();
-            
+
             $this->updateProductProperties($entity->id, $productItem);
             $this->updateProductSpecification($entity->id, $productItem);
-
-
+            $this->updateProductFilters($entity->id, $productItem);
         });
     }
 
-    protected function updateProductProperties(int $productId, ProductItem $productItem){
+    protected function updateProductFilters(int $productId, ProductItem $productItem)
+    {
+        ProductFilter::delete_all(array('conditions' => array('product_id = ?', $productId)));
+
+        foreach ($productItem->getProperties() as $property) {
+            $filter = $this->findFilterValueByIdErp(
+                $property->getValue()->getIdErp(),
+                FilterTreat::PROPERTY_VALUE_ID_ERP_SOURCE
+            );
+            $productToFilter = new ProductFilter();
+            $productToFilter->product_id = $productId;
+            $productToFilter->filter_id = $filter->filter_id;
+            $productToFilter->save();
+        }
+
+        foreach ($productItem->getSpecifications() as $specification) {
+
+            foreach ($specification->getCharacteristics() as $characteristic) {
+                $filter = $this->findFilterValueByIdErp(
+                            $characteristic->getValue()->getIdErp(),
+                    FilterTreat::SPECIFICATION_CHARACTERISTIC_VALUE_ID_ERP_SOURCE
+                    );
+
+                $productToFilter = new ProductFilter();
+                $productToFilter->product_id = $productId;
+                $productToFilter->filter_id = $filter->filter_id;
+                $productToFilter->save();
+            }
+        }
+    }
+
+    protected function updateProductProperties(int $productId, ProductItem $productItem)
+    {
         ProductAttribute::delete_all(array('conditions' => array('product_id = ?', $productId)));
-        foreach ( $productItem->getProperties() as $property){
+        foreach ($productItem->getProperties() as $property) {
             $attribute = $this->findAttributeByIdErp($property->getIdErp());
             $productToAttribute = new ProductAttribute();
             $productToAttribute->product_id = $productId;
@@ -132,10 +182,11 @@ class ProductTreat extends AbstractTreater
         }
     }
 
-    protected function updateProductSpecification(int $productId, ProductItem $productItem){
+    protected function updateProductSpecification(int $productId, ProductItem $productItem)
+    {
 
         ProductOptionGroup::delete_all(array('conditions' => array('product_id = ?', $productId)));
-        foreach ($productItem->getSpecifications() as $specification){
+        foreach ($productItem->getSpecifications() as $specification) {
             $productToOptionGroup = new ProductOptionGroup();
             $productToOptionGroup->price_base = $specification->getPriceBase();
             $productToOptionGroup->price_discount = $specification->getPriceDiscount();
@@ -145,19 +196,22 @@ class ProductTreat extends AbstractTreater
             $productToOptionGroup->save();
 
             foreach ($specification->getCharacteristics() as $characteristic) {
+                $option = $this->findOptionByIdErp($characteristic->getIdErp());
                 $productToOption = new ProductOption();
                 $productToOption->product_id = $productId;
-                $productToOption->option_id = $this->findOptionByIdErp($characteristic->getIdErp());
+                $productToOption->option_id = $option->option_id;
                 $productToOption->product_option_group = $productToOptionGroup->id;
                 $productToOption->save();
 
-                $productToOptionValue = new ProductOptionValues();
+                $optionValue = $this->findOptionValueByIdErp($characteristic->getValue()->getIdErp());
+                $productToOptionValue = new ProductOptionValue();
                 $productToOptionValue->product_id = $productId;
-                $productToOption->option_id = $this->findOptionByIdErp($characteristic->getIdErp());
-                $productToOption->option_value_id = $this->findOptionValueByIdErp($characteristic->getValue()->getIdErp());
-                $productToOption->quantity = $this->getTotalSpecificationQuantity($specification);
-                $productToOption->product_option_group = $productToOptionGroup->id;
-                $productToOption->save();
+                $productToOptionValue->product_option_id = $productToOption->id;
+                $productToOptionValue->option_id = $option->option_id;
+                $productToOptionValue->option_value_id = $optionValue->option_value_id;
+                $productToOptionValue->quantity = $this->getTotalSpecificationQuantity($specification);
+                $productToOptionValue->product_option_group = $productToOptionGroup->id;
+                $productToOptionValue->save();
             }
 
         }
@@ -188,6 +242,11 @@ class ProductTreat extends AbstractTreater
         return OptionValueFinder::getInstance()->findByIdErp($idErp);
     }
 
+    protected function findFilterValueByIdErp(string $idErp, string $source): ARFilterEntity
+    {
+        return FilterValueFinder::getInstance()->findByIdErp($idErp, $source);
+    }
+
     protected function getTotalProductQuantity(ProductItem $productItem): int
     {
         $total = 0;
@@ -202,7 +261,7 @@ class ProductTreat extends AbstractTreater
     protected function getTotalSpecificationQuantity(Specification $specification): int
     {
         $total = 0;
-        foreach ($specification->getPrices() as $price){
+        foreach ($specification->getPrices() as $price) {
             $total += $price->getQuantity();
         }
         return $total;

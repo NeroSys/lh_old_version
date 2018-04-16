@@ -12,5 +12,5 @@ class ProductOption extends \ActiveRecord\Model
         array('option_values', 'through' => 'product_option_values'),
     );
 
-    static $table_name = DB_PREFIX . 'product_options';
+    static $table_name = DB_PREFIX . 'product_option';
 }

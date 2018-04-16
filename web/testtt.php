@@ -122,7 +122,7 @@ $xmlMessage = '<?xml version="1.0" encoding="UTF-8" ?>
                 <id_erp>32dfsdfs</id_erp>
                 <name>Страна происхождения</name>
                 <value>
-                    <id_erp>f1f2cdsfdfsf</id_erp>
+                    <id_erp>00Upf1f2cdsfdfsf</id_erp>
                     <name>Германия</name>
                 </value>
             </property>
