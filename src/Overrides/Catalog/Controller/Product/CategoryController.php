@@ -156,7 +156,14 @@ class CategoryController extends \Controller
 
             $data['categories'] = array();
             $data['parent_category_info'] = $this->model_catalog_category->getCategoryLogo($category_id);
-            $results = $this->model_catalog_category->getCategories($category_id);
+
+            if($category_info['parent_id']>0){
+                $results = $this->model_catalog_category->getOneLevelCategories($category_id, $category_info['parent_id']);
+            }
+            else{
+                $results = $this->model_catalog_category->getCategories($category_id);
+            }
+
 
             foreach ($results as $result) {
                 $filter_data = array(
@@ -166,7 +173,7 @@ class CategoryController extends \Controller
 
                 $data['categories'][] = array(
                     'name' => $result['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . '_' . $result['category_id'] . $url)
+                    'href' => $this->url->link('product/category', 'path=' . $result['category_id'] . $url)
                 );
             }
 

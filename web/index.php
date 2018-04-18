@@ -2,7 +2,6 @@
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 
-
 // Version
 define('VERSION', '2.2.0.0');
 

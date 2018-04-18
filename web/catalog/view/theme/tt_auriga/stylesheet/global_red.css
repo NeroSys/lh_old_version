@@ -98,7 +98,7 @@ p {
 }
 
 .fa {
-    font-size: 14px;
+    /*font-size: 14px;*/
 }
 
 h1 {
@@ -775,7 +775,7 @@ div.required .control-label:before {
     text-align: left;
 }
 
-header .col-logo{
+.header .col-logo{
     height: 55px;
 }
 
@@ -1073,13 +1073,15 @@ header .col-logo{
 }
 
 #menu {
-    background-color: #229ac8;
-    background-image: linear-gradient(to bottom, #23a1d1, #1f90bb);
+    background-color: rgba(0,0,0,1);
     background-repeat: repeat-x;
-    border-color: #1f90bb #1f90bb #145e7a;
     min-height: 40px;
+    color: #ccc;
+    border-color: #222;
 }
-
+#menu a {
+    color: #ccc;
+}
 #menu .nav > li > a {
     color: #fff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -1213,8 +1215,8 @@ header .col-logo{
 }
 
 .footer .footer-content li {
-    line-height: 23px;
-    margin: 0 0 7px;
+  /*  line-height: 23px;
+    margin: 0 0 0px;*/
 }
 
 .footer .col .footer-content a {
@@ -3279,7 +3281,10 @@ ul.tabs li span:hover, ul.tabs li.active span {
 }
 
 .brand-slider-contain {
-    margin: 45px 0 0;
+    margin: 0px 0 0;
+}
+.brand-text-container{
+    padding-top: 45px;
 }
 
 .brand-title {
@@ -3763,13 +3768,13 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     text-align: right;
 }
 
-.header a, header .address {
+.header li a, .header .address {
     text-align: left;
     font-family: "Arial", serif;
     padding: 10px 20px 10px;
     font-weight: 300;
     font-size: 14px;
-    line-height: 32px;
+    line-height: 20px;
     text-decoration: none;
     text-transform: uppercase;
     display: block;
@@ -3783,31 +3788,31 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     color: #e84c3d;
 }
 
-header .phone a {
+.header .phone a {
     font-size: 15px;
 }
 
-header .address {
+.header .address {
     text-align: right;
 }
 
-header .phone, header .address {
+.header .phone, .header .address {
     color: #666;
 }
 
-header .last a {
+.header .last a {
     padding-right: 0px;
 }
 
-header .first a {
+.header .first a {
     padding-left: 0px;
 }
 
-header .address {
+.header .address {
     padding-left: 14px;
 }
 
-header .subheader {
+.header .subheader {
     margin-top: 6px;
 }
 
@@ -4070,14 +4075,14 @@ header .subheader {
 
 @media (max-width: 767px) {
     .header li a {
-        padding: 2px 0px 2px;
-        font-weight: 300;
-        font-size: 14px;
-        line-height: 23px;
+        /*padding: 2px 0px 2px;*/
+        /*font-weight: 300;*/
+        /*font-size: 14px;*/
+        /*line-height: 23px;*/
     }
 
-    header .phone a {
-        padding: 2px 0px 2px;
+    .header .phone a {
+        /*padding: 2px 0px 2px;*/
     }
 
     .header ul {
@@ -4085,7 +4090,7 @@ header .subheader {
         margin-bottom: 4px;
     }
 
-    header .address {
+    .header .address {
         text-align: left;
     }
 
@@ -4766,6 +4771,36 @@ div.pt_menu .parentMenu a, .parentMenu .block-title {
     margin-bottom:0;
 }
 .press-post-item .press-post-title span {padding: 10px; display: block; width: 100%;}
-header .phones {text-align: left; margin:0;}
-header .phones li:first-child a {padding-left: 0}
-header .phone-header {line-height: 50px}
+.header .phones {text-align: left; margin:0; }
+.header .phones li a {font-size: 1.45em;}
+.header .phones li:first-child a {padding-left: 0}
+.header .phone-header {line-height: 50px}
+
+
+
+.content{
+    padding-top:45px;
+}
+
+.mm-menu .mm-listview .mm-btn_next:after {
+    border-color: rgba(255,255,255,.3);
+}
+
+#hamburger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+}
+
+.header {position: fixed; top: 0}
+
+.mm-menu .mm-listitem_selected>a:not(.mm-btn_next), .mm-menu .mm-listitem_selected>span{
+    background: rgba(255,255,255,.1);
+}
+#menu {
+    opacity: 0;
+}
+#menu:not(.mm-menu){
+    display: none;
+}

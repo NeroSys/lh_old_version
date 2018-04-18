@@ -9,7 +9,7 @@ class Category extends \ActiveRecord\Model
     );
 
     static $has_many = array(
-         array('product_to_category')
+        array('product_to_category')
     );
 
     static $table_name = DB_PREFIX . 'category';

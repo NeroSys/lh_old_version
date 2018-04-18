@@ -11,7 +11,7 @@ class ActiveRecord
             $cfg->set_connections(
                 array(
                     'development' => 'mysql://' . $username . ':' . $password . '@' . $hostname . '/' . $database.';charset=utf8'
-                )
+               )
             );
         });
     }

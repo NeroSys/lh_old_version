@@ -4,7 +4,6 @@ namespace App\ErpIntegration\Processors;
 
 
 use App\ErpIntegration\Processors\WardrobeTreats\AttributeTreat;
-use App\ErpIntegration\Processors\WardrobeTreats\BrandTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\CategoryTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\FilterTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\ManufacturerTreat;
