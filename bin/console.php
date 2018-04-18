@@ -48,6 +48,8 @@ $application->add(
     )
 );
 
+$application->add(new \App\ErpIntegration\Commands\UpdateImagesCommand());
+
 /**
  * end of ERP Integration commands
  */

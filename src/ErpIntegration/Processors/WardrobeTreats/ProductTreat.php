@@ -94,7 +94,7 @@ class ProductTreat extends AbstractTreater
         $entity->quantity = $this->getTotalProductQuantity($productItem);
         $entity->id_erp = $productItem->getIdErp();
         if($mainImage = $productItem->getImages()->first()){
-            $entity->image = 'catalog/'.$mainImage->getPath();
+            $entity->image = 'catalog/products/'.$mainImage->getPath();
         }
 
 
