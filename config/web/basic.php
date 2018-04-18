@@ -14,7 +14,7 @@ $appConfig->set('DIR_MODIFICATION', $appConfig->get('LOCAL_DIR_OPENCART').'rewri
 $appConfig->set('DIR_IMAGE', $appConfig->get('PUBLIC_WEB').'/image/');
 $appConfig->set('DIR_CACHE', $appConfig->get('LOCAL_DIR_OPENCART').'/cache/');
 $appConfig->set('DIR_DOWNLOAD', $appConfig->get('PUBLIC_WEB').'/storage/download/');
-$appConfig->set('DIR_LOGS', $appConfig->get('LOCAL_DIR_OPENCART').'/logs/');
+$appConfig->set('DIR_LOGS', $appConfig->get('LOCAL_DIR_OPENCART').'logs/');
 
 $appConfig->set('DIR_UPLOAD', $appConfig->get('PUBLIC_WEB').'/storage/upload/');
 

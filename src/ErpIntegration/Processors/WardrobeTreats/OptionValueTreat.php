@@ -4,9 +4,11 @@ namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\OptionValue;
 use App\Entity\OptionValueDescription;
+use App\ErpIntegration\Exception\ItemNotFoundException;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\Entity\OptionValue as AROptionValueEntity;
 use App\ErpIntegration\Processors\ProductProcessor;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionValueFinder;
 use LHGroup\From1cToWeb\Item\Product\CharacteristicValue;
 
 class OptionValueTreat extends AbstractTreater
@@ -21,7 +23,10 @@ class OptionValueTreat extends AbstractTreater
 
     protected function findOptionValueByIdErp(string $idErp): ?AROptionValueEntity
     {
-        return OptionValue::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
+        try { return OptionValueFinder::getInstance()->findByIdErp($idErp); }
+        catch (ItemNotFoundException $exception){
+            return null;
+        }
     }
 
     protected function treatOptionValue(CharacteristicValue $characteristicValue, int $optionId)

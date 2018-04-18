@@ -6,8 +6,10 @@ namespace App\ErpIntegration\Processors\WardrobeTreats;
 use App\Entity\Option;
 use App\Entity\OptionDescription;
 
+use App\ErpIntegration\Exception\ItemNotFoundException;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\ErpIntegration\Processors\ProductProcessor;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionFinder;
 use LHGroup\From1cToWeb\Item\Product\Characteristic;
 use LHGroup\From1cToWeb\Item\Product\CharacteristicValue;
 
@@ -33,7 +35,10 @@ class OptionTreat extends AbstractTreater
 
     protected function findOptionByIdErp(string $idErp): ?Option
     {
-        return Option::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
+        try { return OptionFinder::getInstance()->findByIdErp($idErp); }
+        catch (ItemNotFoundException $exception){
+            return null;
+        }
     }
 
     protected function treatOption(Characteristic $characteristic)

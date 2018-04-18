@@ -3,8 +3,10 @@
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\AttributeDescription;
+use App\ErpIntegration\Exception\ItemNotFoundException;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\ErpIntegration\Processors\ProductProcessor;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\AttributeFinder;
 use LHGroup\From1cToWeb\Item\Product\Property;
 use App\Entity\Attribute as ARAttributeEntity;
 
@@ -20,7 +22,10 @@ class AttributeTreat extends AbstractTreater
 
     protected function findAttributeByIdErp(string $idErp): ?ARAttributeEntity
     {
-        return ARAttributeEntity::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
+        try { return AttributeFinder::getInstance()->findByIdErp($idErp); }
+        catch (ItemNotFoundException $exception){
+            return null;
+        }
     }
 
     protected function treatAttribute(Property $property)

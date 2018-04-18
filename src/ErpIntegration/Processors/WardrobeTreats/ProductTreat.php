@@ -44,7 +44,6 @@ class ProductTreat extends AbstractTreater
     {
         parent::treat($item, $options);
         $this->treatProduct($item);
-        $this->slugger = new Slugger();
     }
 
     protected function findProductByIdErp(string $idErp): ?ARProductEntity
@@ -67,7 +66,7 @@ class ProductTreat extends AbstractTreater
         $this->updateProductRelations($entity, $productItem);
         $seoUrl = new UrlAlias;
         $seoUrl->query = 'product_id='.$entity->id;
-        $seoUrl->keyword = $this->slugger::slugify($productItem->getName().'-'.$entity->erp_id);
+        $seoUrl->keyword = Slugger::slugify($productItem->getName().'-'.$entity->id);
         $seoUrl->save();
     }
 
@@ -94,6 +93,9 @@ class ProductTreat extends AbstractTreater
 
         $entity->quantity = $this->getTotalProductQuantity($productItem);
         $entity->id_erp = $productItem->getIdErp();
+        if($mainImage = $productItem->getImages()->first()){
+            $entity->image = 'catalog/'.$mainImage->getPath();
+        }
 
 
 
@@ -152,6 +154,7 @@ class ProductTreat extends AbstractTreater
             $productToFilter->save();
         }
 
+        $alreadyInserted = [];
         foreach ($productItem->getSpecifications() as $specification) {
 
             foreach ($specification->getCharacteristics() as $characteristic) {
@@ -159,11 +162,13 @@ class ProductTreat extends AbstractTreater
                             $characteristic->getValue()->getIdErp(),
                     FilterTreat::SPECIFICATION_CHARACTERISTIC_VALUE_ID_ERP_SOURCE
                     );
-
+                //уже была характеристика с таким товаром, товар уже привязан к этой характеристике
+                if(!empty($alreadyInserted[$productId.$filter->filter_id])){ continue; }
                 $productToFilter = new ProductFilter();
                 $productToFilter->product_id = $productId;
                 $productToFilter->filter_id = $filter->filter_id;
                 $productToFilter->save();
+                $alreadyInserted[$productId.$filter->filter_id] = 1;
             }
         }
     }
@@ -193,6 +198,7 @@ class ProductTreat extends AbstractTreater
             $productToOptionGroup->id_erp = $specification->getIdErp();
             $productToOptionGroup->quantity = $this->getTotalSpecificationQuantity($specification);
             $productToOptionGroup->product_id = $productId;
+            $productToOptionGroup->ean = $specification->getEan();
             $productToOptionGroup->save();
 
             foreach ($specification->getCharacteristics() as $characteristic) {

@@ -3,9 +3,11 @@
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\ManufacturerToStore;
+use App\ErpIntegration\Exception\ItemNotFoundException;
 use App\ErpIntegration\Processors\AbstractTreater;
 use App\Entity\Manufacturer as ARManufacturerEntity;
 use App\ErpIntegration\Processors\ProductProcessor;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\ManufacturerFinder;
 use LHGroup\From1cToWeb\Item\Product\Manufacturer;
 
 class ManufacturerTreat extends AbstractTreater
@@ -19,7 +21,11 @@ class ManufacturerTreat extends AbstractTreater
 
     public function findManufacturerByIdErp(string $idErp): ?ARManufacturerEntity
     {
-        return ARManufacturerEntity::first(array('conditions' => array('id_erp' => $idErp), 'limit' => 1));
+        try { return ManufacturerFinder::getInstance()->findByIdErp($idErp); }
+        catch (ItemNotFoundException $exception){
+            return null;
+        }
+
     }
 
     protected function treatManufacturer(Manufacturer $manufacturer)

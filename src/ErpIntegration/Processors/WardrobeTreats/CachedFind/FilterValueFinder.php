@@ -25,7 +25,7 @@ class FilterValueFinder
         }
         $entity = $this->findOneInDb($idErp, $source);
         if (null === $entity) {
-            throw new ItemNotFoundException("No item with id_erp $idErp $source in the database.");
+            throw new ItemNotFoundException("No filter value item with id_erp $idErp $source in the database.");
         }
         $this->add($entity->id_erp, $entity->source, $entity);
 

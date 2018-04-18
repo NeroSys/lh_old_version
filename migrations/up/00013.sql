@@ -1,7 +1,7 @@
 ALTER TABLE `oc_product_option` ADD product_option_group int(11) unsigned NOT NULL;
 ALTER TABLE `oc_product_option` ADD INDEX `product_option_group_index` (`product_option_group`);
 
-ALTER TABLE oc_product_option ADD CONSTRAINT FK_option_value_group
+ALTER TABLE oc_product_option ADD CONSTRAINT FK_option_value_group_to_product_option
 FOREIGN KEY (product_option_group) REFERENCES oc_product_option_group(id)
   ON DELETE CASCADE
   ON UPDATE CASCADE;

@@ -81,8 +81,10 @@
                         </div>
                     </div>
                         <?php } else { ?>
-                        <div class="pt_menu parentMenu">
-                            <a href="<?php echo $category['href']; ?>"><span><?php echo $category['name']; ?></span></a>
+                        <div class="pt_menu">
+                            <div class="parentMenu">
+                                <a href="<?php echo $category['href']; ?>"><span><?php echo $category['name']; ?></span></a>
+                            </div>
                         </div>
                         <?php } ?>
 

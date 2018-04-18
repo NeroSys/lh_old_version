@@ -19,7 +19,7 @@ abstract class AbstractFinder
         }
         $entity = $this->findOneInDb($idErp);
         if(null === $entity){
-            throw new ItemNotFoundException("No item with id_erp $idErp in the database.");
+            throw new ItemNotFoundException("No item ".get_class($this)." with id_erp $idErp in the database.");
         }
         $this->add($entity->id_erp, $entity);
 

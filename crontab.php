@@ -12,14 +12,12 @@ $jobby = new \Jobby\Jobby();
 $jobby->add('LoadProductFromErp', array(
     'command' => 'php bin/console integration:consume-products:start',
     'schedule' => '0 * * * *', //Каждый час
-    'output' => DIR_LOGS.'command.log',
     'enabled' => true,
 ));
 
 $jobby->add('sendNewOrdersToErp', array(
-    'command' => 'ls',
-    'schedule' => '*/2 * * * *', //Каждые 2 минуты
-    'output' => DIR_LOGS.'command.log',
+    'command' => 'php bin/console integration:publish:new-orders',
+    'schedule' => '*/3 * * * *', //Каждые 2 минуты
     'enabled' => true,
 ));
 
