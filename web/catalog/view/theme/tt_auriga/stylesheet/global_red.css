@@ -4842,3 +4842,5 @@ button:hover.mfp-close{background-color: transparent}
 #product .form-group-actions .add-to-links .compare button:hover {
     background-position: -5px -66px;
 }
+
+.radio {clear:both}
