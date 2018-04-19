@@ -38,6 +38,6 @@ Thumbs.db
 vendor/
 .idea/
 web/image/cache/
-cache/
+./cache/
 config/local.yml
 composer.phar
