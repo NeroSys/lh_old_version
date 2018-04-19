@@ -4,10 +4,10 @@ namespace App\ErpIntegration\Processors;
 
 abstract class AbstractTreater implements TreaterInterface
 {
-   public function treat($item, int $storeId)
-   {
-       if(null === $item){
-           return;
-       }
-   }
+    public function treat($item, array $options = [])
+    {
+        if(null === $item){
+            return;
+        }
+    }
 }

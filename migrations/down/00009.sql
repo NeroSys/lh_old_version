@@ -1,0 +1,1 @@
+ALTER TABLE `oc_option_value_description` DROP FOREIGN KEY FK_option_value

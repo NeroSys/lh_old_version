@@ -35,9 +35,10 @@
 .Trashes
 ehthumbs.db
 Thumbs.db
-vendor/
-.idea/
-web/image/cache/
-cache/
-config/local.yml
+/vendor
+.idea
+/web/image/cache
+/cache
+/config/local.yml
 composer.phar
+/web/image/catalog/products

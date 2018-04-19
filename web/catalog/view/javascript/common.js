@@ -634,22 +634,22 @@ $(document).delegate('.agree', 'click', function(e) {
 	}
         
          // function to set the height on fly
- function autoHeight() {
+/* function autoHeight() {
    $('.text-container').css('min-height', 0);
    $('.text-container').css('min-height', (
      $(document).height() - $('header').outerHeight() - $('#pt_custommenu').outerHeight() - $('.footer').outerHeight() - $('.powered').outerHeight()
    ));
- }
+ }*/
 
  // onDocumentReady function bind
 
-   autoHeight();
+   //autoHeight();
 
 
  // onResize bind of the function
- $(window).resize(function() {
+/* $(window).resize(function() {
    autoHeight();
  })
- 
+ */
 })(window.jQuery);
 

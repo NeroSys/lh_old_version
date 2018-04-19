@@ -1,0 +1,11 @@
+--- opencart/opencart/upload/system/framework.php	(date 1521535916000)
++++ opencart/opencart/upload/system/framework.php	(date 1521535916000)
+@@ -33,7 +33,7 @@
+ }
+ 
+ // Cache 
+-$registry->set('cache', new Cache($config->get('cache_type'), $config->get('cache_expire')));
++$registry->set('cache', new \App\Engine\Cache\Memcached());
+ 
+ // Url
+ $registry->set('url', new Url($config->get('site_ssl')));

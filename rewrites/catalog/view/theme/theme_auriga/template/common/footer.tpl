@@ -40,7 +40,7 @@
            <li class="hidden-lg hidden-md"><a href="/our_brands"><span>Бренды</span></a></li>
            <li class="hidden-lg hidden-md"><a href="/our-activity"><span>Новости</span></a></li>
            <li class="hidden-lg hidden-md"><a href="/press"><span>Пресс-центр</span></a></li>
-           <li><a href="/opt"><span>ОПТ</span></a></li>
+           <li><a href="/opt"><span>Опт</span></a></li>
        </ul>
       </div>
     </div>
@@ -75,7 +75,7 @@
 
 <script src="/catalog/view/javascript/opentheme/hozmegamenu/custommenu.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/elevatezoom/jquery.elevatezoom.js" type="text/javascript"></script>
-<script src="/catalog/view/javascript/common.js?d24" type="text/javascript"></script>
+<script src="/catalog/view/javascript/common.js?d24d3" type="text/javascript"></script>
 
 <script src="/catalog/view/javascript/mmenu/jquery.mmenu.all.js" type="text/javascript"></script>
 

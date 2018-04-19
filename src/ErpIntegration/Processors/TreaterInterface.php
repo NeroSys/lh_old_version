@@ -4,5 +4,5 @@ namespace App\ErpIntegration\Processors;
 
 Interface TreaterInterface
 {
-    public function treat($item, int $storeId);
+    public function treat($item, array $options = []);
 }

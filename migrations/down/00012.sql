@@ -1,0 +1,1 @@
+ALTER TABLE `oc_product_option` DROP COLUMN product_option_group;

@@ -14,8 +14,8 @@
     <?php $class = 'col-sm-12'; ?>
     <?php } ?>
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
-      <h2><?php echo $heading_title; ?></h2>
-      <?php if ($thumb || $description) { ?>
+      <h1><?php echo $heading_title; ?></h1>
+      <?php if ($thumb || trim(strip_tags($description))) { ?>
       <div class="row">
         <?php if ($thumb) { ?>
         <div class="col-sm-2"><img src="<?php echo $thumb; ?>" alt="<?php echo $heading_title; ?>" title="<?php echo $heading_title; ?>" class="img-thumbnail" /></div>

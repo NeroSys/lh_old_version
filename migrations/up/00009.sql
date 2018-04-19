@@ -1,0 +1,4 @@
+ALTER TABLE oc_option_value ADD CONSTRAINT FK_option
+FOREIGN KEY (option_id) REFERENCES oc_option(option_id)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;

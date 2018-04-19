@@ -3,6 +3,7 @@ $loader = require_once dirname(__DIR__, 1) . '/vendor/autoload.php';
 
 require_once(dirname(__DIR__, 1) . '/config/config.php');
 
+
 use \Symfony\Component\Console\Application;
 
 \Doctrine\Common\Annotations\AnnotationRegistry::registerLoader([$loader, 'loadClass']);
@@ -35,9 +36,19 @@ $application->add(
 $application->add(
     new \App\ErpIntegration\Commands\ConsumeProductsCommand(
         null,
+        $ampqConfig,
+        new \App\Engine\Cache\Memcached()
+    )
+);
+
+$application->add(
+    new \App\ErpIntegration\Commands\SendNewOrdersCommand(
+        null,
         $ampqConfig
     )
 );
+
+$application->add(new \App\ErpIntegration\Commands\UpdateImagesCommand());
 
 /**
  * end of ERP Integration commands
