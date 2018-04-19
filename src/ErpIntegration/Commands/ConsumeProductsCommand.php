@@ -46,7 +46,7 @@ class ConsumeProductsCommand extends Command
                  'Quit listening queue after '.QueueConsumer::QUEUE_TIMEOUT_SEC.' sec. 
                     If not set then true and it will listen permanently',
                  null
-             );
+             )->setHelp("Usage example: php bin/console.php integration:consume-products:start --permanent=false");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)

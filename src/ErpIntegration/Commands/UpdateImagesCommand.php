@@ -35,20 +35,20 @@ class UpdateImagesCommand extends Command
         $notifier = new IntegrationEventNotify($output);
 
         $this->initFtpConnection($notifier);
-        
+
         $products = Product::all();
         foreach ($products as $product) {
-            if (!empty($product->image) && !is_file(DIR_IMAGE . $product->image)) {
-                $notifier->notifyEvent("Copying image ".$product->image." of product with id_erp ".$product->id_erp." from mediaservers ftp");
-                try{
-                    $this->imageFromMediaserverToWeb($product->image);
-                    $notifier->notifyEvent("Image copied successfully!", $notifier::SUCCESS_MESSAGE);
-                }
-                catch(\Throwable $e){
-                    $notifier->notifyError($e);
-                }
-                break;
+            if (empty($product->image) || is_file(DIR_IMAGE . $product->image)) {
+                continue;
             }
+            $notifier->notifyEvent("Copying image " . $product->image . " of product with id_erp " . $product->id_erp . " from mediaservers ftp");
+            try {
+                $this->imageFromMediaserverToWeb($product->image);
+                $notifier->notifyEvent("Image copied successfully!", $notifier::SUCCESS_MESSAGE);
+            } catch (\Throwable $e) {
+                $notifier->notifyError($e);
+            }
+
         }
 
         $this->closeFtpConnection();

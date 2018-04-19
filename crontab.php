@@ -15,9 +15,15 @@ $jobby->add('LoadProductFromErp', array(
     'enabled' => true,
 ));
 
+$jobby->add('LoadProductFromErp', array(
+    'command' => 'php bin/console.php integration:images:update',
+    'schedule' => '0 1 * * *', //At 01:00.
+    'enabled' => true,
+));
+
 $jobby->add('sendNewOrdersToErp', array(
     'command' => 'php bin/console integration:publish:new-orders',
-    'schedule' => '*/3 * * * *', //Каждые 2 минуты
+    'schedule' => '*/3 * * * *', //Каждые 3 минуты
     'enabled' => true,
 ));
 
