@@ -292,26 +292,38 @@ class ProductController extends \ControllerProductProduct
 
             $this->load->model('tool/image');
 
-            if ($product_info['image']) {
-                $data['popup'] = $this->model_tool_image->resize($product_info['image'], $this->config->get($this->config->get('config_theme') . '_image_popup_width'), $this->config->get($this->config->get('config_theme') . '_image_popup_height'));
-            } else {
-                $data['popup'] = '';
-            }
+			$image = file_exists('image/', $product_info['image']) ? $product_info['image'] : 'placeholder.png';
 
-            if ($product_info['image']) {
-                $data['thumb'] = $this->model_tool_image->resize($product_info['image'], $this->config->get($this->config->get('config_theme') . '_image_thumb_width'), $this->config->get($this->config->get('config_theme') . '_image_thumb_height'));
-            } else {
-                $data['thumb'] = '';
-            }
+			$data['popup'] = $this->model_tool_image->resize(
+				$image,
+				$this->config->get($this->config->get('config_theme') . '_image_popup_width'),
+				$this->config->get($this->config->get('config_theme') . '_image_popup_height')
+			);
+
+			$data['thumb'] = $this->model_tool_image->resize(
+				$image,
+				$this->config->get($this->config->get('config_theme') . '_image_thumb_width'),
+				$this->config->get($this->config->get('config_theme') . '_image_thumb_height')
+			);
 
             $data['images'] = array();
 
             $results = $this->model_catalog_product->getProductImages($this->request->get['product_id']);
 
             foreach ($results as $result) {
+				$image = $result['image'] ? $result['image'] : 'placeholder.png';
+
                 $data['images'][] = array(
-                    'popup' => $this->model_tool_image->resize($result['image'], $this->config->get($this->config->get('config_theme') . '_image_popup_width'), $this->config->get($this->config->get('config_theme') . '_image_popup_height')),
-                    'thumb' => $this->model_tool_image->resize($result['image'], $this->config->get($this->config->get('config_theme') . '_image_additional_width'), $this->config->get($this->config->get('config_theme') . '_image_additional_height'))
+                    'popup' => $this->model_tool_image->resize(
+						$image,
+						$this->config->get($this->config->get('config_theme') . '_image_popup_width'),
+						$this->config->get($this->config->get('config_theme') . '_image_popup_height')
+					),
+                    'thumb' => $this->model_tool_image->resize(
+						$image,
+						$this->config->get($this->config->get('config_theme') . '_image_additional_width'),
+						$this->config->get($this->config->get('config_theme') . '_image_additional_height')
+					)
                 );
             }
 
