@@ -41,3 +41,4 @@ Thumbs.db
 /cache
 /config/local.yml
 composer.phar
+/web/image/catalog/products
