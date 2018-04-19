@@ -10,13 +10,8 @@ class ProductModel extends \ModelCatalogProduct
     const PRODUCT_OPTION_REQUIRED   = 1;
 
     public function getAviableProductSpecifications(int $product_id):?array{
-        $options = $this->getProductSpecificationOptions($product_id);
-
-        $specifications = array();
-        foreach ($options as $option){
-            $specifications[$option['id']] = $option;
-        }
-        return $specifications;
+        $options = $this->getProductSpecificationOptionsFromDatabase($product_id);
+        return $this->groupingOptionsAsSpecificationID($options);
     }
 
 
@@ -24,7 +19,7 @@ class ProductModel extends \ModelCatalogProduct
     public function getProductOptions($product_id) {
         $product_option_data = array();
 
-        $options = $this->getProductSpecificationOptions($product_id);
+        $options = $this->getProductSpecificationOptionsFromDatabase($product_id);
         foreach ($options as $option) {
             $product_option_data[$option['option_id']]['product_option_id']     = $option['product_option_id'];
             $product_option_data[$option['option_id']]['option_id']             = $option['option_id'];
@@ -52,13 +47,28 @@ class ProductModel extends \ModelCatalogProduct
         return $product_option_data;
     }
 
+    private function groupingOptionsAsSpecificationID(array $data):?array{
+        $options = array();
+        foreach ($data as $option){
+			$option['status'] = true;
+			$options[$option['id']]['id'] = $option['id'];
+			$options[$option['id']]['number'] = $option['id_erp'];
+			$options[$option['id']]['status'] = true;
+            $options[$option['id']]['options'][$option['option_id']] = $option;
+        }
+        foreach ($options as &$option){
+            $option['options'] = array_values($option['options']);
+        }
+        return $options;
+    }
 
-    private function getProductSpecificationOptions(int $product_id):?array{
-        $sql = "SELECT opog.*, opog.price_base price,
+    private function getProductSpecificationOptionsFromDatabase(int $product_id):?array{
+        $sql = "SELECT opog.*, opog.price_base price, 
                   ood.option_id, ood.name option_name, 
                   oo.type, oo.sort_order,
                   oovd.option_value_id, oovd.name option_value_name, 
-                  pov.price_prefix, pov.subtract, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, pov.product_option_group, pov.product_option_id 
+                  pov.price_prefix, pov.subtract, pov.points, pov.points_prefix, pov.weight, pov.weight_prefix, 
+                  pov.product_option_group, pov.product_option_id 
                 FROM " . DB_PREFIX . "product_option_value pov 
                   LEFT JOIN " . DB_PREFIX . "product_option_group opog ON pov.product_option_group = opog.id
                   LEFT JOIN " . DB_PREFIX . "option_value oov ON pov.option_value_id = oov.option_value_id
@@ -67,7 +77,7 @@ class ProductModel extends \ModelCatalogProduct
                   LEFT JOIN " . DB_PREFIX . "option oo ON pov.option_id = oo.option_id
                   WHERE opog.product_id = $product_id
                   ORDER BY opog.id, ood.option_id";
-        $data = $this->db->query($sql);
-        return $data->rows;
+
+        return $this->db->query($sql)->rows;
     }
 }

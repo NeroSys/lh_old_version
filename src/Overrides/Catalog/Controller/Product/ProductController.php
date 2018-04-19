@@ -169,13 +169,6 @@ class ProductController extends \ControllerProductProduct
 
         $product_info = $this->model_catalog_product->getProduct($product_id);
 
-//        $spesifications = $this->getProductSpecifications();
-//
-//        dump($spesifications);
-//
-//        $options = $this->getProductOptions($product_id);
-//        dump($options);
-
         if ($product_info) {
             $url = '';
 
@@ -579,12 +572,15 @@ class ProductController extends \ControllerProductProduct
         }
     }
 
-    protected function getProductSpecifications(): ?array
-    {
-        if(isset($this->request->get['product_id'])){
-            return $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
-        }
-        return null;
+    public function options(){
+        $this->load->language('product/product');
+        $this->load->model('catalog/product');
+
+        $data = $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
+        header('Content-Type: application/json');
+        header("Access-Control-Allow-Origin: *");
+        $responce = json_encode(array_values($data));
+		echo $responce;
     }
 
     protected function getProductOptions(): array
