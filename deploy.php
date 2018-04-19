@@ -37,9 +37,9 @@ host('dev.little-house.com.ua')
     ->addSshOption('StrictHostKeyChecking', 'no')
     ->set('branch', 'dev-products_upload_from_erp');
 
-host('little-house.com.ua')
-    ->set('deploy_path', '/home/admin/web/little-house.com.ua/public_html')
-    ->stage('prod')
+host('demo.little-house.com.ua')
+    ->set('deploy_path', '/home/admin/web/demo.little-house.com.ua/public_html')
+    ->stage('demo')
     ->hostname('192.168.102.120')
     ->user('admin')
     ->port(22)
@@ -49,7 +49,7 @@ host('little-house.com.ua')
     ->multiplexing(true)
     ->addSshOption('UserKnownHostsFile', '/dev/null')
     ->addSshOption('StrictHostKeyChecking', 'no')
-    ->set('branch', 'master');
+    ->set('branch', 'dev');
 
 desc('Deploy Little-house');
 task('deploy', [
