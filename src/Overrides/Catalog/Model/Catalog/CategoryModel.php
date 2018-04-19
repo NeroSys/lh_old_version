@@ -11,9 +11,10 @@ class CategoryModel extends \ModelCatalogCategory
         return $breadcrumbs;
     }
 
-    public function getCategoryLogo(int $category_id){
+    public function getCategoryLogo(int $category_id):?array{
         $cat_tree = $this->getCategoryTree($category_id);
         $parent = $this->getCategory($cat_tree[0]['category_id']);
+        if(empty($parent['image'])){ return null;}
         $this->load->model('tool/image');
         $parent["image"] = $this->model_tool_image->imageLocation($parent['image']);
         return $parent;
