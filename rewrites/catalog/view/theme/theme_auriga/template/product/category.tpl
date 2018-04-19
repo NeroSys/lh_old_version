@@ -15,7 +15,19 @@
         <?php } ?>
         <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
            <!-- <h1><?php echo $heading_title; ?></h1>-->
-            
+            <div class="col-sm-12 category-description">
+                <div class="category-list">
+                    <?php if ($categories) {
+                            $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+                            ?>
+                    <?php foreach ($categories as $category) { ?>
+                    <div class="col-sm-6 col-md-4"><a class="button <?php if($category['href'] == $actual_link) echo 'disabled';?>" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></div>
+                    <?php } ?>
+                    <?php } ?>
+                </div>
+
+                <?php if ($description) { echo $description; }?>
+            </div>
 
             <?php if ($products) { ?>
             <div class="row-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
@@ -145,25 +157,9 @@
                     <?php } ?>
 
                 </div>
-           
-
-
 
                 <div class="col-xs-7 col-sm-8 category-description">
-                        <div class="category-list">
-                            <?php if ($categories) { 
-                            $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-                            ?>
-                                <?php foreach ($categories as $category) { ?>
-                                <div class="col-sm-6 col-md-4"><a class="button <?php if($category['href'] == $actual_link) echo 'disabled';?>" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></div>
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
-                    
                     <?php if ($description) { echo $description; }?>
-                
-                 
-                    
                 </div>
             </div>
           
