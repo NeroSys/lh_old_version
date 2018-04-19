@@ -39,10 +39,11 @@ class IntegrationEventNotify implements NotifyInterface {
 
     protected function generateFileLoggerLocation(){
         $logToFile = DIR_LOGS.'erp/'.date("YY.m.d").'.log';
-        if(is_dir(dirname($logToFile))){
+        if(!is_dir(dirname($logToFile))){
             if (!mkdir(dirname($logToFile), 0755, true)) {
                 throw new \Exception("Не удалось создать директорию логирования для ERP ".dirname($logToFile));
             }
         }
+        return $logToFile;
     }
 }
