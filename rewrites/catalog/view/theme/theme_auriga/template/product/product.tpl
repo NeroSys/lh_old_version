@@ -80,7 +80,7 @@
                         <?php } ?>
                         <ul class="list-unstyled">
                             <?php if ($manufacturer) { ?>
-                            <!--<li><?php echo $text_manufacturer; ?> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li>-->
+                            <li><?php echo $text_manufacturer; ?> <?php echo $manufacturer; ?></li>
                             <?php } ?>
                             <?php if ($reward) { ?>
                             <li><?php echo $text_reward; ?> <?php echo $reward; ?></li>
