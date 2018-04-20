@@ -42,7 +42,9 @@ class BrandTreat extends AbstractTreater
    }
 
    protected function updateManufacturer(Manufacturer $manufacturer, ARManufacturerEntity $entity, int $storeId){
-       $entity->name = $manufacturer->getName();
-       $entity->save();
+       if($manufacturer->getName() !== $entity->name ) {
+           $entity->name = $manufacturer->getName();
+           $entity->save();
+       }
    }
 }

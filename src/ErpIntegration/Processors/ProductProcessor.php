@@ -33,7 +33,7 @@ class ProductProcessor implements ProcessorInterface
         }
 
         $wardrobeBrandTreater = new ManufacturerTreat();
-        $wardrobeBrandTreater->treat($product->getManufacturer());
+        $wardrobeBrandTreater->treat($product->getBrand());
 
         $wardrobeCharacteristicOptionTreater = new OptionTreat();
         foreach ($product->getSpecifications() as $specification) {
