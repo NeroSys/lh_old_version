@@ -292,19 +292,31 @@ class ProductController extends \ControllerProductProduct
 
             $this->load->model('tool/image');
 
-			$image = @file_exists('image/', $product_info['image']) ? $product_info['image'] : 'placeholder.png';
-
 			$data['popup'] = $this->model_tool_image->resize(
-				$image,
+				$product_info['image'],
 				$this->config->get($this->config->get('config_theme') . '_image_popup_width'),
 				$this->config->get($this->config->get('config_theme') . '_image_popup_height')
 			);
 
+			$data['popup'] = isset($data['popup']) ? $data['popup'] :
+				$this->model_tool_image->resize(
+					'placeholder.png',
+					$this->config->get($this->config->get('config_theme') . '_image_popup_width'),
+					$this->config->get($this->config->get('config_theme') . '_image_popup_height')
+				);
+
 			$data['thumb'] = $this->model_tool_image->resize(
-				$image,
+				$product_info['image'],
 				$this->config->get($this->config->get('config_theme') . '_image_thumb_width'),
-				$this->config->get($this->config->get('config_theme') . '_image_thumb_height')
+				$this->config->get($this->config->get('config_theme') . '_image_thumb_width')
 			);
+
+			$data['thumb'] = isset($data['thumb']) ? $data['thumb'] :
+				$this->model_tool_image->resize(
+					'placeholder.png',
+					$this->config->get($this->config->get('config_theme') . '_image_thumb_width'),
+					$this->config->get($this->config->get('config_theme') . '_image_thumb_width')
+				);
 
             $data['images'] = array();
 

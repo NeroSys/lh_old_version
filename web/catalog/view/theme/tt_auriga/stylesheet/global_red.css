@@ -906,7 +906,7 @@ div.required .control-label:before {
 }
 
 #cart .dropdown-menu {
-    width: 280px;
+    width: 320px;
 }
 
 #cart > .btn {
@@ -986,7 +986,7 @@ div.required .control-label:before {
     bottom: 0px;
     right: 0;
 }
-
+.cart-content .cart-button button {font-size: 14px}
 .cart-content .btn {
     padding: 0;
     background: none;
@@ -3554,7 +3554,7 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
 }
 
 .product-view .price {
-    display: none;
+    /*display: none;*/
 }
 
 .product-view .manufacturer {
