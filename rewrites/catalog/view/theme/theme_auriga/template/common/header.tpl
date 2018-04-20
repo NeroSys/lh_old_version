@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-5 col-xs-7" style="display: none !important;">
+            <div class="col-md-9 col-sm-5 col-xs-7">
                 <div class="cart-search">
                     <div class="top-cart">
                         <?php echo $cart; ?>

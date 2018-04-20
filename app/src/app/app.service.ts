@@ -21,7 +21,6 @@ export class MainService {
     addToCart(data): Promise<any> {
         const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
         const options = new RequestOptions({ headers: headers });
-        console.log('addToCart()',  JSON.stringify(data));
         return this.http.post(`${environment.apiUrl}index.php?route=checkout/cart/add`, data, options).toPromise();
     }
 

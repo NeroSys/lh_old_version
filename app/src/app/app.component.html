@@ -1,3 +1,4 @@
+<div class="product-price"><span *ngIf="price">{{price}} грн.</span></div>
 <form [formGroup]="form"  (ngSubmit)="onSubmit()">
     <div *ngFor="let field of optionGroups" class="form-group" >
         <label>{{field.option_name}}</label>
@@ -25,7 +26,7 @@
                 (change)="select(field.option_id)"
                 class="form-control">
                 <option *ngFor="let option of field.values" value="{{option.option_value_id}}" [attr.disabled]="option.status === false ? '' : null">
-                    {{option.option_value_name}} ({{ option.price }} грн.)
+                    {{option.option_value_name}}
                 </option>
             </select>
         </div>
@@ -33,18 +34,29 @@
 
     <div class="form-group form-group-actions">
         <label class="control-label" for="input-quantity">Количество</label>
-        <input type="button" id="minus">
         <input
             formControlName="quantity"
             [(ngModel)]="data['quantity']"
-            type="text"
+            type="number"
             name="quantity"
             value="1"
             size="2"
             id="input-quantity"
             class="form-control">
-        <input type="button" id="plus">
         <button type="submit" id="button-cart" data-loading-text="Загрузка..." class="btn btn-primary btn-lg btn-block"><span>Купить</span></button>
+
+        <div class="add-to-links">
+            <div class="btn-group">
+                <div class="wishlist">
+                    <button type="button" class="btn btn-default" title="В закладки">
+                        <span>В закладки</span></button>
+                </div>
+                <div class="compare">
+                    <button type="button" class="btn btn-default" title="В сравнение">
+                        <span>В сравнение</span></button>
+                </div>
+            </div>
+        </div>
     </div>
 
 </form>

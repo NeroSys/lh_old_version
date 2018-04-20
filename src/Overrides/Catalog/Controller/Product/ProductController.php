@@ -292,7 +292,7 @@ class ProductController extends \ControllerProductProduct
 
             $this->load->model('tool/image');
 
-			$image = file_exists('image/', $product_info['image']) ? $product_info['image'] : 'placeholder.png';
+			$image = @file_exists('image/', $product_info['image']) ? $product_info['image'] : 'placeholder.png';
 
 			$data['popup'] = $this->model_tool_image->resize(
 				$image,

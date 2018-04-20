@@ -82,7 +82,6 @@
                             <?php if ($manufacturer) { ?>
                             <!--<li><?php echo $text_manufacturer; ?> <a href="<?php echo $manufacturers; ?>"><?php echo $manufacturer; ?></a></li>-->
                             <?php } ?>
-                            <li><?php echo $text_model; ?> <?php echo $model; ?></li>
                             <?php if ($reward) { ?>
                             <li><?php echo $text_reward; ?> <?php echo $reward; ?></li>
                             <?php } ?>
@@ -99,7 +98,7 @@
                             <script type="text/javascript" src="/src/app/polyfills.bundle.js"></script>
                             <script type="text/javascript" src="/src/app/main.bundle.js"></script>
 
-                            <div class="add-to-links">
+                            <div class="add-to-links" style="display: none">
                                 <div class="btn-group">
                                     <div class="wishlist">
                                         <button type="button" class="btn btn-default"
@@ -140,8 +139,11 @@
                 </div>
                 <div class="tab-view">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab-description"
-                                              data-toggle="tab"><?php echo $tab_description; ?></a></li>
+                        <?php $first_tab = false; if ($description != '') { $first_tab = true; ?>
+                        <li class="active">
+                            <a href="#tab-description" data-toggle="tab"><?php echo $tab_description; ?></a>
+                        </li>
+                        <?php } ?>
                         <?php if ($attribute_groups) { ?>
                         <li><a href="#tab-specification" data-toggle="tab"><?php echo $tab_attribute; ?></a></li>
                         <?php } ?>
@@ -150,9 +152,11 @@
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
+                        <?php if (!$first_tab) { ?>
                         <div class="tab-pane active" id="tab-description"><?php echo $description; ?></div>
+                        <?php } ?>
                         <?php if ($attribute_groups) { ?>
-                        <div class="tab-pane" id="tab-specification">
+                        <div class="tab-pane  <?php if (!$first_tab) { ?>active<?php } ?>" id="tab-specification">
                             <table class="table table-bordered">
                                 <?php foreach ($attribute_groups as $attribute_group) { ?>
                                 <thead>

@@ -3,7 +3,7 @@ import {FormGroup, FormControl} from '@angular/forms';
 import {MainService} from './app.service';
 import {Specification} from './model/specification';
 import {Option} from './model/option';
-
+import {DecimalPipe} from '@angular/common';
 
 declare var product_id: any;
 
@@ -13,6 +13,7 @@ declare var product_id: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+    public price: number;
     public form: FormGroup;
     public optionGroups;
     public data: object = {};
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
         this.optionGroups = [];
         this.form = new FormGroup({});
         this.form.controls['quantity'] = new FormControl();
+        this.data['quantity'] = 1;
     }
 
     ngOnInit(): void {
@@ -31,7 +33,10 @@ export class AppComponent implements OnInit {
             .then(
                 variants => this.variants = variants
             ).then(
-            e => this.setOptionGroup()
+            e => {
+                this.price = this.variants[0].options[0].price;
+                this.setOptionGroup();
+            }
         );
     }
 
@@ -44,7 +49,6 @@ export class AppComponent implements OnInit {
     public onSubmit(): void {
         if (this.form.valid) {
             const request = {};
-            console.log('selectedOptions: ', this.selectedOptions);
             request['quantity'] = this.form.controls.quantity.value;
             request['product_id'] = product_id;
             request['option'] = [];
@@ -54,13 +58,15 @@ export class AppComponent implements OnInit {
 
             this.optionGroups.forEach(
                 variant => {
-                    if (this.selectedOptions[variant.option_id]) {
-                        request['option'][variant.option_id] = this.selectedOptions[variant.option_id];
-                        body += '&option[' + variant.option_id + ']=' + this.selectedOptions[variant.option_id];
+                    const selectedOption = this.selectedOptions[variant.option_id];
+                    if (selectedOption) {
+                        console.log(selectedOption);
+                        request['option'][selectedOption.product_option_id] = selectedOption.option_value_id;
+                        body += '&option[' + selectedOption.product_option_id + ']=' + selectedOption.option_value_id;
                     }
                 }
             );
-            console.log('request: ', request, body);
+            console.log('request: ', request);
             this.mainService.addToCart(body);
         }
     }
@@ -106,7 +112,7 @@ export class AppComponent implements OnInit {
         this.optionGroups.forEach(variant => {
             if (this.data[variant.option_id]) {
                 const option = variant.values.find(item => (item.option_value_id === this.data[variant.option_id]));
-                this.selectedOptions[variant.option_id] = option.option_value_id;
+                this.selectedOptions[variant.option_id] = option;
             }
         });
     }
@@ -119,7 +125,7 @@ export class AppComponent implements OnInit {
                         if (
                             this.selectedOptions[option.option_id]
                             && this.selectedOptions[option.option_id] !== null
-                            && this.selectedOptions[option.option_id] !== option.option_value_id
+                            && this.selectedOptions[option.option_id] !== option
                         ) {
                             variant.status = false;
                             option.status = false;
