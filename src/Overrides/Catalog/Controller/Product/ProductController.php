@@ -13,71 +13,37 @@ class ProductController extends \ControllerProductProduct
 {
     private $error = array();
 
-    public function index() {
-        $this->load->language('product/product');
+    protected function generateBreadcrumbs(int $productId){
+        $product_info = $this->model_catalog_product->getProduct($productId);
 
-        $data['breadcrumbs'] = array();
+        $breadcrumbs = array();
 
-        $data['breadcrumbs'][] = array(
+        $breadcrumbs[] = array(
             'text' => $this->language->get('text_home'),
             'href' => $this->url->link('common/home')
         );
 
-        $this->load->model('catalog/category');
 
-        if (isset($this->request->get['path'])) {
-            $path = '';
-
-            $parts = explode('_', (string)$this->request->get['path']);
-
-            $category_id = (int)array_pop($parts);
-
-            foreach ($parts as $path_id) {
-                if (!$path) {
-                    $path = $path_id;
-                } else {
-                    $path .= '_' . $path_id;
-                }
-
-                $category_info = $this->model_catalog_category->getCategory($path_id);
-
-                if ($category_info) {
-                    $data['breadcrumbs'][] = array(
-                        'text' => $category_info['name'],
-                        'href' => $this->url->link('product/category', 'path=' . $path)
-                    );
-                }
-            }
-
-            // Set the last category breadcrumb
-            $category_info = $this->model_catalog_category->getCategory($category_id);
-
-            if ($category_info) {
-                $url = '';
-
-                if (isset($this->request->get['sort'])) {
-                    $url .= '&sort=' . $this->request->get['sort'];
-                }
-
-                if (isset($this->request->get['order'])) {
-                    $url .= '&order=' . $this->request->get['order'];
-                }
-
-                if (isset($this->request->get['page'])) {
-                    $url .= '&page=' . $this->request->get['page'];
-                }
-
-                if (isset($this->request->get['limit'])) {
-                    $url .= '&limit=' . $this->request->get['limit'];
-                }
-
-                $data['breadcrumbs'][] = array(
-                    'text' => $category_info['name'],
-                    'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'] . $url)
+        $productCategories = $this->model_catalog_product->getCategories($productId);
+        if($productCategories) {
+            $productCategory = end($productCategories);
+            foreach ($this->model_catalog_category->getCategoryTree($productCategory["category_id"]) as $category) {
+                $breadcrumbs[] = array(
+                    'text' => $category['name'],
+                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'])
                 );
             }
         }
+        $breadcrumbs[] = array(
+            'text' => $product_info['name'],
+            'href' => $this->url->link('product/product', '&product_id=' . $this->request->get['product_id'])
+        );
 
+        return $breadcrumbs;
+    }
+    public function index() {
+        $this->load->language('product/product');
+        $this->load->model('catalog/category');
         $this->load->model('catalog/manufacturer');
 
         if (isset($this->request->get['manufacturer_id'])) {
@@ -170,6 +136,7 @@ class ProductController extends \ControllerProductProduct
         $product_info = $this->model_catalog_product->getProduct($product_id);
 
         if ($product_info) {
+            $data["breadcrumbs"] = $this->generateBreadcrumbs($product_id);
             $url = '';
 
             if (isset($this->request->get['path'])) {
@@ -220,10 +187,7 @@ class ProductController extends \ControllerProductProduct
                 $url .= '&limit=' . $this->request->get['limit'];
             }
 
-            $data['breadcrumbs'][] = array(
-                'text' => $product_info['name'],
-                'href' => $this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'])
-            );
+
 
             $this->document->setTitle($product_info['meta_title']);
             $this->document->setDescription($product_info['meta_description']);
