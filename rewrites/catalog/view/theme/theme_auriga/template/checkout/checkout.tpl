@@ -21,7 +21,7 @@
     <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
       <h1><?php echo $heading_title; ?></h1>
       <div class="panel-group" id="accordion">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="display: none">
           <div class="panel-heading">
             <h4 class="panel-title"><?php echo $text_checkout_option; ?></h4>
           </div>
@@ -39,11 +39,11 @@
           </div>
         </div>
         <?php } else { ?>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title"><?php echo $text_checkout_payment_address; ?></h4>
+        <div class="">
+          <div class="panel-heading" style="display: none">
+            <h4 class=""><?php echo $text_checkout_payment_address; ?></h4>
           </div>
-          <div class="panel-collapse collapse" id="collapse-payment-address">
+          <div class="" id="collapse-payment-address">
             <div class="panel-body"></div>
           </div>
         </div>
@@ -66,7 +66,7 @@
           </div>
         </div>
         <?php } ?>
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="display: none">
           <div class="panel-heading">
             <h4 class="panel-title"><?php echo $text_checkout_payment_method; ?></h4>
           </div>
@@ -74,11 +74,11 @@
             <div class="panel-body"></div>
           </div>
         </div>
-        <div class="panel panel-default">
-          <div class="panel-heading">
+        <div class="">
+          <div class="panel-heading" style="display: none">
             <h4 class="panel-title"><?php echo $text_checkout_confirm; ?></h4>
           </div>
-          <div class="panel-collapse collapse" id="collapse-checkout-confirm">
+          <div class="" id="collapse-checkout-confirm">
             <div class="panel-body"></div>
           </div>
         </div>
@@ -760,10 +760,10 @@ $(document).delegate('#button-payment-method', 'click', function() {
                     dataType: 'html',
                     success: function(html) {
                         $('#collapse-checkout-confirm .panel-body').html(html);
+                        $('#collapse-checkout-confirm #button-confirm').trigger('click');
+						//$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-confirm" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_confirm; ?> <i class="fa fa-caret-down"></i></a>');
 
-						$('#collapse-checkout-confirm').parent().find('.panel-heading .panel-title').html('<a href="#collapse-checkout-confirm" data-toggle="collapse" data-parent="#accordion" class="accordion-toggle"><?php echo $text_checkout_confirm; ?> <i class="fa fa-caret-down"></i></a>');
-
-						$('a[href=\'#collapse-checkout-confirm\']').trigger('click');
+						//$('a[href=\'#collapse-checkout-confirm\']').trigger('click');
 					},
                     error: function(xhr, ajaxOptions, thrownError) {
                         alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
