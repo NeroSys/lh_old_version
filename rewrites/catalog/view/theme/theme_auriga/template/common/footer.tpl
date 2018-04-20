@@ -37,10 +37,11 @@
       <div class="footer-content">
        <ul class="toggle-footer">
            <li><a href="/contacts"><span>Магазины</span></a></li>
+           <li><a href="/delivery"><span>Оплата и доставка</span></a></li>
            <li class="hidden-lg hidden-md"><a href="/our_brands"><span>Бренды</span></a></li>
            <li class="hidden-lg hidden-md"><a href="/our-activity"><span>Новости</span></a></li>
            <li class="hidden-lg hidden-md"><a href="/press"><span>Пресс-центр</span></a></li>
-           <li><a href="/opt"><span>Опт</span></a></li>
+           <li class="hidden-lg hidden-md"><a href="/opt"><span>Опт</span></a></li>
        </ul>
       </div>
     </div>
