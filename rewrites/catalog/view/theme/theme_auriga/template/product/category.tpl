@@ -15,6 +15,7 @@
         <?php } ?>
         <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
            <!-- <h1><?php echo $heading_title; ?></h1>-->
+            <div class="row">
             <div class="col-sm-12 category-description">
                 <div class="category-list">
                     <?php if ($categories) {
@@ -27,6 +28,7 @@
                 </div>
 
                 <?php if ($description) { echo $description; }?>
+            </div>
             </div>
 
             <?php if ($products) { ?>
@@ -136,19 +138,6 @@
                                                  alt="<?php echo $parent_category_info['name']; ?>"></div>
 
                     <?php  if ($thumb && (int) $parent !== 0) { ?>
-                    <script>
-                        $(document).ready(function () {
-                            $('.popup-gallery').magnificPopup({
-                                type: 'image',
-                                gallery: {
-                                    enabled: true
-                                }
-                            });
-                        });
-
-                    </script>
-
-
                     <div>
                         <a class="thumbnail popup-gallery" href="<?php echo $category_image; ?>" title="<?php echo $heading_title; ?>">
                             <img src="<?php echo $thumb ?>" title="<?php echo $heading_title; ?>"  alt="<?php echo $heading_title; ?>">

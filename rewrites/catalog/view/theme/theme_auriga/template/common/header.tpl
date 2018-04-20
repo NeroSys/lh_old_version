@@ -67,6 +67,7 @@
                     <ul class="list-inline links">
                         <li class="first"><a href="/about_us"> <span>О нас</span></a></li>
                         <li><a href="/contacts"><span>Магазины</span></a></li>
+                        <li><a href="/delivery"><span>Оплата и доставка</span></a></li>
                         <li><a href="/our_brands"><span>Бренды</span></a></li>
                         <li><a href="/our-activity"><span>Новости</span></a></li>
                         <li><a href="/press"><span>Пресс-центр</span></a></li>
@@ -100,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="col-md-9 col-sm-5 col-xs-7" style="display: none !important;">
+            <div class="col-md-9 col-sm-5 col-xs-7">
                 <div class="cart-search">
                     <div class="top-cart">
                         <?php echo $cart; ?>

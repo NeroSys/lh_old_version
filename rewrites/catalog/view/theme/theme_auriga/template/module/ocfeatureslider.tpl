@@ -70,18 +70,3 @@
 </div>
 </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function() { 
-  $(".owl-demo-feature").owlCarousel({
-	  slideSpeed: <?php if($config_slide['f_ani_speed']) { echo $config_slide['f_ani_speed'] ;} else { echo 3000;} ?>,
-      items : <?php if($config_slide['items']) { echo $config_slide['items'] ;} else { echo 3;} ?>,
-	  autoPlay : <?php if($config_slide['f_speed_slide']) { echo 'true' ;} else { echo 'false';} ?>,
-	  navigation : <?php if($config_slide['f_show_nextback']) { echo 'true' ;} else { echo 'false';} ?>,
-	  paginationNumbers : true,
-	  pagination : <?php if($config_slide['f_show_ctr']) { echo 'true' ;} else { echo 'false';} ?>,
-	  stopOnHover : false,
- 
-  });
- 
-});
-</script>

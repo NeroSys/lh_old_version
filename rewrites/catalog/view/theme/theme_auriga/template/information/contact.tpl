@@ -119,13 +119,5 @@
     };
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.popup-gallery').magnificPopup({
-            type: 'ajax'
-        });
-    });
-</script>
-
 
 <?php echo $footer; ?>

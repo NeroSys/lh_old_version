@@ -1,0 +1,62 @@
+<div class="product-price"><span *ngIf="price">{{price}} грн.</span></div>
+<form [formGroup]="form"  (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of optionGroups" class="form-group" >
+        <label>{{field.option_name}}</label>
+        <div *ngIf="field.type === 'radio'">
+            <div class="form-check radio" *ngFor="let option of field.values">
+                <label class="form-check-label" for="{{'field_' + field.option_id}}">
+                    <input
+                        formControlName="{{'field_' + field.option_id}}"
+                        name="{{'field_' + field.option_id}}"
+                        [(ngModel)]="data[field.option_id]"
+                        (change)="select(field.option_id)"
+                        type="radio"
+                        class="form-check-input"
+                        value="{{option.option_value_id}}"
+                        [attr.disabled]="option.status === false ? '' : null"
+                        >
+                    {{option.option_value_name}} ({{ option.price }} грн.)
+                </label>
+            </div>
+        </div>
+        <div *ngIf="field.type === 'select'" >
+            <select
+                formControlName="{{'field_' + field.option_id}}"
+                [(ngModel)]="data[field.option_id]"
+                (change)="select(field.option_id)"
+                class="form-control">
+                <option *ngFor="let option of field.values" value="{{option.option_value_id}}" [attr.disabled]="option.status === false ? '' : null">
+                    {{option.option_value_name}}
+                </option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group form-group-actions">
+        <label class="control-label" for="input-quantity">Количество</label>
+        <input
+            formControlName="quantity"
+            [(ngModel)]="data['quantity']"
+            type="number"
+            name="quantity"
+            value="1"
+            size="2"
+            id="input-quantity"
+            class="form-control">
+        <button type="submit" id="button-cart" data-loading-text="Загрузка..." class="btn btn-primary btn-lg btn-block"><span>Купить</span></button>
+
+        <div class="add-to-links">
+            <div class="btn-group">
+                <div class="wishlist">
+                    <button type="button" class="btn btn-default" title="В закладки">
+                        <span>В закладки</span></button>
+                </div>
+                <div class="compare">
+                    <button type="button" class="btn btn-default" title="В сравнение">
+                        <span>В сравнение</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
