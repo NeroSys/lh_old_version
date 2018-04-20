@@ -78,22 +78,16 @@
                             <?php } ?>
                         </div>
                         <?php } ?>
-                        <ul class="list-unstyled">
-                            <?php if ($manufacturer) { ?>
-                            <!--<li><?php echo $text_manufacturer; ?> <?php echo $manufacturer; ?></li>-->
-                            <?php } ?>
-                            <?php if ($reward) { ?>
-                            <li><?php echo $text_reward; ?> <?php echo $reward; ?></li>
-                            <?php } ?>
-                            <li><?php echo $text_stock; ?> <?php echo $stock; ?></li>
-                        </ul>
+
+                        <?php if ($stock == "Нет в наличии") { ?>
+                        <span class="label label-danger label-md"><?php echo $stock; ?></span>
+                        <?php } ?>
+
                         <div id="product">
                             <?php if ($options) { ?>
-                            <hr>
-                            <h3><?php echo $text_option; ?></h3>
                             <?php foreach ($options as $option) { ?>
                             <?php if ($option['type'] == 'select') { ?>
-                            <div class="form-group<?php echo ($option['required'] ? ' required' : ''); ?>">
+                            <div class="form-group<?php echo ($option['required'] ? ' required' : ''); ?>" style="margin-top:0">
                                 <label class="control-label"
                                        for="input-option<?php echo $option['product_option_id']; ?>"><?php echo $option['name']; ?></label>
                                 <select name="option[<?php echo $option['product_option_id']; ?>]"
@@ -450,9 +444,9 @@
                             </div>
                             <?php } ?>
                             <div class="item-container">
-                                <div class="item-description">
-                                    <div class="name"><a
-                                                href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
+                                <div class="item-description" >
+                                    <div class="name">
+                                        <a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a>
                                     </div>
                                     <?php if ($product['price']) { ?>
                                     <div class="price">
