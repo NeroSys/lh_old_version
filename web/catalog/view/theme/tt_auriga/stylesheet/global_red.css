@@ -4847,3 +4847,6 @@ button:hover.mfp-close{background-color: transparent}
 }
 
 .radio {clear:both}
+
+.wishlist {display: none}
+.product-filter .btn-group {display: none}
