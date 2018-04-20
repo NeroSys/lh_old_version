@@ -62,7 +62,7 @@
                         <?php } ?>
                     </select>
                 </div>
-            </div>	  
+            </div>
             <div class="row products-category grid">
                 <?php foreach ($products as $product) { ?>
                 <div class="product-layout product-list col-xs-12 ">
@@ -129,7 +129,7 @@
 
 
             <?php } ?>
-           
+
             <div class="row">
 
                 <div class="col-xs-5 col-sm-4 category-image">
@@ -151,9 +151,9 @@
                     <?php if ($description) { echo $description; }?>
                 </div>
             </div>
-          
 
-           
+
+
             <?php if (!$categories && !$products) { ?>
             <p style="display: none"><?php echo $text_empty; ?></p>
             <div class="buttons" style="display: none;">

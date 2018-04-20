@@ -209,7 +209,7 @@ function display(view) {
 					html += '<p class="price">' + price  + '</p>';
 				}
 				html += '<div class="item-container">'
-					html += '<div class="item-description">'
+					html += '<div class="item-description" onclick="javascript:location.href=\'' + $(element).find('.name a').attr("href") + '\'">';
 						html += '<div class="name">' + $(element).find('.name').html() + '</div>';
 						var price = $(element).find('.price').html();
 						if (price != null) {
