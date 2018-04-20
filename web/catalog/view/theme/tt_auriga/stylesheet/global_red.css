@@ -3899,7 +3899,7 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     }
 
     .table-bordered td {
-        display: block;
+        /*display: block;*/
     }
 
     .table-responsive td .input-group-btn {
