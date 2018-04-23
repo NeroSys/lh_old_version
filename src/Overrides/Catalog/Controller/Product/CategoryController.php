@@ -210,18 +210,6 @@ class CategoryController extends \Controller
                 }
 
                 $product_attributes = $this->model_catalog_product->getProductAttributes($result['product_id']);
-                $product_description = '';
-                //$product_description = "Производитель: ". $result["manufacturer"]."<br>";
-
-                foreach ($product_attributes as $attribute_group){
-                    foreach ($attribute_group["attribute"] as $attribute){
-                        $product_description.=$attribute["name"].": ".$attribute["text"]."<br>";
-                    }
-                }
-
-                $product_description = utf8_substr(
-                    html_entity_decode($product_description, ENT_QUOTES, 'UTF-8'), 0, 180
-                ).'..';
 
 
                 $data['products'][] = array(
@@ -233,7 +221,7 @@ class CategoryController extends \Controller
                             strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')
                             ), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')
                         ) . '..',*/
-                    'description' => $product_description,
+                    'description' => $this->model_catalog_product->generateProductDescription($result['product_id']),
                     'attributes'=> $product_attributes,
                     'price'       => $price,
                     'special'     => $special,

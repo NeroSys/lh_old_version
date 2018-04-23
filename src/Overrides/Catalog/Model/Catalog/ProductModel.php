@@ -80,4 +80,25 @@ class ProductModel extends \ModelCatalogProduct
 
         return $this->db->query($sql)->rows;
     }
+
+    public function generateProductDescription(int $product_id):string{
+        $product_attributes = $this->getProductAttributes($product_id);
+        $product_description = '';
+        //$product_description = "Производитель: ". $result["manufacturer"]."<br>";
+
+        foreach ($product_attributes as $attribute_group) {
+            foreach ($attribute_group["attribute"] as $attribute) {
+                $product_description .= $attribute["name"] . ": " . $attribute["text"] . "<br>";
+            }
+        }
+
+        $product_description = utf8_substr(
+            html_entity_decode($product_description, ENT_QUOTES, 'UTF-8'), 0, 180
+        );
+
+        if (mb_strlen($product_description) === 180) {
+            $product_description .= '..';
+        }
+        return $product_description;
+    }
 }
