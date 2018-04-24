@@ -3,6 +3,7 @@
 namespace App\Overrides\Catalog\Controller\Product;
 
 use App\Entity\ProductOptionGroup;
+use App\Overrides\Catalog\Model\Localisation\LocationModel;
 
 require_once(DIR_OPENCART . 'catalog/controller/product/product.php');
 
@@ -560,8 +561,8 @@ class ProductController extends \ControllerProductProduct
     public function options(){
         $this->load->language('product/product');
         $this->load->model('catalog/product');
-
         $data = $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
+
         header('Content-Type: application/json');
         header("Access-Control-Allow-Origin: *");
         $responce = json_encode(array_values($data));

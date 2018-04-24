@@ -64,9 +64,19 @@ class ProductModel extends \ModelCatalogProduct
     }
 
     protected function formatOption($option){
+        static $shops;
+        if(!$shops) {
+            $localisationModel = $this->load->model('localisation/location');
+            $shops = $localisationModel->getShops();
+        }
         if(!empty($option["availability"])) {
-            $unserializerOptions = unserialize($option["availability"] );
-            $option["availability"] = $unserializerOptions->toArray();
+            $unserializerOptions = unserialize($option["availability"])->toArray();
+            unset($unserializerOptions["availability"]["priceWholesale"]);
+            foreach ($unserializerOptions as $shopAviability){
+                $shopAviability->stock = $shops->get($shopAviability->stockErpId);
+            }
+            $option["availability"] = $unserializerOptions;
+
         }
         return $option;
     }
