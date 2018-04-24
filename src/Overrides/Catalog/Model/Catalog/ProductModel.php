@@ -54,12 +54,21 @@ class ProductModel extends \ModelCatalogProduct
 			$options[$option['id']]['id'] = $option['id'];
 			$options[$option['id']]['number'] = $option['id_erp'];
 			$options[$option['id']]['status'] = true;
+			$option = $this->formatOption($option);
             $options[$option['id']]['options'][$option['option_id']] = $option;
         }
         foreach ($options as &$option){
             $option['options'] = array_values($option['options']);
         }
         return $options;
+    }
+
+    protected function formatOption($option){
+        if(!empty($option["availability"])) {
+            $unserializerOptions = unserialize($option["availability"] );
+            $option["availability"] = $unserializerOptions->toArray();
+        }
+        return $option;
     }
 
     private function getProductSpecificationOptionsFromDatabase(int $product_id):?array{
