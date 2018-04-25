@@ -1544,7 +1544,7 @@ a.btn {
     color: #ffffff;
     font-size: 12px;
     padding: 10px 0;
-    margin: 15px 0 0;
+    margin: 10px 0 0;
     display: inline-block;
     width: 100%;
 }
@@ -1941,7 +1941,6 @@ a.btn {
 }
 
 .price {
-    color: #e84c3d;
     font-size: 14px;
     font-weight: 300;
 }
@@ -3564,9 +3563,6 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     border-bottom: 1px solid #dddddd;
 }
 
-.products-category .price {
-    display: none;
-}
 
 .add-to-links .cart {
     display: none;

@@ -141,11 +141,15 @@ class CategoryController extends \Controller
             $data['categories'] = array();
             $data['parent_category_info'] = $this->model_catalog_category->getCategoryLogo($category_id);
 
-            if($category_info['parent_id']>0){
+            $childCategories = $this->model_catalog_category->getCategories($category_id);
+            if($childCategories){
+                $results = $childCategories;
+            }
+            elseif($category_info['parent_id']>0){
                 $results = $this->model_catalog_category->getOneLevelCategories($category_id, $category_info['parent_id']);
             }
             else{
-                $results = $this->model_catalog_category->getCategories($category_id);
+                $results = [];
             }
 
 
