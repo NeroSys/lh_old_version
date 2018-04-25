@@ -1694,13 +1694,8 @@ a.btn {
     text-transform: uppercase;
 }
 
-.product-list .price {
-    padding: 0 0 20px;
-    margin: 5px 0 0;
-    display: inline-block;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid #eeeeee;
+.products-category .grid .price {
+    font-weight: bold;
 }
 
 .product-list .rating {
