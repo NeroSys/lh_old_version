@@ -302,9 +302,10 @@ function display(view) {
     });
 
 
-	$('.popup-gallery').magnificPopup({
+	$('.popup-ajax').magnificPopup({
 		type: 'ajax'
 	});
+
 
     $('.popup-gallery').magnificPopup({
         type: 'image',
@@ -312,6 +313,16 @@ function display(view) {
             enabled: true
         }
     });
+
+    var lazyLoadText =  $('.lazy-load-text');
+    if(lazyLoadText.length > 0){
+        lazyLoadText.each(function(){
+        	if($(this).data('href') !== undefined){
+        		var href = $(this).data('href');
+                $(this).load( href + '?ajax=true');
+			}
+		});
+	}
 
 });
 

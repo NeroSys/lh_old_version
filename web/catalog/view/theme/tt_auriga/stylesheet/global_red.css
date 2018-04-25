@@ -4848,3 +4848,31 @@ button:hover.mfp-close{background-color: transparent}
 
 .wishlist {display: none}
 .product-filter .btn-group {display: none}
+
+a.popup-ajax {border-bottom: #5a5959 dashed 1px}
+a.popup-ajax[href^="https://"] {border-bottom: none}
+
+.mfp-content {background: #fff}
+.mfp-ajax-holder .mfp-content {
+    width: 50%;
+    min-width: 400px;
+    height: 77%;
+    padding: 30px 20px;
+    overflow-x: auto;
+    position: relative;
+}
+.mfp-ajax-holder .mfp-content .mfp-close {
+    display: none;
+}
+.product-information {border-top: #ccc 1px solid; padding-top: 15px; margin-top: 15px;}
+
+.product-information h4 {
+    color: #666666;
+    display: inline-block;
+    font-family: 'CaviarDreams';
+    font-size: 16px;
+    line-height: 20px;
+    padding: 0 15px 0 0;
+    font-weight: normal;
+    text-transform: uppercase;
+}

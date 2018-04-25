@@ -282,10 +282,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <?php if ($minimum > 1) { ?>
-                            <div class="alert alert-info"><i class="fa fa-info-circle"></i> <?php echo $text_minimum; ?>
+
+                            <div class="product-information">
+                                <div class="lazy-load-text" data-href="delivery-info"></div>
                             </div>
-                            <?php } ?>
                         </div>
                         <?php if ($review_status) { ?>
                         <div class="rating">

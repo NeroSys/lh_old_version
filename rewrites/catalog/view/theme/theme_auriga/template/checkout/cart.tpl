@@ -35,7 +35,6 @@
               <tr>
                 <td class="text-center"><?php echo $column_image; ?></td>
                 <td class="text-left"><?php echo $column_name; ?></td>
-                <td class="text-left"><?php echo $column_model; ?></td>
                 <td class="text-left"><?php echo $column_quantity; ?></td>
                 <td class="text-right"><?php echo $column_price; ?></td>
                 <td class="text-right"><?php echo $column_total; ?></td>
@@ -65,7 +64,6 @@
                   <br />
                   <span class="label label-info"><?php echo $text_recurring_item; ?></span> <small><?php echo $product['recurring']; ?></small>
                   <?php } ?></td>
-                <td class="text-left"><?php echo $product['model']; ?></td>
                 <td class="text-left"><div class="input-group btn-block" style="max-width: 200px;">
                     <input type="text" name="quantity[<?php echo $product['key']; ?>]" value="<?php echo $product['quantity']; ?>" size="1" class="form-control" />
                     <span class="input-group-btn">
