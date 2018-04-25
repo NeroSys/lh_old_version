@@ -292,6 +292,7 @@
 
                             <div class="product-information">
                                 <div class="lazy-load-text" data-href="delivery-info"></div>
+                                <a href="/delivery?ajax=true" class="popup-ajax inline md-popup">Оплата и доставка (подробнее)</a>
                             </div>
                         </div>
                         <?php if ($review_status) { ?>
