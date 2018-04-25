@@ -142,46 +142,9 @@ $(document).ready(function() {
 	});
 	// Product List
 function display(view) {
-	if (view == 'list') {
-		$('#content .row > div.clearfix').remove();
-		
-		$('#content .product-layout').attr('class', 'product-layout product-list col-xs-12');
-		$('.product-list > div').each(function(index, element) {
-			html = '<div class="row">';
-			html += '<div class="col-xs-12 col-sm-4 col-md-4">';
-			html += '<div class="box-left">';
-			html += '<div class="left-block">' + $(element).find('.left-block').html() + '</div>';
-			html += '<div class="zoom-in">';
-				html += '<div class="button-group">';
-				html += $(element).find('.button-group').html() ;
-				html +='</div>';
-			html +='</div>';
-			html += '</div>';
-			html += '</div>';
-			html += '<div class="right-block col-xs-12 col-sm-8 col-md-8"><div class="caption">';
-				html += '<div class="name">' + $(element).find('.name').html() + '</div>';
-				var price = $(element).find('.price').html();
-				if (price != null) {
-					html += '<p class="price">' + price  + '</p>';
-				}
-				var rating = $(element).find('.rating').html();
-				if (rating != null) {
-					html += '<div class="rating">' + rating + '</div>';
-				}
-				html += ' <p class="description">' + $(element).find('.description').html() + '</p>';
-			html += '</div></div>';
-			$(element).html(html);
-		
-		});
-		localStorage.setItem('display', 'list');
-		$('.btn-group').find('#list-view').addClass('selected');
-		$('.btn-group').find('#grid-view').removeClass('selected');
-		
-	} else {
+
 		$('#content .row > .clearfix').remove();
-		
-		
-		
+
 		// What a shame bootstrap does not take into account dynamically loaded columns
 		cols = $('#column-right, #column-left').length;
 
@@ -211,10 +174,7 @@ function display(view) {
 				html += '<div class="item-container">'
 					html += '<div class="item-description" onclick="javascript:location.href=\'' + $(element).find('.name a').attr("href") + '\'">';
 						html += '<div class="name">' + $(element).find('.name').html() + '</div>';
-						var price = $(element).find('.price').html();
-						if (price != null) {
-						html += '<p class="price">' + price  + '</p>';
-						}
+
 						html += ' <p class="description">' + $(element).find('.description').html() + '</p>';
 						var rating = $(element).find('.rating').html();
 						if (rating != null) {
@@ -227,10 +187,10 @@ function display(view) {
 			$(element).html(html);
 		});
 		
-		 localStorage.setItem('display', 'grid');
+		 //localStorage.setItem('display', 'grid');
 		 $('.btn-group').find('#grid-view').addClass('selected');
-		 $('.btn-group').find('#list-view').removeClass('selected');
-	}
+		 //$('.btn-group').find('#list-view').removeClass('selected');
+
 }
 
 	if (localStorage.getItem('display') == 'list') {
