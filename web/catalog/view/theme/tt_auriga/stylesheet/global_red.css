@@ -1694,7 +1694,7 @@ a.btn {
     text-transform: uppercase;
 }
 
-.products-category .grid .price {
+.products-category.grid .price {
     font-weight: bold;
 }
 
