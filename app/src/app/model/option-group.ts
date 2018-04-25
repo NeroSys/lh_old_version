@@ -1,10 +1,10 @@
 import {Option} from './option';
 
 export class OptionGroup {
-    option_name: string;
-    option_id: number;
-    product_option_id: number;
-    type: string;
-    status: string;
-    values: Option[];
+    public option_name: string;
+    public option_id: number;
+    public product_option_id: number;
+    public type: string;
+    public status: boolean;
+    public values: Option[];
 }

@@ -2,7 +2,8 @@ import {Injectable} from '@angular/core';
 import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import {environment} from '../environments/environment';
-import {Specification} from './model/specification';
+import {Variant} from "./model/variant";
+import {VariantCollection} from "./model/variant-collection";
 
 @Injectable()
 export class MainService {
@@ -10,11 +11,11 @@ export class MainService {
     constructor(private http: Http) {
     }
 
-    getSpecifications(id_product: number): Promise<Specification[]> {
+    getSpecifications(id_product: number): Promise<VariantCollection> {
         const url = `${environment.apiUrl}index.php?route=product/product/options/&product_id=${id_product}`;
         return this.http.get(url)
             .toPromise()
-            .then(response => response.json() as Specification[])
+            .then(response => response.json() as Variant[])
             .catch(this.handleError);
     }
 
