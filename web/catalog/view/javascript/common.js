@@ -104,7 +104,7 @@ $(document).ready(function() {
 	$('#search input[name=\'search\']').parent().find('button').on('click', function() {
 		url = $('base').attr('href') + 'index.php?route=product/search';
 
-		var value = $('header input[name=\'search\']').val();
+		var value = $('.subheader #search input[name=\'search\']').val();
 
 		if (value) {
 			url += '&search=' + encodeURIComponent(value);

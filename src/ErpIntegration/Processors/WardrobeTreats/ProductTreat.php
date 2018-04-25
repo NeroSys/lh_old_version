@@ -90,13 +90,13 @@ class ProductTreat extends AbstractTreater
 
 
         $entity->status = self::DEFAULT_PRODUCT_STATUS;
-
+        $entity->price = $this->getProductDefaultPrice($productItem);
         $entity->quantity = $this->getTotalProductQuantity($productItem);
         $entity->id_erp = $productItem->getIdErp();
+        $entity->image = '';
         if($mainImage = $productItem->getImages()->first()){
             $entity->image = 'catalog/products/'.$mainImage->getPath();
         }
-
 
 
         $storeId = ProductProcessor::OPENCART_STOREID;
@@ -199,6 +199,9 @@ class ProductTreat extends AbstractTreater
             $productToOptionGroup->quantity = $this->getTotalSpecificationQuantity($specification);
             $productToOptionGroup->product_id = $productId;
             $productToOptionGroup->ean = $specification->getEan();
+            $productToOptionGroup->availability = serialize(
+                $specification->getPrices()
+            );
             $productToOptionGroup->save();
 
             foreach ($specification->getCharacteristics() as $characteristic) {
@@ -222,7 +225,7 @@ class ProductTreat extends AbstractTreater
 
         }
     }
-
+    
     protected function findManufacturerByIdErp(string $idErp): Manufacturer
     {
         return ManufacturerFinder::getInstance()->findByIdErp($idErp);
@@ -271,5 +274,12 @@ class ProductTreat extends AbstractTreater
             $total += $price->getQuantity();
         }
         return $total;
+    }
+
+    public function getProductDefaultPrice(ProductItem $productItem) {
+        if($specification = $productItem->getSpecifications()->first()){
+            return $specification->getPriceBase();
+        }
+        return 0;
     }
 }

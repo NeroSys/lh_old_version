@@ -5,6 +5,36 @@ namespace App\Overrides\Catalog\Controller\Product;
 
 class CategoryController extends \Controller
 {
+    protected function generateBreadcrumbs(int $categoryId):array{
+        $url = '';
+
+        if (isset($this->request->get['sort'])) {
+            $url .= '&sort=' . $this->request->get['sort'];
+        }
+
+        if (isset($this->request->get['order'])) {
+            $url .= '&order=' . $this->request->get['order'];
+        }
+
+        if (isset($this->request->get['limit'])) {
+            $url .= '&limit=' . $this->request->get['limit'];
+        }
+
+        $breadcrumbs= array();
+
+        $breadcrumbs[] = array(
+            'text' => $this->language->get('text_home'),
+            'href' => $this->url->link('common/home')
+        );
+        $filter_data = [];
+        foreach($this->model_catalog_category->getCategoryTree($categoryId) as $category){
+            $breadcrumbs[] = array(
+                'text' => $category['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
+                'href' => $this->url->link('product/category', 'path=' . $category['category_id'] . $url)
+            );
+        }
+        return $breadcrumbs;
+    }
     public function index() {
         $this->load->language('product/category');
 
@@ -44,57 +74,16 @@ class CategoryController extends \Controller
             $limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
         }
 
-        $data['breadcrumbs'] = array();
 
-        $data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/home')
-        );
 
-        if (isset($this->request->get['path'])) {
-            $url = '';
+        $parts = explode('_', (string)$this->request->get['path']);
 
-            if (isset($this->request->get['sort'])) {
-                $url .= '&sort=' . $this->request->get['sort'];
-            }
-
-            if (isset($this->request->get['order'])) {
-                $url .= '&order=' . $this->request->get['order'];
-            }
-
-            if (isset($this->request->get['limit'])) {
-                $url .= '&limit=' . $this->request->get['limit'];
-            }
-
-            $path = '';
-
-            $parts = explode('_', (string)$this->request->get['path']);
-
-            $category_id = (int)array_pop($parts);
-
-            foreach ($parts as $path_id) {
-                if (!$path) {
-                    $path = (int)$path_id;
-                } else {
-                    $path .= '_' . (int)$path_id;
-                }
-
-                $category_info = $this->model_catalog_category->getCategory($path_id);
-
-                if ($category_info) {
-                    $data['breadcrumbs'][] = array(
-                        'text' => $category_info['name'],
-                        'href' => $this->url->link('product/category', 'path=' . $path . $url)
-                    );
-                }
-            }
-        } else {
-            $category_id = 0;
-        }
+        $category_id = (int)array_pop($parts);
 
         $category_info = $this->model_catalog_category->getCategory($category_id);
 
         if ($category_info) {
+            $data["breadcrumbs"] = $this->generateBreadcrumbs($category_id);
             $this->document->setTitle($category_info['meta_title']);
             $this->document->setDescription($category_info['meta_description']);
             $this->document->setKeywords($category_info['meta_keyword']);
@@ -120,11 +109,6 @@ class CategoryController extends \Controller
             $data['button_list'] = $this->language->get('button_list');
             $data['button_grid'] = $this->language->get('button_grid');
 
-            // Set the last category breadcrumb
-            $data['breadcrumbs'][] = array(
-                'text' => $category_info['name'],
-                'href' => $this->url->link('product/category', 'path=' . $this->request->get['path'])
-            );
 
             if ($category_info['image']) {
                 $data['thumb'] = $this->model_tool_image->resize($category_info['image'], $this->config->get($this->config->get('config_theme') . '_image_category_width'), $this->config->get($this->config->get('config_theme') . '_image_category_height'));
@@ -227,18 +211,6 @@ class CategoryController extends \Controller
 
                 $product_attributes = $this->model_catalog_product->getProductAttributes($result['product_id']);
 
-                $product_description = "Производитель: ". $result["manufacturer"]."<br>";
-
-                foreach ($product_attributes as $attribute_group){
-                    foreach ($attribute_group["attribute"] as $attribute){
-                        $product_description.=$attribute["name"].": ".$attribute["text"]."<br>";
-                    }
-                }
-
-                $product_description = utf8_substr(
-                    html_entity_decode($product_description, ENT_QUOTES, 'UTF-8'), 0, 180
-                ).'..';
-
 
                 $data['products'][] = array(
                     'product_id'  => $result['product_id'],
@@ -249,7 +221,7 @@ class CategoryController extends \Controller
                             strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8')
                             ), 0, $this->config->get($this->config->get('config_theme') . '_product_description_length')
                         ) . '..',*/
-                    'description' => $product_description,
+                    'description' => $this->model_catalog_product->generateProductDescription($result['product_id']),
                     'attributes'=> $product_attributes,
                     'price'       => $price,
                     'special'     => $special,

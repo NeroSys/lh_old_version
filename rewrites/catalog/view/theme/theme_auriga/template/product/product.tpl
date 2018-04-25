@@ -1,9 +1,16 @@
 <?php echo $header; ?>
 <div class="container text-container">
     <ul class="breadcrumb">
-        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-        <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-        <?php } ?>
+        <?php
+        $last = end($breadcrumbs);
+        foreach ($breadcrumbs as $breadcrumb) {
+            if($last === $breadcrumb){
+            ?>
+                <li><?php echo $breadcrumb['text']; ?></li>
+            <?php } else{ ?>
+                <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
+            <?php }
+        }?>
     </ul>
     <div class="row"><?php echo $column_left; ?>
         <?php if ($column_left && $column_right) { ?>

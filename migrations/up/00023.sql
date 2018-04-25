@@ -1,0 +1,13 @@
+UPDATE `oc_location` SET `id_erp` = 'ea644233-0089-11e6-80d7-00155d66a124' WHERE `name` = 'Roeckl ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = '965ed75f-9a97-11e6-80e2-00155d66a124' WHERE `name` = 'Steiff ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = 'aa8da6ac-9f75-11e6-80e4-00155d66a124' WHERE `name` = 'Elsy ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = '3adf3537-e6d7-11e6-80d1-005056922691' WHERE `name` = 'TOP Model ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = '43cd9cc7-f99a-11e6-80d2-005056922691' WHERE `name` = 'Sanetta ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = 'd5a2f9c7-fd86-11e6-80d3-005056922691' WHERE `name` = 'Falke ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = 'df1645bb-0089-11e6-80d7-00155d66a124' WHERE `name` = 'Falke kids ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = '51a77418-9e24-11e7-80fd-005056922691' WHERE `name` = 'Falke OCEAN PLAZA';
+UPDATE `oc_location` SET `id_erp` = 'b01438e3-a9b7-11e7-80fd-005056922691' WHERE `name` = 'LITTLE HOUSE Skymall';
+UPDATE `oc_location` SET `id_erp` = '36a1b5f8-da6c-11e7-8101-005056922691' WHERE `name` = 'LITTLE HOUSE Ocean Plaza';
+UPDATE `oc_location` SET `id_erp` = '39e51906-3a1a-11e7-80e9-005056922691' WHERE `name` = 'Hanro ТРЦ GULLIVER';
+UPDATE `oc_location` SET `id_erp` = 'bac5944c-8348-11e7-80fb-005056922691' WHERE `name` = 'LITTLE HOUSE Artmall';
+INSERT INTO `oc_location` SET `id_erp` = 'b1d689b7-7782-11e7-80f9-005056922691', `name` = 'Оушен Магазин "Топ модел"';

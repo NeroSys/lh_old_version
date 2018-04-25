@@ -76,7 +76,7 @@
 
 <script src="/catalog/view/javascript/opentheme/hozmegamenu/custommenu.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/jquery/elevatezoom/jquery.elevatezoom.js" type="text/javascript"></script>
-<script src="/catalog/view/javascript/common.js?d24d3" type="text/javascript"></script>
+<script src="/catalog/view/javascript/common.js?d24d332" type="text/javascript"></script>
 
 <script src="/catalog/view/javascript/mmenu/jquery.mmenu.all.js" type="text/javascript"></script>
 

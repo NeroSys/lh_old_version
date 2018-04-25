@@ -55,12 +55,31 @@ class ProductModel extends \ModelCatalogProduct
 			$options[$option['id']]['number'] = $option['id_erp'];
 			$options[$option['id']]['status'] = true;
 			$options[$option['id']]['price'] = $option['price'];
+			$option = $this->formatOption($option);
             $options[$option['id']]['options'][$option['option_id']] = $option;
         }
         foreach ($options as &$option){
             $option['options'] = array_values($option['options']);
         }
         return $options;
+    }
+
+    protected function formatOption($option){
+        static $shops;
+        if(!$shops) {
+            $localisationModel = $this->load->model('localisation/location');
+            $shops = $localisationModel->getShops();
+        }
+        if(!empty($option["availability"])) {
+            $unserializerOptions = unserialize($option["availability"])->toArray();
+            unset($unserializerOptions["availability"]["priceWholesale"]);
+            foreach ($unserializerOptions as $shopAviability){
+                $shopAviability->stock = $shops->get($shopAviability->stockErpId);
+            }
+            $option["availability"] = $unserializerOptions;
+
+        }
+        return $option;
     }
 
     private function getProductSpecificationOptionsFromDatabase(int $product_id):?array{
@@ -80,5 +99,26 @@ class ProductModel extends \ModelCatalogProduct
                   ORDER BY opog.id, ood.option_id";
 
         return $this->db->query($sql)->rows;
+    }
+
+    public function generateProductDescription(int $product_id):string{
+        $product_attributes = $this->getProductAttributes($product_id);
+        $product_description = '';
+        //$product_description = "Производитель: ". $result["manufacturer"]."<br>";
+
+        foreach ($product_attributes as $attribute_group) {
+            foreach ($attribute_group["attribute"] as $attribute) {
+                $product_description .= $attribute["name"] . ": " . $attribute["text"] . "<br>";
+            }
+        }
+
+        $product_description = utf8_substr(
+            html_entity_decode($product_description, ENT_QUOTES, 'UTF-8'), 0, 180
+        );
+
+        if (mb_strlen($product_description) === 180) {
+            $product_description .= '..';
+        }
+        return $product_description;
     }
 }
