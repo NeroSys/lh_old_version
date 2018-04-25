@@ -1,6 +1,9 @@
+<div class="product-massage"><span *ngIf="massage" class="alert alert-warning">{{massage}}</span></div>
+<div class="product-caption"><span *ngIf="caption">{{caption}}</span></div>
+<div>Доступно спецификаций: {{variants.getCountActiveItems()}}</div>
 <div class="product-price"><span *ngIf="price">{{price}} грн.</span></div>
-<form [formGroup]="form"  (ngSubmit)="onSubmit()">
-    <div *ngFor="let field of optionGroups" class="form-group" >
+<form [formGroup]="form.getData()"  (ngSubmit)="onSubmit()">
+    <div *ngFor="let field of form.fields" class="form-group" >
         <label>{{field.option_name}}</label>
         <div *ngIf="field.type === 'radio'">
             <div class="form-check radio" *ngFor="let option of field.values">
@@ -8,8 +11,8 @@
                     <input
                         formControlName="{{'field_' + field.option_id}}"
                         name="{{'field_' + field.option_id}}"
-                        [(ngModel)]="data[field.option_id]"
-                        (change)="select(field.option_id)"
+                        [(ngModel)]="selectedData[field.option_id]"
+                        (change)="select()"
                         type="radio"
                         class="form-check-input"
                         value="{{option.option_value_id}}"
@@ -22,12 +25,9 @@
         <div *ngIf="field.type === 'select'" >
             <select
                 formControlName="{{'field_' + field.option_id}}"
-                [(ngModel)]="data[field.option_id]"
-                (change)="select(field.option_id)"
+                [(ngModel)]="selectedData[field.option_id]"
+                (change)="select()"
                 class="form-control">
-                <option *ngFor="let option of field.values" value="{{option.option_value_id}}" [attr.disabled]="option.status === false ? '' : null">
-                    {{option.option_value_name}}
-                </option>
             </select>
         </div>
     </div>
@@ -36,7 +36,7 @@
         <label class="control-label" for="input-quantity">Количество</label>
         <input
             formControlName="quantity"
-            [(ngModel)]="data['quantity']"
+            [(ngModel)]="selectedData['quantity']"
             type="number"
             name="quantity"
             value="1"
@@ -58,5 +58,23 @@
             </div>
         </div>
     </div>
-
 </form>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>fields</h3>
+        <pre style="overflow-x: auto; height: 500px; font-size: 0.8em">{{form.fields | json}}</pre>
+    </div>
+
+    <div class="col-md-4">
+        <h3>variants</h3>
+        <pre style="overflow-x: auto; height: 500px; font-size: 0.8em">{{variants | json}}</pre>
+    </div>
+
+    <div class="col-md-4">
+        <h3>selectedData</h3>
+        <pre style="overflow-x: auto; height: 100px; font-size: 0.8em">{{selectedData | json}}</pre>
+        <h3>selectedOptions</h3>
+        <pre style="overflow-x: auto; height: 300px; font-size: 0.8em">{{selectedOptions | json}}</pre>
+    </div>
+</div>

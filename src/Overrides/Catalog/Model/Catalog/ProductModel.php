@@ -54,6 +54,7 @@ class ProductModel extends \ModelCatalogProduct
 			$options[$option['id']]['id'] = $option['id'];
 			$options[$option['id']]['number'] = $option['id_erp'];
 			$options[$option['id']]['status'] = true;
+			$options[$option['id']]['price'] = $option['price'];
 			$option = $this->formatOption($option);
             $options[$option['id']]['options'][$option['option_id']] = $option;
         }

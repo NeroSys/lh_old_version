@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {FormGroup, FormControl} from '@angular/forms';
 import {MainService} from './app.service';
-import {Specification} from './model/specification';
-import {Option} from './model/option';
-import {DecimalPipe} from '@angular/common';
+import {VariantCollection} from './model/variant-collection';
+import {FormFields} from './model/form-fields';
+import {OptionGroup} from './model/option-group';
 
 declare var product_id: any;
 
@@ -14,135 +13,126 @@ declare var product_id: any;
 })
 export class AppComponent implements OnInit {
     public price: number;
-    public form: FormGroup;
-    public optionGroups;
-    public data: object = {};
-    private variants: Specification[];
-    private selectedOptions: object = {};
+    public caption: string = '';
+    public massage: string = '';
+    public selectedData = {};
+
+    private form: FormFields;
+    public variants: VariantCollection;
+    private selectedOptions = {};
+
 
     constructor(private mainService: MainService) {
-        this.optionGroups = [];
-        this.form = new FormGroup({});
-        this.form.controls['quantity'] = new FormControl();
-        this.data['quantity'] = 1;
+        this.form = new FormFields();
+        this.variants = new VariantCollection();
     }
 
     ngOnInit(): void {
         this.mainService
             .getSpecifications(product_id)
             .then(
-                variants => this.variants = variants
+                variants => this.variants.setData(variants)
             ).then(
             e => {
-                this.price = this.variants[0].options[0].price;
-                this.setOptionGroup();
+                this.price = this.variants.getBasePrice();
+                this.form.setData(this.variants);
             }
         );
     }
 
-    public select(option_id): void {
+    public select(): void {
+        this.setChoice();
+    }
+
+    private setChoice(): void {
         this.setSelectedOptions();
-        this.enableAnotherGroup(option_id);
-        this.setVariantsStatus();
-    }
-
-    public onSubmit(): void {
-        if (this.form.valid) {
-            const request = {};
-            request['quantity'] = this.form.controls.quantity.value;
-            request['product_id'] = product_id;
-            request['option'] = [];
-
-            let body = 'quantity=' + this.form.controls.quantity.value;
-            body += '&product_id=' + product_id;
-
-            this.optionGroups.forEach(
-                variant => {
-                    const selectedOption = this.selectedOptions[variant.option_id];
-                    if (selectedOption) {
-                        console.log(selectedOption);
-                        request['option'][selectedOption.product_option_id] = selectedOption.option_value_id;
-                        body += '&option[' + selectedOption.product_option_id + ']=' + selectedOption.option_value_id;
-                    }
-                }
-            );
-            console.log('request: ', request);
-            this.mainService.addToCart(body);
-        }
-    }
-
-    private setOptionGroup(): void {
-        this.variants.forEach(variant => {
-            variant.options.forEach(
-                option => {
-                    this.setOptionItem(option);
-                    this.setFormControl(option);
-                }
-            );
-        });
-    }
-
-    private setOptionItem(option: Option): void {
-        const group_index = this.optionGroups.findIndex(item => option.option_id === item.option_id);
-        if (group_index < 0) {
-            this.optionGroups.push({
-                option_id: option.option_id,
-                option_name: option.option_name,
-                type: option.type,
-                status: true,
-                values: [option]
-            });
-        } else {
-            if (!this.optionGroups[group_index].values.find(item => item.option_value_id === option.option_value_id)) {
-                this.optionGroups[group_index].values.push(option);
-            }
-        }
-    }
-
-    private setFormControl(option: Option): void {
-        const field = 'field_' + option.option_id;
-
-        if (this.form.controls[field] === undefined) {
-            this.form.controls[field] = new FormControl();
-            this.data[option.option_id] = null;
-        }
+        this.setCaption();
     }
 
     private setSelectedOptions(): void {
-        this.optionGroups.forEach(variant => {
-            if (this.data[variant.option_id]) {
-                const option = variant.values.find(item => (item.option_value_id === this.data[variant.option_id]));
+        this.form.fields.forEach(variant => {
+            if (this.selectedData[variant.option_id]) {
+                const option = variant.values.find(item => (item.option_value_id === this.selectedData[variant.option_id]));
                 this.selectedOptions[variant.option_id] = option;
+                this.variants.setAvailableVariants(option);
             }
         });
     }
 
-    private setVariantsStatus(): void {
-        this.variants.forEach(
-            variant => {
-                variant.options.forEach(
-                    (option, index) => {
-                        if (
-                            this.selectedOptions[option.option_id]
-                            && this.selectedOptions[option.option_id] !== null
-                            && this.selectedOptions[option.option_id] !== option
-                        ) {
-                            variant.status = false;
-                            option.status = false;
-                        }
-                    }
-                );
+    private setCaption(): void {
+        this.caption = '';
+        this.massage = '';
+
+        this.form.fields.forEach(variant => {
+            const option = variant.values.find(item => (item.option_value_id === this.selectedData[variant.option_id]));
+            console.log(option);
+            if (option !== undefined) {
+                this.caption += this.caption.length > 0 ? '; ' : '';
+                this.caption += variant.option_name + ': ' + option.option_value_name;
+            } else {
+                this.massage += this.massage.length > 0 ? '; ' : '';
+                this.massage += 'Поле "' + variant.option_name + '" обязательно для заполнения. ';
             }
-        );
-        this.setOptionGroup();
+        });
     }
 
-    private enableAnotherGroup(option_id): void {
-        const group_index = this.optionGroups.findIndex(item => option_id === item.option_id);
-        this.optionGroups[group_index].values.forEach(
-            (option, index) => {
-                this.optionGroups[group_index].values[index].status = true;
-            }
-        );
+    public onSubmit(): void {
+        // if (this.form.valid) {
+        //     const request = {};
+        //     request['quantity'] = this.form.controls.quantity.value;
+        //     request['product_id'] = product_id;
+        //     request['option'] = [];
+		//
+        //     let body = 'quantity=' + this.form.controls.quantity.value;
+        //     body += '&product_id=' + product_id;
+		//
+        //     this.optionGroups.forEach(
+        //         variant => {
+        //             const selectedOption = this.selectedOptions[variant.option_id];
+        //             if (selectedOption) {
+        //                 console.log(selectedOption);
+        //                 request['option'][selectedOption.product_option_id] = selectedOption.option_value_id;
+        //                 body += '&option[' + selectedOption.product_option_id + ']=' + selectedOption.option_value_id;
+        //             }
+        //         }
+        //     );
+        //     console.log('request: ', request);
+        //     this.mainService.addToCart(body);
+        // }
     }
+
+    // private setOptionGroup(variants: VariantCollection): void {
+    //     this.variants.forEach(variant => {
+    //         variant.options.forEach(
+    //             option => {
+    //                 this.setOptionItem(option);
+    //                 this.setFormControl(option);
+    //             }
+    //         );
+    //     });
+    // }
+
+
+
+
+    // private setVariantsStatus(): void {
+    //     this.variants.forEach(
+    //         variant => {
+    //             variant.options.forEach(
+    //                 (option, index) => {
+    //                     if (
+    //                         this.selectedOptions[option.option_id]
+    //                         && this.selectedOptions[option.option_id] !== null
+    //                         && this.selectedOptions[option.option_id] !== option
+    //                     ) {
+    //                         variant.status = false;
+    //                         option.status = false;
+    //                     }
+    //                 }
+    //             );
+    //         }
+    //     );
+    //     this.setOptionGroup();
+    // }
+
 }
