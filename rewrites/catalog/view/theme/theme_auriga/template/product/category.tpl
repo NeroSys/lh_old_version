@@ -26,8 +26,6 @@
                     <?php } ?>
                     <?php } ?>
                 </div>
-
-                <?php if ($description) { echo $description; }?>
             </div>
             </div>
 
