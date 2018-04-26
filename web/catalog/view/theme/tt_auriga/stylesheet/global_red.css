@@ -1313,6 +1313,12 @@ div.required .control-label:before {
 .pagination {
     margin: 0;
     border-radius: 0;
+    padding: 10px 10px 10px 10px;
+    background-color: #3a3a3a;
+}
+.pagination>li>a, .pagination>li>span{
+    background-color: transparent;
+    color: #d2cfcf !important;
 }
 
 .pagination li.active span, .pagination span:hover, .pagination a:hover {
