@@ -60,12 +60,12 @@ class ControllerInformationContact extends Controller {
         $data['locations'] = array();
         $map = array();
 
-        $this->load->model('localisation/location');
+        $locationModel = $this->load->model('localisation/location');
 
-        foreach((array)$this->config->get('config_location') as $location_id) {
-            $location_info = $this->model_localisation_location->getLocation($location_id);
+        foreach($locationModel->getShops() as $location_info) {
+           // $location_info = $this->model_localisation_location->getLocation($location_id);
 
-            if ($location_info) {
+            //if ($location_info) {
                 if ($location_info['image']) {
                     $image = $this->model_tool_image->resize($location_info['image'], $this->config->get('theme_auriga_image_location_width'), $this->config->get('theme_auriga_image_location_height'));
                 } else {
@@ -85,7 +85,7 @@ class ControllerInformationContact extends Controller {
                 );
 
                 $map = $this->addStoreToMap($location_info, $map);
-            }
+
         }
 
         $data['map'] = json_encode($map);
