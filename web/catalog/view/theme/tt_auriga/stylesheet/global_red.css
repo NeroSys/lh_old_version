@@ -4748,11 +4748,7 @@ div.pt_menu .parentMenu a, .parentMenu .block-title {
     overflow: hidden;
 }
 .press-post-item .press-post-title {
-    position: absolute;
     display: block;
-    bottom: 0;
-    margin-bottom:-100%;
-    width: 100%;
     background: rgba(0,0,0,0.5);
     color:white;
 }
