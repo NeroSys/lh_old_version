@@ -50,7 +50,7 @@ class CategoryTreat extends AbstractTreater
 
         $entity::transaction(function () use ($entity, $category, $storeId) {
             $parentId = 0;
-            if (null !== $category->getParent() && 0 !== (int) $category->getParent()) {
+            if (!empty($category->getParent())) {
                 $parentCategory = $this->findCategoryByIdErp($category->getParent());
                 if (!$parentCategory) {
                     throw new \Exception("No parent category with id_erp " . $category->getParent() . " were found :(");

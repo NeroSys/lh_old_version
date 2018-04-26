@@ -48,7 +48,13 @@ $application->add(
     )
 );
 
+$application->add(new \App\ErpIntegration\Commands\SendNewProductsFromFileCommand(
+    null,
+    $ampqConfig)
+);
+
 $application->add(new \App\ErpIntegration\Commands\UpdateImagesCommand());
+
 
 /**
  * end of ERP Integration commands
