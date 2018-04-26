@@ -69,8 +69,8 @@
                         <li><a href="/contacts"><span>Магазины</span></a></li>
                         <li><a href="/delivery"><span>Оплата и доставка</span></a></li>
                         <li><a href="/our_brands"><span>Бренды</span></a></li>
-                        <li><a href="/our-activity"><span>Новости</span></a></li>
-                        <li><a href="/press"><span>Пресс-центр</span></a></li>
+                        <li><a href="/sell_out"><span>Акции</span></a></li>
+                        <li><a href="/our-activity"><span>Пресс-центр</span></a></li>
                         <li class="last"><a href="/opt"><span>Опт</span></a></li>
                     </ul>
                 </div>
