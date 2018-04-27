@@ -63,8 +63,8 @@ class Product extends BasicProductQueue
             }
             $connection = ConnectionManager::get_connection();
             $connection->query("REPLACE INTO `oc_category_path` SET 
-                              category_id = '" . (int)$category->category_id . "', 
-                              `path_id` = '" . (int)$category->category_id . "', level = '" . $level . "' ");
+                              `category_id` = '" . (int)$category->category_id . "', 
+                              `path_id` = '" . (int)$category->category_id . "', `level` = '" . $level . "' ");
 
             $this->repairCategories($category->category_id);
         }

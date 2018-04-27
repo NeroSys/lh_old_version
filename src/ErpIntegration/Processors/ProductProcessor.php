@@ -6,7 +6,7 @@ namespace App\ErpIntegration\Processors;
 use App\ErpIntegration\Processors\WardrobeTreats\AttributeTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\BrandTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\CategoryTreat;
-use App\ErpIntegration\Processors\WardrobeTreats\FilterTreat;
+use App\ErpIntegration\Processors\WardrobeTreats\OCFilterTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\ManufacturerTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\OptionTreat;
 use App\ErpIntegration\Processors\WardrobeTreats\ProductTreat;
@@ -48,7 +48,7 @@ class ProductProcessor implements ProcessorInterface
             $wardrobeAttributeTreater->treat($property);
         }
 
-        $wardrobeFilterTreater = new FilterTreat();
+        $wardrobeFilterTreater = new OCFilterTreat();
         $wardrobeFilterTreater->treat($product);
 
         $productTreat = new ProductTreat();

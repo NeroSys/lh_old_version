@@ -7,6 +7,7 @@ $appConfig->set('DIR_SYSTEM', $appConfig->get('DIR_OPENCART').'system/');
 $appConfig->set('LOCAL_DIR_SYSTEM', $appConfig->get('LOCAL_DIR_OPENCART_REWRITES').'system/');
 
 $appConfig->set('DIR_CONFIG', $appConfig->get('DIR_OPENCART').'system/config/');
+$appConfig->set('LOCAL_DIR_CONFIG', $appConfig->get('LOCAL_DIR_SYSTEM').'/config/');
 
 $appConfig->set('PUBLIC_WEB', $appConfig->get('LOCAL_DIR_OPENCART').'web/');
 $appConfig->set('DIR_MODIFICATION', $appConfig->get('LOCAL_DIR_OPENCART').'rewrites/');

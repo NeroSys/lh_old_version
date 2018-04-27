@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Helper;
 
 
@@ -12,9 +13,10 @@ trait FilesTrait
     {
         if (strpos($filePath, DIR_APPLICATION) !== false) {
             return str_replace(DIR_APPLICATION, LOCAL_DIR_APPLICATION, $filePath);
-        }
-        elseif (strpos($filePath, DIR_TEMPLATE) !== false) {
+        } elseif (strpos($filePath, DIR_TEMPLATE) !== false) {
             return str_replace(DIR_TEMPLATE, LOCAL_DIR_TEMPLATE, $filePath);
+        } elseif (strpos($filePath, DIR_CONFIG) !== false) {
+            return str_replace(DIR_CONFIG, LOCAL_DIR_CONFIG, $filePath);
         }
     }
 }

@@ -56,6 +56,10 @@ class ControllerCommonMenu extends Controller {
 		$data['text_opencart'] = $this->language->get('text_opencart');
 		$data['text_payment'] = $this->language->get('text_payment');
 		$data['text_product'] = $this->language->get('text_product');
+         // OCFilter start
+        $data['text_ocfilter'] = $this->language->get('text_ocfilter');
+        // OCFilter end
+
 		$data['text_reports'] = $this->language->get('text_reports');
 		$data['text_report_sale_order'] = $this->language->get('text_report_sale_order');
 		$data['text_report_sale_tax'] = $this->language->get('text_report_sale_tax');
@@ -213,6 +217,13 @@ class ControllerCommonMenu extends Controller {
 			'amazonus' => $this->config->get('openbay_amazonus_status'),
 			'etsy' => $this->config->get('etsy_status'),
 		);
+
+        // OCFilter start
+        $data['ocfilter'] = $this->url->link('catalog/ocfilter', 'token=' . $this->session->data['token'], 'SSL');
+        // OCFilter end
+        // OCFilter start
+        $data['ocfilter'] = $this->url->link('catalog/ocfilter', 'token=' . $this->session->data['token'], true);
+        // OCFilter end
 
 		return $this->load->view('common/menu', $data);
 	}

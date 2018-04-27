@@ -13,6 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#000">
     <title><?php echo $title; ?></title>
+    <?php if ($noindex) { ?>
+    <!-- OCFilter Start -->
+    <meta name="robots" content="noindex,nofollow" />
+    <!-- OCFilter End -->
+    <?php } ?>
     <base href="<?php echo $base; ?>"/>
     <?php if ($description) { ?>
     <meta name="description" content="<?php echo $description; ?>">
@@ -47,8 +52,14 @@
     <?php foreach ($analytics as $analytic) { ?>
     <?php echo $analytic; ?>
     <?php } ?>
+
+
 </head>
 <body class="<?php echo $class; ?>">
+<?php foreach ($scripts as $script) { ?>
+<script src="<?php echo $script; ?>" type="text/javascript"></script>
+<?php } ?>
+
 <div id="page">
 
 <div class="header Fixed">

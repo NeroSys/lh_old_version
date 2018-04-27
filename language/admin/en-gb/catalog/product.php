@@ -106,3 +106,9 @@ $_['error_name']             = 'Product Name must be greater than 3 and less tha
 $_['error_meta_title']       = 'Meta Title must be greater than 3 and less than 255 characters!';
 $_['error_model']            = 'Product Model must be greater than 1 and less than 64 characters!';
 $_['error_keyword']          = 'SEO URL already in use!';
+
+// OCFilter start
+$_['entry_values']          		= 'Добавьте значения для этой опции.';
+$_['tab_ocfilter']          		= 'Опции фильтра';
+$_['ocfilter_select_category'] 	= 'Для начала, выберите категории для этого товара.';
+// OCFilter end

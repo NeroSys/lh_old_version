@@ -3,6 +3,7 @@
 namespace App\ErpIntegration\Processors\WardrobeTreats;
 
 use App\Entity\Manufacturer;
+use App\Entity\OcfilterOptionValueToProduct;
 use App\Entity\ProductAttribute;
 use App\Entity\ProductDescription;
 use App\Entity\ProductFilter;
@@ -22,23 +23,19 @@ use App\Entity\Option as AROptionEntity;
 use App\Entity\OptionValue as AROptionValueEntity;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\AttributeFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\CategoryFinder;
-use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\FilterValueFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\ManufacturerFinder;
+use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OcFilterOptionValueFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionFinder;
 use App\ErpIntegration\Processors\WardrobeTreats\CachedFind\OptionValueFinder;
-use Doctrine\Common\Collections\ArrayCollection;
+
 use LHGroup\From1cToWeb\Item\Product\Specification;
 use LHGroup\From1cToWeb\Item\ProductItem;
 use EasySlugger\Slugger;
-use App\Entity\Filter as ARFilterEntity;
+use App\Entity\OcfilterOptionValue as ARFilterOptionEntity;
 
 class ProductTreat extends AbstractTreater
 {
     const DEFAULT_PRODUCT_STATUS = 1;
-    /**
-     * @var \EasySlugger\Slugger
-     */
-    protected $slugger;
 
     public function treat($item, array $options = [])
     {
@@ -141,16 +138,17 @@ class ProductTreat extends AbstractTreater
 
     protected function updateProductFilters(int $productId, ProductItem $productItem)
     {
-        ProductFilter::delete_all(array('conditions' => array('product_id = ?', $productId)));
+        OcfilterOptionValueToProduct::delete_all(array('conditions' => array('product_id = ?', $productId)));
 
         foreach ($productItem->getProperties() as $property) {
             $filter = $this->findFilterValueByIdErp(
                 $property->getValue()->getIdErp(),
-                FilterTreat::PROPERTY_VALUE_ID_ERP_SOURCE
+                OCFilterTreat::PROPERTY_VALUE_ID_ERP_SOURCE
             );
-            $productToFilter = new ProductFilter();
+            $productToFilter = new OcfilterOptionValueToProduct();
             $productToFilter->product_id = $productId;
-            $productToFilter->filter_id = $filter->filter_id;
+            $productToFilter->option_id = $filter->option_id;
+            $productToFilter->value_id = $filter->value_id;
             $productToFilter->save();
         }
 
@@ -163,12 +161,13 @@ class ProductTreat extends AbstractTreater
                     FilterTreat::SPECIFICATION_CHARACTERISTIC_VALUE_ID_ERP_SOURCE
                     );
                 //уже была характеристика с таким товаром, товар уже привязан к этой характеристике
-                if(!empty($alreadyInserted[$productId.$filter->filter_id])){ continue; }
-                $productToFilter = new ProductFilter();
+                if(!empty($alreadyInserted[$productId.$filter->value_id])){ continue; }
+                $productToFilter = new OcfilterOptionValueToProduct();
                 $productToFilter->product_id = $productId;
-                $productToFilter->filter_id = $filter->filter_id;
+                $productToFilter->option_id = $filter->option_id;
+                $productToFilter->value_id = $filter->value_id;
                 $productToFilter->save();
-                $alreadyInserted[$productId.$filter->filter_id] = 1;
+                $alreadyInserted[$productId.$filter->value_id] = 1;
             }
         }
     }
@@ -251,9 +250,9 @@ class ProductTreat extends AbstractTreater
         return OptionValueFinder::getInstance()->findByIdErp($idErp);
     }
 
-    protected function findFilterValueByIdErp(string $idErp, string $source): ARFilterEntity
+    protected function findFilterValueByIdErp(string $idErp, string $source): ARFilterOptionEntity
     {
-        return FilterValueFinder::getInstance()->findByIdErp($idErp, $source);
+        return OcFilterOptionValueFinder::getInstance()->findByIdErp($idErp, $source);
     }
 
     protected function getTotalProductQuantity(ProductItem $productItem): int
