@@ -136,13 +136,14 @@
 
             <?php } ?>
 
+           <?php if(mb_strlen($description) > 20 && $page<=1){ ?>
             <div class="row">
-
                 <div class="col-xs-12 category-description">
+                    <h1><?php echo $heading_title; ?></h1>
                     <?php if ($description) { echo $description; }?>
                 </div>
             </div>
-
+            <?php } ?>
 
 
             <?php if (!$categories && !$products) { ?>

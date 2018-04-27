@@ -103,18 +103,19 @@ class ControllerCommonHeader extends Controller {
 		// For page specific css
 		if (isset($this->request->get['route'])) {
 			if (isset($this->request->get['product_id'])) {
-				$class = '-' . $this->request->get['product_id'];
+				$body_class = '-' . $this->request->get['product_id'];
 			} elseif (isset($this->request->get['path'])) {
-				$class = '-' . $this->request->get['path'];
+                $body_class = '-' . $this->request->get['path'];
 			} elseif (isset($this->request->get['manufacturer_id'])) {
-				$class = '-' . $this->request->get['manufacturer_id'];
+                $body_class = '-' . $this->request->get['manufacturer_id'];
 			} elseif (isset($this->request->get['information_id'])) {
-				$class = '-' . $this->request->get['information_id'];
+                $body_class = '-' . $this->request->get['information_id'];
 			} else {
-				$class = '';
+                $body_class = '';
 			}
 
-			$data['class'] = str_replace('/', '-', $this->request->get['route']) . $class;
+			$body_class_global = str_replace('/', '-', $this->request->get['route']);
+			$data['class'] = $body_class_global . ' '.$body_class_global.$body_class;
 		} else {
 			$data['class'] = 'common-home';
 		}

@@ -67,6 +67,7 @@ class CategoryController extends \Controller
         } else {
             $page = 1;
         }
+        $data['page'] = $page;
 
         $limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 36));
 

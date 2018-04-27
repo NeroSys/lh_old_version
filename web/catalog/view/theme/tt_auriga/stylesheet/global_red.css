@@ -4869,3 +4869,6 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
     font-weight: normal;
     text-transform: uppercase;
 }
+.product-category. .category-description{
+    padding-top: 1em;
+}
