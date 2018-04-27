@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build  -e=prod --no-sourcemap --build-optimizer --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,7 +21,7 @@
     "@angular/platform-browser": "^4.2.4",
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
-    "@ng-bootstrap/ng-bootstrap": "^1.1.2",
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.6",
     "@ng-select/ng-select": "^1.0.1-rc.0",
     "bootstrap-sass": "^3.3.7",
     "core-js": "^2.4.1",
