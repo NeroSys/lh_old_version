@@ -69,7 +69,8 @@ class ModelCatalogOCFilter extends Model {
 			}
 		}
 
-    $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value WHERE option_id = '" . (int)$option_id . "'");
+		//тут id_erp и тп проблемы, надо переделывать. не удалять , а обновлять
+/*    $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value WHERE option_id = '" . (int)$option_id . "'");
     $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_description WHERE option_id = '" . (int)$option_id . "'");
 
     if (isset($data['ocfilter_option_value'])) {
@@ -94,7 +95,7 @@ class ModelCatalogOCFilter extends Model {
 					}
 				}
 			}
-    }
+    }*/
 
     if (empty($data['keyword'])) {
     	$data['keyword'] = $this->translit($data['ocfilter_option_description'][$this->config->get('config_language_id')]['name']);
