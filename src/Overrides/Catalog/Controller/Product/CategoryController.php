@@ -126,9 +126,8 @@ class CategoryController extends \Controller
             $data['button_list'] = $this->language->get('button_list');
             $data['button_grid'] = $this->language->get('button_grid');
 
-            if((int)$category_info['parent'] === 0 && $category_info['image']){
+            if((int)$category_info['parent_id'] === 0 && $category_info['image']){
                 $data['thumb'] = $this->model_tool_image->resize($category_info['image'], 250, 160);
-
             }
             elseif ($category_info['image']) {
                 $data['thumb'] = $this->model_tool_image->resize($category_info['image'], $this->config->get($this->config->get('config_theme') . '_image_category_width'), $this->config->get($this->config->get('config_theme') . '_image_category_height'));
