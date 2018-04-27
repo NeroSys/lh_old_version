@@ -4,7 +4,8 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {MainService} from './app.service';
 import {HttpModule} from '@angular/http';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
     declarations: [
@@ -13,7 +14,9 @@ import {ReactiveFormsModule} from '@angular/forms';
     imports: [
         BrowserModule,
         HttpModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule,
+        NgbModule.forRoot()
     ],
     providers: [MainService],
     bootstrap: [AppComponent]

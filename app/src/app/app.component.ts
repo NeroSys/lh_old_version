@@ -1,8 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MainService} from './app.service';
 import {VariantCollection} from './model/variant-collection';
-import {FormFields} from './model/form-fields';
 import {OptionGroup} from './model/option-group';
+import {Option} from "./model/option";
+import {Variant} from "./model/variant";
+import {Alert} from "./model/alert";
 
 declare var product_id: any;
 
@@ -12,36 +14,53 @@ declare var product_id: any;
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    public price: number;
-    public caption: string = '';
-    public massage: string = '';
-    public selectedData = {};
+    public price: number = null;
+    public oldPrice: number = null;
+    public alerts: Alert[] = [];
+    public selectedData = {quantity: 1};
 
-    private form: FormFields;
-    public variants: VariantCollection;
-    private selectedOptions = {};
+    public fields: OptionGroup[] = [];
+    private variants: VariantCollection;
+    private selectedVariant: Variant;
 
 
     constructor(private mainService: MainService) {
-        this.form = new FormFields();
         this.variants = new VariantCollection();
     }
 
-    ngOnInit(): void {
+    public ngOnInit(): void {
         this.mainService
             .getSpecifications(product_id)
             .then(
                 variants => this.variants.setData(variants)
             ).then(
             e => {
-                this.price = this.variants.getBasePrice();
-                this.form.setData(this.variants);
+                this.setData(this.variants);
+                this.setDefaultValues();
             }
         );
     }
 
-    public select(): void {
+    public select(optionId: number): void {
         this.setChoice();
+        this.setOptionsStatus(optionId);
+    }
+
+    public onSubmit(): void {
+        let query = this.prepareRequestAddToCart();
+        let alert = new Alert();
+        this.mainService.addToCart(query).then(
+            response => {
+                if(response.error !== undefined){
+                    alert.type = 'error';
+                    alert.message = response.error;
+                } else if (response.success !== undefined){
+                    alert.type = 'success';
+                    alert.message = response.success;
+                }
+                this.setAlert(alert);
+            }
+        )
     }
 
     private setChoice(): void {
@@ -50,89 +69,138 @@ export class AppComponent implements OnInit {
     }
 
     private setSelectedOptions(): void {
-        this.form.fields.forEach(variant => {
+        let data: any = [];
+        this.fields.forEach(variant => {
             if (this.selectedData[variant.option_id]) {
                 const option = variant.values.find(item => (item.option_value_id === this.selectedData[variant.option_id]));
-                this.selectedOptions[variant.option_id] = option;
                 this.variants.setAvailableVariants(option);
+                data.push(option);
             }
         });
+        this.selectedVariant = this.variants.findBy(data);
+        if(this.selectedVariant === undefined){
+            this.selectedVariant = this.variants.getFirstBy(data[0]);
+            this.selectedVariant.options.forEach(option => {
+                this.selectedData[option.option_id] = option.option_value_id
+            })
+        }
+        this.setPrice();
+    }
+
+    private setPrice():void {
+        this.oldPrice = this.selectedVariant.price_old;
+        this.price = this.selectedVariant.price;
     }
 
     private setCaption(): void {
-        this.caption = '';
-        this.massage = '';
-
-        this.form.fields.forEach(variant => {
-            const option = variant.values.find(item => (item.option_value_id === this.selectedData[variant.option_id]));
-            console.log(option);
+        let caption = '';
+        this.fields.forEach(field => {
+            let option = field.values.find(item => (item.option_value_id === this.selectedData[field.option_id]));
             if (option !== undefined) {
-                this.caption += this.caption.length > 0 ? '; ' : '';
-                this.caption += variant.option_name + ': ' + option.option_value_name;
-            } else {
-                this.massage += this.massage.length > 0 ? '; ' : '';
-                this.massage += 'Поле "' + variant.option_name + '" обязательно для заполнения. ';
+                caption +=  caption.length > 0 ? '; ' : '';
+                caption += field.option_name + ': ' + option.option_value_name;
             }
         });
     }
 
-    public onSubmit(): void {
-        // if (this.form.valid) {
-        //     const request = {};
-        //     request['quantity'] = this.form.controls.quantity.value;
-        //     request['product_id'] = product_id;
-        //     request['option'] = [];
-		//
-        //     let body = 'quantity=' + this.form.controls.quantity.value;
-        //     body += '&product_id=' + product_id;
-		//
-        //     this.optionGroups.forEach(
-        //         variant => {
-        //             const selectedOption = this.selectedOptions[variant.option_id];
-        //             if (selectedOption) {
-        //                 console.log(selectedOption);
-        //                 request['option'][selectedOption.product_option_id] = selectedOption.option_value_id;
-        //                 body += '&option[' + selectedOption.product_option_id + ']=' + selectedOption.option_value_id;
-        //             }
-        //         }
-        //     );
-        //     console.log('request: ', request);
-        //     this.mainService.addToCart(body);
-        // }
+    private setData(variants: VariantCollection):void {
+        variants.getAll().forEach(variant => {
+            variant.options.forEach(
+                option => {
+                    this.setOptionItem(option);
+                }
+            );
+
+        });
     }
 
-    // private setOptionGroup(variants: VariantCollection): void {
-    //     this.variants.forEach(variant => {
-    //         variant.options.forEach(
-    //             option => {
-    //                 this.setOptionItem(option);
-    //                 this.setFormControl(option);
-    //             }
-    //         );
-    //     });
-    // }
+    private setOptionItem(option: Option): void {
+        let group_index = this.fields.findIndex(item => option.option_id === item.option_id);
+        if (group_index < 0) {
+            this.fields.push({
+                option_id: option.option_id,
+                option_name: option.option_name,
+                product_option_id: option.product_option_id,
+                type: option.type,
+                status: true,
+                values: [option]
+            });
+        } else {
+            if (!this.fields[group_index].values.find(item => item.option_value_id === option.option_value_id)) {
+                this.fields[group_index].values.push(option);
+            }
+        }
+    }
 
+    private setDefaultValues(): void {
+        this.variants.getFirst().options.forEach(option => {
+            this.selectedData[option.option_id] = option.option_value_id;
+        });
 
+        this.setChoice();
+        this.setOptionsStatus(this.selectedVariant.options[0].option_id);
+    }
 
+    private setOptionsStatus(optionId): void {
+        let itsAfterSelectedOption: boolean = false;
+        let queryData: Option[] = [];
 
-    // private setVariantsStatus(): void {
-    //     this.variants.forEach(
-    //         variant => {
-    //             variant.options.forEach(
-    //                 (option, index) => {
-    //                     if (
-    //                         this.selectedOptions[option.option_id]
-    //                         && this.selectedOptions[option.option_id] !== null
-    //                         && this.selectedOptions[option.option_id] !== option
-    //                     ) {
-    //                         variant.status = false;
-    //                         option.status = false;
-    //                     }
-    //                 }
-    //             );
-    //         }
-    //     );
-    //     this.setOptionGroup();
-    // }
+        this.selectedVariant.options.forEach(option => {
+
+            if(itsAfterSelectedOption){
+                this.setOptionsStatusForNextFields(option.option_id, queryData);
+            } else {
+                queryData.push(option);
+            }
+
+            if (option.option_id === optionId){
+                itsAfterSelectedOption = true;
+            }
+
+        });
+    }
+
+    private setOptionsStatusForNextFields(option_id, query: Option[]){
+        let findBy: Option[];
+
+        this.fields.forEach((field, fi) => {
+            if (field.option_id !== option_id)
+                return false;
+
+            field.values.forEach((option, fiv) => {
+                findBy  = Object.assign([], query);
+                findBy.push(option);
+                this.fields[fi].values[fiv].status = this.variants.findBy(findBy) === undefined ? false : true;
+            });
+        });
+    }
+
+    private prepareRequestAddToCart(): string {
+        let request = {};
+        request['quantity'] = this.selectedData['quantity'];
+        request['product_id'] = product_id;
+        request['option'] = [];
+
+        let body = 'quantity=' + this.selectedData['quantity'];
+        body += '&product_id=' + product_id;
+
+        this.selectedVariant.options.forEach(
+            option => {
+                request['option'][option.product_option_id] = option.option_value_id;
+                body += '&option[' + option.product_option_id + ']=' + option.option_value_id;
+
+            }
+        );
+        return body;
+    }
+
+    private setAlert(alert: Alert){
+        let index = this.alerts.findIndex(find => find.type === alert.type);
+        if(index < 0){
+            this.alerts.push(alert);
+        } else {
+            this.alerts[index] = alert;
+        }
+    }
 
 }

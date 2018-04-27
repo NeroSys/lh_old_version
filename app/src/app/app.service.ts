@@ -22,7 +22,10 @@ export class MainService {
     addToCart(data): Promise<any> {
         const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'});
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(`${environment.apiUrl}index.php?route=checkout/cart/add`, data, options).toPromise();
+        return this.http.post(`${environment.apiUrl}index.php?route=checkout/cart/add`, data, options)
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
     }
 
     private handleError(error: any): Promise<any> {

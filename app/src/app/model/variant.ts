@@ -6,5 +6,6 @@ export class Variant {
     number: string;
     status: boolean;
     price: number;
+    price_old: number;
     options: Option[];
 }
