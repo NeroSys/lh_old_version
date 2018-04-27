@@ -73,8 +73,8 @@
     var locations = <?php echo $map; ?>;
 
     var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 12,
-        center: new google.maps.LatLng(50.4507781, 30.5236861),
+        zoom: 11,
+        center: new google.maps.LatLng(50.4407781, 30.5236861),
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 

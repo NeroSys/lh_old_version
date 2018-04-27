@@ -67,8 +67,16 @@ class CategoryController extends \Controller
         } else {
             $page = 1;
         }
+        $data['page'] = $page;
+
+        $limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 36));
+
+        sort($limits);
 
         if (isset($this->request->get['limit'])) {
+            if((int) $this->request->get['limit'] > end($limits)){
+                $this->request->get['limit'] = end($limits);
+            }
             $limit = (int)$this->request->get['limit'];
         } else {
             $limit = $this->config->get($this->config->get('config_theme') . '_product_limit');
@@ -320,9 +328,14 @@ class CategoryController extends \Controller
 
             $data['limits'] = array();
 
-            $limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 25, 50, 75, 100));
+            $limits = array_unique(array($this->config->get($this->config->get('config_theme') . '_product_limit'), 36));
 
             sort($limits);
+            if (isset($this->request->get['limit'])) {
+                if((int) $this->request->get['limit'] > end($limits)){
+                    $this->request->get['limit'] = end($limits);
+                }
+            }
 
             foreach($limits as $value) {
                 $data['limits'][] = array(

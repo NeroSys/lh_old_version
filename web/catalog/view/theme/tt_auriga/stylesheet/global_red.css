@@ -1313,6 +1313,12 @@ div.required .control-label:before {
 .pagination {
     margin: 0;
     border-radius: 0;
+    padding: 10px 10px 10px 10px;
+    background-color: #3a3a3a;
+}
+.pagination>li>a, .pagination>li>span{
+    background-color: transparent;
+    color: #d2cfcf !important;
 }
 
 .pagination li.active span, .pagination span:hover, .pagination a:hover {
@@ -1694,13 +1700,8 @@ a.btn {
     text-transform: uppercase;
 }
 
-.product-list .price {
-    padding: 0 0 20px;
-    margin: 5px 0 0;
-    display: inline-block;
-    width: 100%;
-    text-align: left;
-    border-bottom: 1px solid #eeeeee;
+.products-category.grid .price {
+    font-weight: bold;
 }
 
 .product-list .rating {
@@ -4753,11 +4754,7 @@ div.pt_menu .parentMenu a, .parentMenu .block-title {
     overflow: hidden;
 }
 .press-post-item .press-post-title {
-    position: absolute;
     display: block;
-    bottom: 0;
-    margin-bottom:-100%;
-    width: 100%;
     background: rgba(0,0,0,0.5);
     color:white;
 }
@@ -4871,4 +4868,7 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
     padding: 0 15px 0 0;
     font-weight: normal;
     text-transform: uppercase;
+}
+.product-category. .category-description{
+    padding-top: 1em;
 }

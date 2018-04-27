@@ -15,21 +15,39 @@
         <?php } ?>
         <div id="content" class="<?php echo $class; ?>"><?php echo $content_top; ?>
            <!-- <h1><?php echo $heading_title; ?></h1>-->
-            <div class="row">
-            <div class="col-sm-12 category-description">
-                <div class="category-list">
+            <div class="row category-description">
+                    <?php if($parent_category_info['image']){ ?>
+                        <div class="col-xs-12 col-sm-4 category-image">
+                            <div class="brand-logo">
+                                <img src="<?php echo $parent_category_info['image']; ?>" alt="<?php echo $parent_category_info['name']; ?>">
+                            </div>
+
+                            <?php  if ($thumb && (int) $parent !== 0) { ?>
+                            <div>
+                                <a class="thumbnail popup-gallery" href="<?php echo $category_image; ?>" title="<?php echo $heading_title; ?>">
+                                    <img src="<?php echo $thumb ?>" title="<?php echo $heading_title; ?>"  alt="<?php echo $heading_title; ?>">
+                                </a>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    <?php } ?>
+
+
+
+                <div class="col-xs-12 <?php if($parent_category_info['image']) { echo 'col-sm-8'; } ?>">
+                    <div class="category-list">
                     <?php if ($categories) {
                             $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
                             ?>
-                    <?php foreach ($categories as $category) { ?>
-                    <div class="col-sm-6 col-md-4"><a class="button <?php if($category['href'] == $actual_link) echo 'disabled';?>" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></div>
+                        <?php foreach ($categories as $category) { ?>
+                            <div class="col-sm-6 col-md-4"><a class="button <?php if($category['href'] == $actual_link) echo 'disabled';?>" href="<?php echo $category['href']; ?>"><?php echo $category['name']; ?></a></div>
+                        <?php } ?>
                     <?php } ?>
-                    <?php } ?>
+                    </div>
                 </div>
 
-                <?php if ($description) { echo $description; }?>
             </div>
-            </div>
+
 
             <?php if ($products) { ?>
             <div class="row-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>
@@ -110,36 +128,22 @@
                 <?php } ?>
             </div>
             <div class="row">
-                <div class="col-sm-6 text-left"><?php echo $pagination; ?></div>
-                <div class="col-sm-6 text-right"><?php echo $results; ?></div>
+                <div class="col-sm-6 text-left"><?php echo $results; ?></div>
+                <div class="col-sm-6 text-right"><?php echo $pagination; ?></div>
             </div>
 
 
 
             <?php } ?>
 
+           <?php if(mb_strlen($description) > 20 && $page<=1){ ?>
             <div class="row">
-
-                <div class="col-xs-5 col-sm-4 category-image">
-                    <?php if($parent_category_info['image'])?>
-                    <div class="brand-logo"><img src="<?php echo $parent_category_info['image']; ?>"
-                                                 alt="<?php echo $parent_category_info['name']; ?>"></div>
-
-                    <?php  if ($thumb && (int) $parent !== 0) { ?>
-                    <div>
-                        <a class="thumbnail popup-gallery" href="<?php echo $category_image; ?>" title="<?php echo $heading_title; ?>">
-                            <img src="<?php echo $thumb ?>" title="<?php echo $heading_title; ?>"  alt="<?php echo $heading_title; ?>">
-                        </a>
-                    </div>
-                    <?php } ?>
-
-                </div>
-
-                <div class="col-xs-7 col-sm-8 category-description">
+                <div class="col-xs-12 category-description">
+                    <h1><?php echo $heading_title; ?></h1>
                     <?php if ($description) { echo $description; }?>
                 </div>
             </div>
-
+            <?php } ?>
 
 
             <?php if (!$categories && !$products) { ?>

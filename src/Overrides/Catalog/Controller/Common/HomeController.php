@@ -47,7 +47,7 @@ class HomeController extends \Controller
     private function getLastNews()
     {
         $this->load->model('newsblog/article');
-        $info_list = $this->model_newsblog_article->getArticles($data = array('order' => 'DESC', 'filter_category_id' => 2, 'start' => 0, 'limit' => 3, 'sort' => 'date_added'));
+        $info_list = $this->model_newsblog_article->getArticles($data = array('order' => 'DESC', 'filter_category_id' => 4, 'start' => 0, 'limit' => 3, 'sort' => 'date_added'));
 
         foreach ($info_list as $key => $info) {
             if ($info['image']) {

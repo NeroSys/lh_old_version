@@ -27,7 +27,7 @@ class LocationModel extends \ModelLocalisationLocation
         if (isset($data['sort']) && in_array($data['sort'], $sort_data)) {
             $sql .= " ORDER BY " . $data['sort'];
         } else {
-            $sql .= " ORDER BY name";
+            $sql .= " ORDER BY sort_order";
         }
 
         if (isset($data['order']) && ($data['order'] == 'DESC')) {

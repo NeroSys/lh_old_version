@@ -6,8 +6,8 @@ class ControllerNewsBlogCategory extends Controller {
 	private $version_newsblog = 20171002;
 
 	public function index() {
-		if (empty($this->session->data['check_version_newsblog'])) $this->session->data['check_version_newsblog']=@file_get_contents('http://nedorogoi-internet-magazin.ru/check_version.php?now='.$this->version_newsblog.'&version='.VERSION.'&site='.$_SERVER['HTTP_HOST']);
 
+	   // if (empty($this->session->data['check_version_newsblog'])) $this->session->data['check_version_newsblog']=@file_get_contents('http://nedorogoi-internet-magazin.ru/check_version.php?now='.$this->version_newsblog.'&version='.VERSION.'&site='.$_SERVER['HTTP_HOST']);
 		$this->language->load('newsblog/category');
 
 		$this->document->setTitle($this->language->get('heading_title'));

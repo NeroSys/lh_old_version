@@ -1,0 +1,1 @@
+ALTER TABLE oc_location ADD COLUMN sort_order SMALLINT DEFAULT 0;

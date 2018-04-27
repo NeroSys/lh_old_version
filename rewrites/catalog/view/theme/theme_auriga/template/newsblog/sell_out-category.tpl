@@ -35,13 +35,13 @@
 
                 <div class="col-md-4 press-post-item">
                     <div class="press-post-item-wrapper">
-                        <a class="press-post-popup mfp-iframe" href="<?php echo $article['original']; ?>">
-                            <img class="img-responsive" src="<?php echo $article['thumb']; ?>" />
-                        </a>
-                        <a class="press-post-title" href="<?php echo $article['href']; ?>">
-                            <span><?php echo $article['name']; ?></span>
+                        <a href="<?php echo $article['href']; ?>">
+                            <img class="img-responsive" src="<?php echo $article['thumb']; ?>">
                         </a>
                     </div>
+                    <a class="press-post-title" href="<?php echo $article['href']; ?>">
+                        <span><?php echo $article['name']; ?></span>
+                    </a>
                 </div>
             <?php } ?>
                 </div>
@@ -54,14 +54,6 @@
             </div>
             <?php } ?>
 
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('.press-post-popup').magnificPopup({
-                        type:'ajax',
-                        mainClass: 'magnific-iframe'
-                    });
-                });
-            </script>
 
 
             <?php echo $content_bottom; ?></div>
