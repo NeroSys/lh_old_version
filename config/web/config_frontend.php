@@ -11,6 +11,3 @@ $appConfig->set('DIR_LANGUAGE', $appConfig->get('LOCAL_DIR_OPENCART').'language/
 
 $appConfig->set('DIR_TEMPLATE', $appConfig->get('DIR_OPENCART').'catalog/view/theme/');
 $appConfig->set('LOCAL_DIR_TEMPLATE', $appConfig->get('LOCAL_DIR_OPENCART').'catalog/view/theme/');
-
-
-$application_config = 'catalog';

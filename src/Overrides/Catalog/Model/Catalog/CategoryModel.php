@@ -28,8 +28,13 @@ class CategoryModel extends \ModelCatalogCategory
     }
 
     public function getCategoryTreeDown(int $category_id):NodeInterface{
+        $cache_key = "category_tree_down_".$category_id;
+        if($leaves = $this->cache->get($cache_key)) {
+            return $leaves;
+        }
         $leaves = new Node("root");
         $this->getCategoryTreeLeavsDown((int) $category_id, $leaves);
+        $this->cache->set($cache_key, $leaves);
         return $leaves;
     }
 
