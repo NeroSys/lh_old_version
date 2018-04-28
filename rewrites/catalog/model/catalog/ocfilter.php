@@ -114,7 +114,21 @@ class ModelCatalogOCFilter extends Model {
 			'products' => array()
 		);
 
-    $sql = "SELECT MIN(`min`) AS `min`, MAX(`max`) AS `max` FROM (SELECT product_id, LEAST(price, discount_special, MIN(option_price)) AS `min`, GREATEST(price, discount_special, MAX(option_price)) AS `max` FROM (SELECT p.product_id, p.price, COALESCE(IF(pov.price_prefix = '-', p.price - pov.price, NULL), IF(pov.price_prefix = '+', p.price + pov.price, NULL), IF(pov.price_prefix = '*', p.price + p.price * pov.price, NULL), IF(pov.price_prefix = '%', p.price + p.price * (pov.price / 100), NULL), IF(pov.price_prefix = '=', pov.price, NULL), p.price + pov.price, p.price) AS option_price, COALESCE((SELECT MIN(pd.price) FROM " . DB_PREFIX . "product_discount pd WHERE pd.product_id = p.product_id AND pd.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND pd.quantity > '0' AND ((pd.date_start = '0000-00-00' OR pd.date_start < '" . $this->db->escape(date('Y-m-d')) . "') AND (pd.date_end = '0000-00-00' OR pd.date_end > '" . $this->db->escape(date('Y-m-d')) . "'))), (SELECT MIN(ps.price) FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < '" . $this->db->escape(date('Y-m-d')) . "') AND (ps.date_end = '0000-00-00' OR ps.date_end > '" . $this->db->escape(date('Y-m-d')) . "'))), p.price) AS discount_special FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN " . DB_PREFIX . "product_option_value pov ON (p.product_id = pov.product_id) WHERE p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND p.status = '1' AND p.price > '0' AND p2c.category_id = '" . (int)$data['filter_category_id'] . "' AND p.date_available <= '" . $this->db->escape(date('Y-m-d')) . "'";
+/*    $sql = "SELECT MIN(`min`) AS `min`, MAX(`max`) AS `max` FROM
+(SELECT product_id, LEAST(price, discount_special, MIN(option_price)) AS `min`, GREATEST(price, discount_special, MAX(option_price)) AS `max`
+FROM (SELECT p.product_id, p.price, COALESCE(IF(pov.price_prefix = '-', p.price - pov.price, NULL), IF(pov.price_prefix = '+', p.price + pov.price, NULL), IF(pov.price_prefix = '*', p.price + p.price * pov.price, NULL), IF(pov.price_prefix = '%', p.price + p.price * (pov.price / 100), NULL), IF(pov.price_prefix = '=', pov.price, NULL), p.price + pov.price, p.price) AS option_price, COALESCE((SELECT MIN(pd.price) FROM " . DB_PREFIX . "product_discount pd WHERE pd.product_id = p.product_id AND pd.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND pd.quantity > '0' AND ((pd.date_start = '0000-00-00' OR pd.date_start < '" . $this->db->escape(date('Y-m-d')) . "') AND (pd.date_end = '0000-00-00' OR pd.date_end > '" . $this->db->escape(date('Y-m-d')) . "'))),
+(SELECT MIN(ps.price) FROM " . DB_PREFIX . "product_special ps WHERE ps.product_id = p.product_id AND ps.customer_group_id = '" . (int)$this->config->get('config_customer_group_id') . "' AND ((ps.date_start = '0000-00-00' OR ps.date_start < '" . $this->db->escape(date('Y-m-d')) . "') AND (ps.date_end = '0000-00-00' OR ps.date_end > '" . $this->db->escape(date('Y-m-d')) . "'))), p.price) AS discount_special
+FROM " . DB_PREFIX . "product p
+LEFT JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) 
+LEFT JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) LEFT JOIN " . DB_PREFIX . "product_option_value pov ON (p.product_id = pov.product_id)
+WHERE p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND p.status = '1' AND p.price > '0' AND p2c.category_id = '" . (int)$data['filter_category_id'] . "' AND p.date_available <= '" . $this->db->escape(date('Y-m-d')) . "'";*/
+
+      $sql = "SELECT MIN(p.price) AS `min`, MAX(p.price) AS `max`
+FROM " . DB_PREFIX . "product p 
+INNER JOIN " . DB_PREFIX . "product_to_category p2c ON (p.product_id = p2c.product_id) 
+INNER JOIN " . DB_PREFIX . "product_to_store p2s ON (p.product_id = p2s.product_id) 
+WHERE p2s.store_id = '" . (int)$this->config->get('config_store_id') . "' AND p.status = '1' AND p.price > '0' AND p2c.category_id = '" . (int)$data['filter_category_id'] . "' AND p.date_available <= '" . $this->db->escape(date('Y-m-d')) . "'";
+
 
     if (!empty($data['filter_ocfilter'])) {
 			$sql_product = $this->getProductSQL($data['filter_ocfilter']);
@@ -126,7 +140,7 @@ class ModelCatalogOCFilter extends Model {
       }
     }
 
-    $sql .= ") prices GROUP BY product_id) results";
+    //$sql .= ") prices GROUP BY product_id) results";
 
     $query = $this->db->query($sql);
 
@@ -138,7 +152,9 @@ class ModelCatalogOCFilter extends Model {
 			);
     }
 
-    $this->cache->set($cache, $product_price_data);
+    if (empty($data['filter_ocfilter'])) {
+        $this->cache->set($cache, $product_price_data);
+    }
 
     return $product_price_data;
   }
