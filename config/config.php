@@ -1,7 +1,13 @@
 <?php
 
 use M1\Vars\Vars;
-$cache_key = "app_config";
+
+$cache_key = "admin_app_config";
+if(defined('WEBSITE_TYPE') && WEBSITE_TYPE === 'FRONTEND') {
+    $cache_key = "app_config";
+    $application_config = 'catalog';
+}
+
 $cache = \App\Engine\Cache\Memcached::getInstance();
 $appConfig = $cache->get($cache_key);
 
@@ -23,10 +29,6 @@ if(!$appConfig){
         require_once __DIR__ . '/web/config_frontend.php';
     }
     $cache->set($cache_key, $appConfig);
-}
-
-if(defined('WEBSITE_TYPE') && WEBSITE_TYPE === 'FRONTEND'){
-    $application_config = 'catalog';
 }
 
 opencartConfigInit($appConfig);
