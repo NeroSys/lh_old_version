@@ -104,3 +104,7 @@ $_['text_newsblog'] = 'NewsBlog материалы';
 $_['text_newsblog_category'] = 'Список категорий';
 $_['text_newsblog_article'] = 'Список материалов';
 
+// OCFilter start
+$_['text_ocfilter'] = 'Фильтр товаров OCFilter';
+// OCFilter end
+

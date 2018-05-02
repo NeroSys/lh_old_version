@@ -4,19 +4,26 @@ namespace App\Engine\Cache;
 
 use \Psr\SimpleCache\CacheInterface;
 
-require_once DIR_OPENCART . 'system/library/cache.php';
 
-class Memcached extends \Cache implements CacheInterface
+class Memcached implements CacheInterface
 {
     /**
      * @var Memcached
      */
     private $memcached;
-    private $expire_in_seconds = 3600;
+    private $expire_in_seconds = 3600*3;
 
-    public function __construct()
-    {
+    private static $instance = null;
+    private final function __construct() {
         $this->memcached = $this->createConnection();
+    }
+    private final function __clone() { }
+    public final function __sleep() {
+        throw new Exception('Serializing of Singletons is not allowed');
+    }
+    public static function getInstance() {
+        if (self::$instance === null) self::$instance = new self();
+        return self::$instance;
     }
 
     private function createConnection()

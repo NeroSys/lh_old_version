@@ -6,6 +6,66 @@ require_once(DIR_OPENCART . 'admin/model/catalog/product.php');
 
 class ProductModel extends \ModelCatalogProduct
 {
+    public function addProduct($data){
+
+        $product_id = parent::addProduct($data);
+
+        // OCFilter start
+        $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_to_product WHERE product_id = '" . (int)$product_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_to_product_description WHERE product_id = '" . (int)$product_id . "'");
+
+        if (isset($data['ocfilter_product_option'])) {
+            foreach ($data['ocfilter_product_option'] as $option_id => $values) {
+                foreach ($values['values'] as $value_id => $value) {
+                    if (isset($value['selected'])) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "ocfilter_option_value_to_product SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value_id = '" . (string)$value_id . "', slide_value_min = '" . (isset($value['slide_value_min']) ? (float)$value['slide_value_min'] : 0) . "', slide_value_max = '" . (isset($value['slide_value_max']) ? (float)$value['slide_value_max'] : 0) . "'");
+
+                        foreach ($value['description'] as $language_id => $description) {
+                            if (trim($description['description'])) {
+                                $this->db->query("INSERT INTO " . DB_PREFIX . "ocfilter_option_value_to_product_description SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value_id = '" . (string)$value_id . "', language_id = '" . (int)$language_id . "', description = '" . $this->db->escape($description['description']) . "'");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // OCFilter end
+      return $product_id;
+    }
+
+    public function editProduct($product_id, $data) {
+        parent::editProduct($product_id, $data);
+        // OCFilter start
+        $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_to_product WHERE product_id = '" . (int)$product_id . "'");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_to_product_description WHERE product_id = '" . (int)$product_id . "'");
+
+        if (isset($data['ocfilter_product_option'])) {
+            foreach ($data['ocfilter_product_option'] as $option_id => $values) {
+                foreach ($values['values'] as $value_id => $value) {
+                    if (isset($value['selected'])) {
+                        $this->db->query("INSERT INTO " . DB_PREFIX . "ocfilter_option_value_to_product SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value_id = '" . (string)$value_id . "', slide_value_min = '" . (isset($value['slide_value_min']) ? (float)$value['slide_value_min'] : 0) . "', slide_value_max = '" . (isset($value['slide_value_max']) ? (float)$value['slide_value_max'] : 0) . "'");
+
+                        foreach ($value['description'] as $language_id => $description) {
+                            if (trim($description['description'])) {
+                                $this->db->query("INSERT INTO " . DB_PREFIX . "ocfilter_option_value_to_product_description SET product_id = '" . (int)$product_id . "', option_id = '" . (int)$option_id . "', value_id = '" . (string)$value_id . "', language_id = '" . (int)$language_id . "', description = '" . $this->db->escape($description['description']) . "'");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // OCFilter end
+    }
+
+
+    public function deleteProduct($product_id) {
+        parent::deleteProduct($product_id);
+        // OCFilter start
+        $this->db->query("DELETE FROM " . DB_PREFIX . "ocfilter_option_value_to_product WHERE product_id = '" . (int)$product_id . "'");
+        // OCFilter end
+
+    }
+
     public function getAviableProductSpecifications(int $productId):?array{
         return ProductOptionGroup::find('all',array('conditions' => array('product_id=?', $productId)));
     }

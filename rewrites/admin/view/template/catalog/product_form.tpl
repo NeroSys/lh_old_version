@@ -934,6 +934,28 @@
       </div>
     </div>
   </div>
+  <!-- OCFilter start -->
+  <script type="text/javascript"><!--
+      ocfilter.php = {
+          text_select: '<?php echo $text_select; ?>',
+          ocfilter_select_category: '<?php echo $ocfilter_select_category; ?>',
+          entry_values: '<?php echo $entry_values; ?>',
+          tab_ocfilter: '<?php echo $tab_ocfilter; ?>'
+      };
+
+      ocfilter.php.languages = [];
+
+      <?php foreach ($languages as $language) { ?>
+          ocfilter.php.languages.push({
+              'language_id': <?php echo $language['language_id']; ?>,
+          'name': '<?php echo $language['name']; ?>',
+              'image': '<?php echo $language['image']; ?>'
+      });
+      <?php } ?>
+
+      //--></script>
+  <!-- OCFilter end -->
+
   <script type="text/javascript"><!--
 // Manufacturer
 $('input[name=\'manufacturer\']').autocomplete({

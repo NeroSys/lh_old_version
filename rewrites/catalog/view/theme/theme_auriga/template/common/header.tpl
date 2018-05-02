@@ -13,6 +13,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="theme-color" content="#000">
     <title><?php echo $title; ?></title>
+    <?php if ($noindex) { ?>
+    <!-- OCFilter Start -->
+    <meta name="robots" content="noindex,nofollow" />
+    <!-- OCFilter End -->
+    <?php } ?>
     <base href="<?php echo $base; ?>"/>
     <?php if ($description) { ?>
     <meta name="description" content="<?php echo $description; ?>">
@@ -24,7 +29,7 @@
     <script src="/catalog/view/javascript/jquery/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script src="/catalog/view//javascript/loadcss.js" type="text/javascript"></script>
     <link href="/catalog/view/javascript/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link rel="stylesheet" type="text/css" href="/catalog/view/theme/tt_auriga/stylesheet/global_red.css?d2112">
+    <link rel="stylesheet" type="text/css" href="/catalog/view/theme/tt_auriga/stylesheet/global_red.css?d212">
     <script>
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/fonts/font-awesome-4.7.0/css/font-awesome.min.css");
         loadCSS("/catalog/view//theme/tt_auriga/stylesheet/animate.css");
@@ -47,8 +52,14 @@
     <?php foreach ($analytics as $analytic) { ?>
     <?php echo $analytic; ?>
     <?php } ?>
+
+
 </head>
 <body class="<?php echo $class; ?>">
+<?php foreach ($scripts as $script) { ?>
+<script src="<?php echo $script; ?>" type="text/javascript"></script>
+<?php } ?>
+
 <div id="page">
 
 <div class="header Fixed">

@@ -1,6 +1,9 @@
 <?php
 namespace App\Overrides\Catalog\Model\Catalog;
 
+use Tree\Node\Node;
+use Tree\Node\NodeInterface;
+
 require_once DIR_OPENCART . 'catalog/model/catalog/category.php';
 
 class CategoryModel extends \ModelCatalogCategory
@@ -20,7 +23,34 @@ class CategoryModel extends \ModelCatalogCategory
         return $parent;
     }
 
-    public function getCategoryTree(string $category_id) {
+    public function getCategoryTree(string $category_id):?array {
+         return $this->getCategoryTreeLeavsUp((int) $category_id);
+    }
+
+    public function getCategoryTreeDown(int $category_id):NodeInterface{
+        $cache_key = "category_tree_down_".$category_id;
+        if($leaves = $this->cache->get($cache_key)) {
+            return $leaves;
+        }
+        $leaves = new Node("root");
+        $this->getCategoryTreeLeavsDown((int) $category_id, $leaves);
+        $this->cache->set($cache_key, $leaves);
+        return $leaves;
+    }
+
+    protected function getCategoryTreeLeavsDown(int $category_id, Node $node):void{
+        $query = $this->db->query("SELECT cd.name,cd.category_id,c.parent_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int) $category_id . "' AND cd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int) $this->config->get('config_store_id') . "' AND c.status = '1' ORDER BY c.sort_order ASC");
+        foreach ($query->rows as $belowCategory) {
+            $belowCategory["href"] = $this->url->link('product/category', 'path=' . $belowCategory['category_id']);
+            $leavNode = new Node($belowCategory);
+            $node->addChild(
+                $leavNode
+            );
+            $this->getCategoryTreeLeavsDown((int) $belowCategory["category_id"], $leavNode);
+        }
+    }
+
+    protected function getCategoryTreeLeavsUp(int $category_id):?array{
         $result = true;
         $breadcrumbs = [];
         do {

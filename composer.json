@@ -18,14 +18,15 @@
     "symfony/console": "^3.0",
     "byjg/migration": "~2.0.4",
     "php-activerecord/php-activerecord": "^1.2",
-    "lhgroup/from1ctoweb": "~v1.0.7",
+    "lhgroup/from1ctoweb": "~v1.0.8",
     "m1/vars": "~1.1.2",
     "hellogerard/jobby": "~3.4.0",
     "symfony/var-dumper": "^3.0|^4.0",
     "javiereguiluz/easyslugger": "^1.0",
     "psr/simple-cache": "^1.0",
     "apix/log": "^1.2",
-    "nette/mail": "^2.4"
+    "nette/mail": "^2.4",
+    "nicmart/tree": "^0.2.7"
   },
   "authors": [
     {
@@ -44,7 +45,8 @@
         "global glob func rewrite": "patches/glob_func_rewrites.patch",
         "exists file checks rewrites": "patches/file_exists_rewrites.patch",
         "permissions file exists rewrites": "patches/user_permission_rewrites.patch",
-        "psr memcached added as cache": "patches/cache_to_memcached.patch"
+        "psr memcached added as cache": "patches/cache_to_memcached.patch",
+	"system/library/config locator rewrite ": "patches/rewrite_config_file_exists.patch"
       },
       "byjg/migration": {
         "wrap all queries to transactions": "patches/migration_wrapped_to_transactions.patch"

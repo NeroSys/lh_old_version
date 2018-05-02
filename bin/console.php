@@ -37,7 +37,7 @@ $application->add(
     new \App\ErpIntegration\Commands\ConsumeProductsCommand(
         null,
         $ampqConfig,
-        new \App\Engine\Cache\Memcached()
+        \App\Engine\Cache\Memcached::getInstance()
     )
 );
 
@@ -54,7 +54,7 @@ $application->add(new \App\ErpIntegration\Commands\SendNewProductsFromFileComman
 );
 
 $application->add(new \App\ErpIntegration\Commands\UpdateImagesCommand());
-
+$application->add(new \App\Commands\CacheClearCommand(null, \App\Engine\Cache\Memcached::getInstance()));
 
 /**
  * end of ERP Integration commands

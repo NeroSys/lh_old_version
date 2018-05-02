@@ -1746,8 +1746,7 @@ a.btn {
 .category .box-heading h3 span {
     color: #555555;
     display: block;
-    font-family: impact;
-    font-size: 25px;
+    font-size: 1.5em;
     font-weight: normal;
     min-height: 16px;
     text-transform: uppercase;
@@ -1758,7 +1757,7 @@ a.btn {
 }
 
 .category .list-group li {
-    line-height: 35px;
+    padding: 4px 0px 4px 0px;
 }
 
 .category .list-group li ul li {
@@ -1783,12 +1782,15 @@ a.btn {
     padding: 0;
     background: url("../image/bg_vertical.png") repeat-x scroll 0 50%;
 }
+.category .list-group li a.active{
+    color: #e84c3d;
+}
 
 .category .list-group li a span {
     background: #fff;
-    padding-right: 10px;
-    font-family: impact;
-    font-size: 15px;
+    padding-right: 15px;
+
+    font-size: 1.3em;
 }
 
 .category .list-group li ul li a {
@@ -1808,6 +1810,9 @@ a.btn {
 
 .category-filter .filter-content {
     margin: 20px 0 0;
+}
+.category .list-group, .category .list-group ul{
+    list-style: none;
 }
 
 .category-filter .panel-heading {
@@ -2077,7 +2082,7 @@ a.btn {
 
 .product-filter {
     border: 1px solid #eeeeee;
-    margin: 20px 0 20px;
+    margin: 0px 0px 0px;
     overflow: hidden;
     padding: 13px 10px 15px;
 }
@@ -3335,7 +3340,6 @@ ul.list-group > li {
     text-indent: -99999px;
     position: absolute;
     right: 0;
-    top: 5px;
     z-index: 9;
 }
 
@@ -3354,6 +3358,15 @@ ul.list-group li.active .button-view {
 .ttopen {
     background-position: 0 100%;
 }
+
+.box.category .ttopen {
+    background-position: 0 2%;
+}
+
+.box.category .ttclose {
+    background-position: 0 100%;
+}
+
 
 #sequence-theme .controls a {
     background: url("../image/bg_direction_nav.png") no-repeat scroll 0 0 #c1c1c0;

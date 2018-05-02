@@ -5,7 +5,7 @@
  
  // Cache 
 -$registry->set('cache', new Cache($config->get('cache_type'), $config->get('cache_expire')));
-+$registry->set('cache', new \App\Engine\Cache\Memcached());
++$registry->set('cache', \App\Engine\Cache\Memcached::getInstance());
  
  // Url
  $registry->set('url', new Url($config->get('site_ssl')));

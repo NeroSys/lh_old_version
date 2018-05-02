@@ -1,0 +1,11 @@
+--- opencart/opencart/upload/system/library/config.php	(date 1524820073000)
++++ opencart/opencart/upload/system/library/config.php	(date 1524820073000)
+@@ -17,7 +17,7 @@
+ 	public function load($filename) {
+ 		$file = DIR_CONFIG . $filename . '.php';
+ 
+-		if (file_exists($file)) {
++		if ($file = \App\Helper\FileExiststRewriter::fileExists($file)) {
+ 			$_ = array();
+ 
+ 			require($file);

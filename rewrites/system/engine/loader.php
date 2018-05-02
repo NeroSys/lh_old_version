@@ -86,10 +86,13 @@ final class Loader {
 	
 	public function helper($route) {
 		$file = DIR_SYSTEM . 'helper/' . str_replace('../', '', (string)$route) . '.php';
-
+        $fileLocal = LOCAL_DIR_SYSTEM . 'helper/' . str_replace('../', '', (string)$route) . '.php';
 		if (is_file($file)) {
 			include_once($file);
-		} else {
+		}
+        if (is_file($fileLocal)) {
+            include_once($fileLocal);
+        }else {
 			throw new \Exception('Error: Could not load helper ' . $route . '!');
 		}
 	}

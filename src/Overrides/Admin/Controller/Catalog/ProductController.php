@@ -12,8 +12,19 @@ class ProductController extends \ControllerCatalogProduct
 {
     protected function getForm()
     {
+        // OCFilter start
+        $this->document->addStyle('view/stylesheet/ocfilter/ocfilter.css');
+        $this->document->addScript('view/javascript/ocfilter/ocfilter.js');
+        // OCFilter end
+
         parent::getForm();
         $data = $this->load->data;
+
+        // OCFilter start
+        $data['tab_ocfilter'] = $this->language->get('tab_ocfilter');
+        $data['entry_values'] = $this->language->get('entry_values');
+        $data['ocfilter_select_category'] = $this->language->get('ocfilter_select_category');
+        // OCFilter end
 
         $data['product_option_groups'] = $this->getProductSpecifications();
         foreach ($this->getProductOptions() as $key => $product_option) {
