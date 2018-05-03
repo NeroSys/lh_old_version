@@ -4855,7 +4855,7 @@ button:hover.mfp-close{background-color: transparent}
 .wishlist {display: none}
 .product-filter .btn-group {display: none}
 
-a.popup-ajax {border-bottom: #5a5959 dashed 1px}
+a.popup-ajax, a.dashed {border-bottom: #5a5959 dashed 1px}
 a.popup-ajax[href^="https://"] {border-bottom: none}
 
 .mfp-content {background: #fff}
@@ -4885,3 +4885,8 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
 .product-category. .category-description{
     padding-top: 1em;
 }
+.modal.fade.show {opacity: 1; background-color: rgba(0,0,0,0.5);}
+.modal.fade .modal-dialog {margin-top: 150px; }
+.modal-dialog button.close {position: absolute; top:15px; right: 15px}
+.modal-dialog button.close:active,
+.modal-dialog button.close{background: none}

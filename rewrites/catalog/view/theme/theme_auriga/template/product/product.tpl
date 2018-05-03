@@ -72,6 +72,7 @@
                             <app-product-options></app-product-options>
                             <script type="text/javascript" src="/src/app/inline.bundle.js"></script>
                             <script type="text/javascript" src="/src/app/polyfills.bundle.js"></script>
+                            <script type="text/javascript" src="/src/app/vendor.bundle.js"></script>
                             <script type="text/javascript" src="/src/app/main.bundle.js"></script>
 
                             <div class="add-to-links" style="display: none">

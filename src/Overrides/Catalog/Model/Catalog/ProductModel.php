@@ -94,6 +94,8 @@ ORDER BY o.sort_order");
     private function groupingOptionsAsSpecificationID(array $data):?array{
         $options = array();
         foreach ($data as $option){
+			$options[$option['id']]['availability'] = $this->formatOptionByAvailability($option);
+
         	if($option['price_discount'] > 0 && $option['price_discount_type'] == self::PRICE_DISCOUNT_TYPE_PERCENT) {
 				$price_old = $option['price'];
 				$price = $option['price'] - ($option['price'] * ($option['price_discount']/100));
@@ -111,7 +113,6 @@ ORDER BY o.sort_order");
 			$options[$option['id']]['status'] = true;
 			$options[$option['id']]['price'] = (float) $price;
 			$options[$option['id']]['price_old'] = (float) $price_old;
-			$option = $this->formatOption($option);
             $options[$option['id']]['options'][$option['option_id']] = $option;
         }
         foreach ($options as &$option){
@@ -120,7 +121,7 @@ ORDER BY o.sort_order");
         return $options;
     }
 
-    protected function formatOption($option){
+    protected function formatOptionByAvailability(&$option){
         static $shops;
         if(!$shops) {
             $localisationModel = $this->load->model('localisation/location');
@@ -128,14 +129,18 @@ ORDER BY o.sort_order");
         }
         if(!empty($option["availability"])) {
             $unserializerOptions = unserialize($option["availability"])->toArray();
-            unset($unserializerOptions["availability"]["priceWholesale"]);
-            foreach ($unserializerOptions as $shopAviability){
-                $shopAviability->stock = $shops->get($shopAviability->stockErpId);
-            }
-            $option["availability"] = $unserializerOptions;
+            unset($option["availability"]);
 
+            foreach ($unserializerOptions as &$shopAviability){
+				$shopAviability->stock = $shops->get($shopAviability->stockErpId);
+				$geocode = explode(',', $shopAviability->stock['geocode']);
+				$shopAviability->stock['geocode'] = ['lat' => $geocode[0], 'lng' => $geocode[1]];
+				unset($shopAviability->stockErpId);
+				unset($shopAviability->priceWholesale);
+				unset($shopAviability->stock['id_erp']);
+            }
         }
-        return $option;
+        return $unserializerOptions;
     }
 
     private function getProductSpecificationOptionsFromDatabase(int $product_id):?array{

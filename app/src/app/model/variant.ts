@@ -1,4 +1,5 @@
 import {Option} from './option';
+import {Availability} from "./availability";
 
 export class Variant {
     id: number;
@@ -7,5 +8,6 @@ export class Variant {
     status: boolean;
     price: number;
     price_old: number;
+    availability: Availability[];
     options: Option[];
 }

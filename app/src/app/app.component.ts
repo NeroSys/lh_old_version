@@ -5,6 +5,10 @@ import {OptionGroup} from './model/option-group';
 import {Option} from "./model/option";
 import {Variant} from "./model/variant";
 import {Alert} from "./model/alert";
+import {Marker} from "./model/marker";
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+
+import {} from '@types/googlemaps';
 
 declare var product_id: any;
 
@@ -18,14 +22,17 @@ export class AppComponent implements OnInit {
     public oldPrice: number = null;
     public alerts: Alert[] = [];
     public selectedData = {quantity: 1};
-
+    public selectedVariant: Variant;
+    public marker: Marker;
     public fields: OptionGroup[] = [];
     private variants: VariantCollection;
-    private selectedVariant: Variant;
+
+    positions = [];
 
 
-    constructor(private mainService: MainService) {
+    constructor(private mainService: MainService, private modalService: NgbModal) {
         this.variants = new VariantCollection();
+        this.marker = new Marker;
     }
 
     public ngOnInit(): void {
@@ -63,6 +70,15 @@ export class AppComponent implements OnInit {
         )
     }
 
+    public open(content) {
+        this.modalService.open(content, { size: 'lg' }).result.then((result) => {
+
+        }, (reason) => {
+
+        });
+    }
+
+
     private setChoice(): void {
         this.setSelectedOptions();
         this.setCaption();
@@ -83,6 +99,7 @@ export class AppComponent implements OnInit {
             this.selectedVariant.options.forEach(option => {
                 this.selectedData[option.option_id] = option.option_value_id
             })
+
         }
         this.setPrice();
     }
@@ -141,7 +158,7 @@ export class AppComponent implements OnInit {
         this.setOptionsStatus(this.selectedVariant.options[0].option_id);
     }
 
-    private setOptionsStatus(optionId): void {
+    private setOptionsStatus(optionId: number): void {
         let itsAfterSelectedOption: boolean = false;
         let queryData: Option[] = [];
 
@@ -202,5 +219,11 @@ export class AppComponent implements OnInit {
             this.alerts[index] = alert;
         }
     }
+
+    public showInfoWindow({target: marker}){
+
+    }
+
+
 
 }
