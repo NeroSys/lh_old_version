@@ -19,11 +19,15 @@ class ControllerCheckoutShippingMethod extends Controller {
 
 					if ($quote) {
 						$method_data[$result['code']] = array(
+						    'code' => $result['code'],
 							'title'      => $quote['title'],
 							'quote'      => $quote['quote'],
 							'sort_order' => $quote['sort_order'],
 							'error'      => $quote['error']
 						);
+                        if(!empty($quote["controller"])) {
+                            $method_data[$result['code']]["method_html"] = $this->load->controller($quote["controller"]."/index", $quote);
+                        }
 					}
 				}
 			}
@@ -60,7 +64,9 @@ class ControllerCheckoutShippingMethod extends Controller {
 		if (isset($this->session->data['shipping_method']['code'])) {
 			$data['code'] = $this->session->data['shipping_method']['code'];
 		} else {
-			$data['code'] = '';
+            reset($method_data);
+            $first_key = key($method_data);
+			$data['code'] = $first_key;
 		}
 
 		if (isset($this->session->data['comment'])) {
@@ -76,16 +82,49 @@ class ControllerCheckoutShippingMethod extends Controller {
 		$this->load->language('checkout/checkout');
 
 		$json = array();
-
 		// Validate if shipping is required. If not the customer should not have reached this page.
 		if (!$this->cart->hasShipping()) {
 			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 		}
 
+        if (!isset($this->request->post['shipping_method'])) {
+            $json['error']['warning'] = $this->language->get('error_shipping');
+        } else {
+            $shipping = explode('.', $this->request->post['shipping_method']);
+
+            if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]])) {
+                $json['error']['warning'] = $this->language->get('error_shipping');
+            }
+        }
+
+		if($shipping[0] === "novaposhta"){
+            if(empty($this->request->post['novapochta_region'])){
+                $json['error']['warning'] = "Укажите регион";
+            }
+            elseif (empty($this->request->post['novapochta_city'])){
+                $json['error']['warning'] = "Укажите населенный пункт";
+            }
+            elseif (empty($this->request->post['novaposhta_warehouse'])){
+                $json['error']['warning'] = "Укажите номер отделения";
+            }
+            else {
+                $np_model = $this->getNpModel();
+
+                $shipping_to_address = $this->request->post['novapochta_region'];
+                $city = $np_model->getCityByRef($this->request->post['novapochta_city'], $this->request->post['novapochta_region']);
+                $shipping_to_address.=" ".$city["Description"];
+                $warehouse = $np_model->getWarehouseByRef($this->request->post['novapochta_city'], $this->request->post['novaposhta_warehouse']);
+                $shipping_to_address.=". ".$warehouse["Description"];
+                $this->session->data['shipping_to_address'] = $shipping_to_address;
+            }
+        }
+
 		// Validate if shipping address has been set.
 		if (!isset($this->session->data['shipping_address'])) {
-			$json['redirect'] = $this->url->link('checkout/checkout', '', true);
+			//$json['redirect'] = $this->url->link('checkout/checkout', '', true);
 		}
+
+
 
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
@@ -111,15 +150,7 @@ class ControllerCheckoutShippingMethod extends Controller {
 			}
 		}
 
-		if (!isset($this->request->post['shipping_method'])) {
-			$json['error']['warning'] = $this->language->get('error_shipping');
-		} else {
-			$shipping = explode('.', $this->request->post['shipping_method']);
 
-			if (!isset($shipping[0]) || !isset($shipping[1]) || !isset($this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]])) {
-				$json['error']['warning'] = $this->language->get('error_shipping');
-			}
-		}
 
 		if (!$json) {
 			$this->session->data['shipping_method'] = $this->session->data['shipping_methods'][$shipping[0]]['quote'][$shipping[1]];
@@ -130,4 +161,11 @@ class ControllerCheckoutShippingMethod extends Controller {
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
 	}
+
+    /**
+     * @return ModelShippingNovaposhta
+     */
+	protected function getNpModel(){
+	    return $this->load->singleton('shipping/novaposhta');
+    }
 }

@@ -72,14 +72,14 @@ class ModelLoader
      * @param string $model
      * @return Object created from model name or from registry
      */
-    public function singleton($model)
+    public function singleton(string $model, \Registry $registry)
     {
         $registry_key = 'model_' . str_replace('/', '_', $model);
-        $already_existing_model = $this->registry->get($registry_key);
+        $already_existing_model = $registry->get($registry_key);
         if ($already_existing_model) {
             return $already_existing_model;
         }
-        return $this->model($model);
+        return $this->loadModel($model, $registry);
     }
 
     protected function callback($registry, $route) {

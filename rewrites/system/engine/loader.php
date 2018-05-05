@@ -37,6 +37,12 @@ final class Loader {
 		return $this->modelLoader->loadModel($route, $this->registry);
 	}
 
+    public function singleton(string $route): \Proxy
+    {
+        return $this->modelLoader->singleton($route, $this->registry);
+
+    }
+
 	public function view($route, $data = array()) {
 		// Sanitize the call
 		$route = str_replace('../', '', (string)$route);

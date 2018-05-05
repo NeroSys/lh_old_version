@@ -26,7 +26,8 @@
     "psr/simple-cache": "^1.0",
     "apix/log": "^1.2",
     "nette/mail": "^2.4",
-    "nicmart/tree": "^0.2.7"
+    "nicmart/tree": "^0.2.7",
+    "levgenij/nova-poshta-api-2": "^1.0"
   },
   "authors": [
     {

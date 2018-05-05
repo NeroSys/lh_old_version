@@ -387,7 +387,7 @@ class Cart {
 
 	public function hasShipping() {
 
-	    return false; //убрал шаг выбора доставки
+	    //return false; //убрал шаг выбора доставки
 
 		foreach ($this->getProducts() as $product) {
 			if ($product['shipping']) {

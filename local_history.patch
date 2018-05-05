@@ -1,0 +1,16 @@
+Index: vendor/opencart/opencart/upload/admin/controller/extension/shipping.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- vendor/opencart/opencart/upload/admin/controller/extension/shipping.php	(date 1524943824000)
++++ vendor/opencart/opencart/upload/admin/controller/extension/shipping.php	(date 1524943824000)
+@@ -106,7 +106,7 @@
+ 		$extensions = $this->model_extension_extension->getInstalled('shipping');
+ 
+ 		foreach ($extensions as $key => $value) {
+-			if (!file_exists(DIR_APPLICATION . 'controller/shipping/' . $value . '.php')) {
++			if (!\App\Helper\FileExiststRewriter::fileExists(DIR_APPLICATION . 'controller/shipping/' . $value . '.php')) {
+ 				$this->model_extension_extension->uninstall('shipping', $value);
+ 
+ 				unset($extensions[$key]);
