@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, enableProdMode, OnInit} from '@angular/core';
 import {MainService} from './app.service';
 import {VariantCollection} from './model/variant-collection';
 import {OptionGroup} from './model/option-group';
@@ -11,6 +11,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {} from '@types/googlemaps';
 
 declare var product_id: any;
+enableProdMode();
 
 @Component({
     selector: 'app-product-options',
@@ -56,11 +57,12 @@ export class AppComponent implements OnInit {
     public onSubmit(): void {
         let query = this.prepareRequestAddToCart();
         let alert = new Alert();
+        alert.message = '';
         this.mainService.addToCart(query).then(
             response => {
                 if(response.error !== undefined){
                     alert.type = 'error';
-                    alert.message = response.error;
+                    response.error.option.forEach(msg => {alert.message += msg + ' '});
                 } else if (response.success !== undefined){
                     alert.type = 'success';
                     alert.message = response.success;
@@ -208,6 +210,9 @@ export class AppComponent implements OnInit {
 
             }
         );
+        console.log(this.selectedVariant);
+        console.log(this.selectedData);
+        console.log(body);
         return body;
     }
 

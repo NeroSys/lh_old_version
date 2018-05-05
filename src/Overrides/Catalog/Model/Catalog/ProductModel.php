@@ -133,7 +133,7 @@ ORDER BY o.sort_order");
 
             foreach ($unserializerOptions as &$shopAviability){
 				$shopAviability->stock = $shops->get($shopAviability->stockErpId);
-				$geocode = explode(',', $shopAviability->stock['geocode']);
+				$geocode = isset($shopAviability->stock['geocode']) ? explode(',', $shopAviability->stock['geocode']) : [[],[]];
 				$shopAviability->stock['geocode'] = ['lat' => $geocode[0], 'lng' => $geocode[1]];
 				unset($shopAviability->stockErpId);
 				unset($shopAviability->priceWholesale);
@@ -157,7 +157,7 @@ ORDER BY o.sort_order");
                   LEFT JOIN " . DB_PREFIX . "option_value_description oovd ON pov.option_value_id = oovd.option_value_id
                   LEFT JOIN " . DB_PREFIX . "option oo ON pov.option_id = oo.option_id
                   WHERE opog.product_id = $product_id
-                  ORDER BY opog.id, ood.option_id";
+                  ORDER BY opog.product_id, option_value_name";
 
         return $this->db->query($sql)->rows;
     }

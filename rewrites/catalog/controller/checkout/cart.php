@@ -285,8 +285,6 @@ class ControllerCheckoutCart extends Controller {
 	}
 
 	public function add() {
-		header("Access-Control-Allow-Origin: *");
-
 		$this->load->language('checkout/cart');
 
 		$json = array();
@@ -321,7 +319,7 @@ class ControllerCheckoutCart extends Controller {
 					&& isset($option[$product_option['product_option_id']])
 					&& isset($product_option['product_option_value'][$option[$product_option['product_option_id']]])
 				) {
-					$json['error']['option'][$product_option['product_option_id']] = sprintf($this->language->get('error_required'), $product_option['name']);
+					$json['error']['option'][] = sprintf($this->language->get('error_required'), $product_option['name']);
 				}
 			}
 

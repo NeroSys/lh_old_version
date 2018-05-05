@@ -564,9 +564,7 @@ class ProductController extends \ControllerProductProduct
         $data = $this->model_catalog_product->getAviableProductSpecifications((int)$this->request->get['product_id']);
 
         header('Content-Type: application/json');
-        header("Access-Control-Allow-Origin: *");
-        $responce = json_encode(array_values($data));
-		echo $responce;
+		echo json_encode(array_values($data));
     }
 
     protected function getProductOptions(): array

@@ -68,7 +68,6 @@
     </p>
 </div>
 
-
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
         <h4 class="modal-title">Наличие в магазинах</h4>
@@ -79,9 +78,9 @@
     <div class="modal-body">
         <div class="row" *ngIf="selectedVariant.availability">
             <div class="col-md-6">
-                <div class="row" *ngFor="let item of selectedVariant.availability">
-                    <div class="col-md-4"><img src="http://lh.loc:802/image/{{item.stock.image}}" width="100" alt="{{item.stock.name}}"> </div>
-                    <div class="col-md-8">
+                <div class="row store-item" *ngFor="let item of selectedVariant.availability">
+                    <div class="col-md-3"><img src="image/{{item.stock.image}}" width="100" alt="{{item.stock.name}}"> </div>
+                    <div class="col-md-9">
                         <p *ngIf="item.stock.name"><b>{{item.stock.name}}</b></p>
                         <p *ngIf="item.stock.address"><i>{{item.stock.address}}</i></p>
                         <p *ngIf="item.stock.open">{{item.stock.open}}</p>
@@ -91,7 +90,7 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <ngui-map zoom="13" center="Киев, Цум">
+                <ngui-map zoom="11" center="Киев, Цум">
                     <marker *ngFor="let pos of selectedVariant.availability"
                         (click)="showInfoWindow($event)"
                         [position]="[pos.stock.geocode.lat, pos.stock.geocode.lng]"></marker>

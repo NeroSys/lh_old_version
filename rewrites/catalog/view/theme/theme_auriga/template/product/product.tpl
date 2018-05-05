@@ -40,16 +40,16 @@
                                 </a>
                                 <?php } ?>
                             </div>
+                            <?php if ($images) { ?>
                             <div class="image-additional" id="gallery_01">
-                                <?php if ($images) { ?>
                                 <?php foreach ($images as $image) { ?>
                                 <a class="popup-gallery" href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" rel="noindex">
                                     <img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>"
                                          alt="<?php echo $heading_title; ?>"/>
                                 </a>
                                 <?php } ?>
-                                <?php } ?>
                             </div>
+                            <?php } ?>
                             <?php } ?>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="tab-view">
                     <ul class="nav nav-tabs">
-                        <?php $first_tab = false; if ($description != '') { $first_tab = true; ?>
+                        <?php $first_tab = false; if (!empty($description)) { $first_tab = true; ?>
                         <li class="active">
                             <a href="#tab-description" data-toggle="tab"><?php echo $tab_description; ?></a>
                         </li>
@@ -133,7 +133,7 @@
                         <?php } ?>
                     </ul>
                     <div class="tab-content">
-                        <?php if (!$first_tab) { ?>
+                        <?php if ($first_tab) { ?>
                         <div class="tab-pane active" id="tab-description"><?php echo $description; ?></div>
                         <?php } ?>
                         <?php if ($attribute_groups) { ?>
@@ -326,57 +326,6 @@
 
                 if (json['success']) {
                     $('#recurring-description').html(json['success']);
-                }
-            }
-        });
-    });
-    //--></script>
-<script type="text/javascript"><!--
-    $('#button-cart').on('click', function () {
-        $.ajax({
-            url: 'index.php?route=checkout/cart/add',
-            type: 'post',
-            data: $('#product input[type=\'text\'], #product input[type=\'hidden\'], #product input[type=\'radio\']:checked, #product input[type=\'checkbox\']:checked, #product select, #product textarea'),
-            dataType: 'json',
-            beforeSend: function () {
-                $('#button-cart').button('loading');
-            },
-            complete: function () {
-                $('#button-cart').button('reset');
-            },
-            success: function (json) {
-                $('.alert, .text-danger').remove();
-                $('.form-group').removeClass('has-error');
-
-                if (json['error']) {
-                    if (json['error']['option']) {
-                        for (i in json['error']['option']) {
-                            var element = $('#input-option' + i.replace('_', '-'));
-
-                            if (element.parent().hasClass('input-group')) {
-                                element.parent().after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                            } else {
-                                element.after('<div class="text-danger">' + json['error']['option'][i] + '</div>');
-                            }
-                        }
-                    }
-
-                    if (json['error']['recurring']) {
-                        $('select[name=\'recurring_id\']').after('<div class="text-danger">' + json['error']['recurring'] + '</div>');
-                    }
-
-                    // Highlight any found errors
-                    $('.text-danger').parent().addClass('has-error');
-                }
-
-                if (json['success']) {
-                    $('.breadcrumb').after('<div class="alert alert-success">' + json['success'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
-
-                    $('#cart-total').html(json['total']);
-
-                    $('html, body').animate({scrollTop: 0}, 'slow');
-
-                    $('#cart > ul').load('index.php?route=common/cart/info ul li');
                 }
             }
         });
