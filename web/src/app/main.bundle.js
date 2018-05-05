@@ -454,7 +454,7 @@ var VariantCollection = /** @class */ (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: false,
-    apiUrl: 'http://lh.loc:802/'
+    apiUrl: '/'
 };
 
 
