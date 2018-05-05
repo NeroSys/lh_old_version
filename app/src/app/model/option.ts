@@ -1,3 +1,5 @@
+import {Availability} from "./availability";
+
 export class Option {
     id: number;
     price_base: number;

@@ -1,14 +1,12 @@
 import {OptionGroup} from "./option-group";
 import {VariantCollection} from "./variant-collection";
 import {Option} from "./option";
-import {FormControl, FormGroup, FormArray} from "@angular/forms";
 
 export class FormFields {
     public fields: OptionGroup[] = [];
-    private form: FormGroup[];
+    private form: any;
 
     constructor() {
-        // this.form['quantity'] = new FormGroup({});
     }
 
     public setData(variants: VariantCollection):void {
@@ -16,13 +14,12 @@ export class FormFields {
             variant.options.forEach(
                 option => {
                     this.setOptionItem(option);
-                    this.setFormControl(option);
                 }
             );
         });
     }
 
-    public getData(): FormGroup[] {
+    public getData(): void {
         return this.form;
     }
 
@@ -44,22 +41,5 @@ export class FormFields {
             }
         }
     }
-
-    private setFormControl(option: Option): void {
-        // console.log(this.form);
-        let field = 'field_' + option.option_id;
-        if (this.form[field] === undefined) {
-            this.form[field] = new FormGroup({
-                field: new FormArray([
-                    new FormControl(option.option_value_id)
-                ])
-            });
-        } else {
-            this.form[field].controls[field].setValue(option.option_value_id);
-        }
-
-        console.log(this.form);
-    }
-
 
 }
