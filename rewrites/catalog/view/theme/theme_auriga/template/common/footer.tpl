@@ -89,7 +89,7 @@
 <script src="/catalog/view/javascript/opentheme/ocslideshow/jquery.nivo.slider.js" type="text/javascript"></script>
 <script src="catalog/view/javascript/jquery/owl-carousel/owl.carousel.js" type="text/javascript"></script>
 <script src="/catalog/view/javascript/Swiper-3.4.0/dist/js/swiper.min.js" type="text/javascript"></script>
-<script src="/catalog/view/javascript/jquery/jquery.magnific-popup.min.js" type="text/javascript"></script>
+<script src="/catalog/view/javascript/jquery/magnific/jquery.magnific-popup.min.js" type="text/javascript"></script>
 
 
 <script>
