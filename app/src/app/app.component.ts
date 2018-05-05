@@ -210,9 +210,6 @@ export class AppComponent implements OnInit {
 
             }
         );
-        console.log(this.selectedVariant);
-        console.log(this.selectedData);
-        console.log(body);
         return body;
     }
 

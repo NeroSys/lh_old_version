@@ -218,9 +218,6 @@ var AppComponent = /** @class */ (function () {
             request['option'][option.product_option_id] = option.option_value_id;
             body += '&option[' + option.product_option_id + ']=' + option.option_value_id;
         });
-        console.log(this.selectedVariant);
-        console.log(this.selectedData);
-        console.log(body);
         return body;
     };
     AppComponent.prototype.setAlert = function (alert) {
