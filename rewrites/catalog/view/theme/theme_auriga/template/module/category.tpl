@@ -1,5 +1,5 @@
 <div class="box category">
-    <div class="box-heading"><h3><span><?php echo $heading_title; ?></span></h3></div>
+    <div class="box-heading"><span><?php echo $heading_title; ?></span></div>
     <div class="box-content">
         <ul class="list-group">
             <?php echo $category_html;?>

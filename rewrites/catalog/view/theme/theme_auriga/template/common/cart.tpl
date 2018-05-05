@@ -1,6 +1,5 @@
 <div id="cart" class="btn-group btn-block">
 	<button type="button" data-toggle="dropdown" data-loading-text="<?php echo $text_loading; ?>" class="btn btn-inverse btn-block btn-lg dropdown-toggle">
-		<span class="title-cart"><?php echo $title_cart; ?></span>
 		<span id="cart-total"><?php echo $text_items; ?></span>
 	</button>
 <ul class="dropdown-menu pull-right">

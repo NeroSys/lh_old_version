@@ -62,7 +62,7 @@ $(document).ready(function() {
 		$('#currency').submit();
 	});
 	// slider
-         if($().owlCarousel) {
+	 if($().owlCarousel) {
 		$(".image-additional").owlCarousel({
 			navigation:true,
 			pagination: false,
@@ -263,8 +263,10 @@ function display(view) {
 
 
 	$('.popup-ajax').magnificPopup({
-		type: 'ajax'
-	});
+		type: 'ajax',
+        closeOnBgClick: true,
+        showCloseBtn:true
+    });
 
 
     $('.popup-gallery').magnificPopup({
@@ -283,6 +285,21 @@ function display(view) {
 			}
 		});
 	}
+
+	if($('#search input[type="text"]').length > 0){
+        $('#search').append('<div class="search-overlay"></div>');
+        $('#search input[type="text"]').on('focus', function(){
+        	$('#search').addClass('active');
+		}).blur(function () {
+            $('#search').removeClass('active');
+        });
+	}
+
+	$('#cart.btn-block').click(function(){
+		if($(this).hasClass('open'))
+			return;
+		cart.info();
+	});
 
 });
 
@@ -361,6 +378,9 @@ var cart = {
 				}
 			}
 		});
+	},
+	'info': function(){
+        $('#cart > ul').load('index.php?route=common/cart/info ul li');
 	}
 }
 
