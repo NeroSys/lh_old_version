@@ -60,13 +60,13 @@ class ControllerCheckoutConfirm extends \Controller {
 			$taxes = $this->cart->getTaxes();
 			$total = 0;
 
-			// Because __call can not keep var references so we put them into an array. 
+			// Because __call can not keep var references so we put them into an array.
 			$total_data = array(
 				'totals' => &$totals,
 				'taxes'  => &$taxes,
 				'total'  => &$total
 			);
-			
+
 			$this->load->model('extension/extension');
 
 			$sort_order = array();
@@ -211,8 +211,7 @@ class ControllerCheckoutConfirm extends \Controller {
 			$order_data['products'] = array();
 
 			foreach ($this->cart->getProducts() as $product) {
-				$option_data = array();
-
+				$option_data = $option = array();
 				foreach ($product['option'] as $option) {
 					$option_data[] = array(
 						'product_option_id'       => $option['product_option_id'],
@@ -221,10 +220,16 @@ class ControllerCheckoutConfirm extends \Controller {
 						'option_value_id'         => $option['option_value_id'],
 						'name'                    => $option['name'],
 						'value'                   => $option['value'],
-						'type'                    => $option['type']
+						'type'                    => $option['type'],
+                        'ean'                     => $option['ean']
 					);
+
 				}
 
+				$ean = "";
+				if(!empty($option['ean'])) {
+				    $ean = $option['ean'];
+                }
 				$order_data['products'][] = array(
 					'product_id' => $product['product_id'],
 					'name'       => $product['name'],
@@ -236,7 +241,8 @@ class ControllerCheckoutConfirm extends \Controller {
 					'price'      => $product['price'],
 					'total'      => $product['total'],
 					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
-					'reward'     => $product['reward']
+					'reward'     => $product['reward'],
+                    'ean' => $ean
 				);
 			}
 
