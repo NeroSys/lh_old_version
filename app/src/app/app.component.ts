@@ -205,8 +205,8 @@ export class AppComponent implements OnInit {
 
         this.selectedVariant.options.forEach(
             option => {
-                request['option'][option.product_option_id] = option.option_value_id;
-                body += '&option[' + option.product_option_id + ']=' + option.option_value_id;
+                request['option'][option.option_id] = option.product_option_id;
+                body += '&option[' + option.option_id + ']=' + option.product_option_id;
 
             }
         );

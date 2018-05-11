@@ -94,10 +94,6 @@
                     <marker *ngFor="let pos of selectedVariant.availability"
                         (click)="showInfoWindow($event)"
                         [position]="[pos.stock.geocode.lat, pos.stock.geocode.lng]"></marker>
-
-                    <info-window id="iw">
-                        test
-                    </info-window>
                 </ngui-map>
             </div>
         </div>
