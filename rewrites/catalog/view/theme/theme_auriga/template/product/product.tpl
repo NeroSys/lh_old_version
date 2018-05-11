@@ -70,10 +70,9 @@
 
                             <script type="application/javascript">var product_id = <?php echo $product_id; ?>;</script>
                             <app-product-options></app-product-options>
-                            <script type="text/javascript" src="/src/app/inline.bundle.js"></script>
-                            <script type="text/javascript" src="/src/app/polyfills.bundle.js"></script>
-                            <script type="text/javascript" src="/src/app/vendor.bundle.js"></script>
-                            <script type="text/javascript" src="/src/app/main.bundle.js"></script>
+                            <?php foreach ($scripts as $file) { ?>
+                            <script type="text/javascript" src="<?php echo $file; ?>"></script>
+                            <?php } ?>
 
                             <div class="add-to-links" style="display: none">
                                 <div class="btn-group">
