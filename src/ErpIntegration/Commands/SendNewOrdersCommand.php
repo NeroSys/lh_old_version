@@ -66,11 +66,11 @@ class SendNewOrdersCommand extends Command
             $item->setStatus($status);
 
             $user = new \LHGroup\From1cToWeb\Item\Order\User();
-            $user->setName($newOrderStatus->firstname.' '.$newOrderStatus->lastname);
-            $user->setEmail($newOrderStatus->email);
-            $user->setPhone($newOrderStatus->telephone);
+            $user->setName($newOrder->firstname.' '.$newOrder->lastname);
+            $user->setEmail($newOrder->email);
+            $user->setPhone($newOrder->telephone);
             $user->setRole('Покупатель');
-            $user->setId($newOrderStatus->customer_id);
+            $user->setId($newOrder->customer_id);
             $item->setUser($user);
 
 

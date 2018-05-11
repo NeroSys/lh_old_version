@@ -11,11 +11,11 @@ class ControllerCheckoutGuest extends Controller {
 		$data['text_loading'] = $this->language->get('text_loading');
         $data['text_comments'] = $this->language->get('text_comments');
 		$data['entry_firstname'] = $this->language->get('entry_firstname');
-
+        $data['entry_lastname'] = $this->language->get('entry_lastname');
 		$data['entry_email'] = $this->language->get('entry_email');
 		$data['entry_telephone'] = $this->language->get('entry_telephone');
 
-		$data['button_confirm'] = $this->language->get('button_confirm');
+		$data['button_confirm'] = $this->language->get('text_checkout_shipping_method');
 		$data['button_upload'] = $this->language->get('button_upload');
 
 		$data['customer_groups'] = array();
@@ -44,17 +44,17 @@ class ControllerCheckoutGuest extends Controller {
 			$data['firstname'] = '';
 		}
 
+        if (isset($this->session->data['guest']['lastname'])) {
+            $data['lastname'] = $this->session->data['guest']['lastname'];
+        } else {
+            $data['lastname'] = '';
+        }
+
 		if (isset($this->session->data['guest']['email'])) {
 			$data['email'] = $this->session->data['guest']['email'];
 		} else {
 			$data['email'] = '';
 		}
-
-        if (isset($this->session->data['comment'])) {
-            $data['comment'] = $this->session->data['comment'];
-        } else {
-            $data['comment'] = '';
-        }
 
 		if (isset($this->session->data['guest']['telephone'])) {
 			$data['telephone'] = $this->session->data['guest']['telephone'];
@@ -124,10 +124,14 @@ class ControllerCheckoutGuest extends Controller {
 		}
 
 		if (!$json) {
-            $this->session->data['comment'] = strip_tags($this->request->post['comment']);
+
 			if ((utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
 				$json['error']['firstname'] = $this->language->get('error_firstname');
 			}
+
+            if ((utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
+                $json['error']['lastname'] = $this->language->get('error_lastname');
+            }
 
 			if ((utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
 				$json['error']['email'] = $this->language->get('error_email');
@@ -173,7 +177,7 @@ class ControllerCheckoutGuest extends Controller {
 
 			$this->session->data['guest']['customer_group_id'] = $customer_group_id;
 			$this->session->data['guest']['firstname'] = $this->request->post['firstname'];
-			$this->session->data['guest']['lastname'] = "";
+			$this->session->data['guest']['lastname'] = $this->request->post['lastname'];
 			$this->session->data['guest']['email'] = $this->request->post['email'];
 			$this->session->data['guest']['telephone'] = $this->request->post['telephone'];
 			$this->session->data['guest']['fax'] = "";
@@ -185,7 +189,7 @@ class ControllerCheckoutGuest extends Controller {
 			}
 
 			$this->session->data['payment_address']['firstname'] = $this->request->post['firstname'];
-			$this->session->data['payment_address']['lastname'] = "";
+			$this->session->data['payment_address']['lastname'] = $this->request->post['lastname'];;
 			$this->session->data['payment_address']['company'] = "";
 			$this->session->data['payment_address']['address_1'] = "";
 			$this->session->data['payment_address']['address_2'] ="";

@@ -1,7 +1,7 @@
 <div class="row">
-    <div class="col-sm-12">
+    <div>
         <div id="account">
-            <legend><?php echo $text_your_details; ?></legend>
+            <h2 style="font-size: 18px !important;"><?php echo $text_your_details; ?></h2>
             <div class="form-group" style="display: <?php echo (count($customer_groups) > 1 ? 'block' : 'none'); ?>;">
                 <label class="control-label"><?php echo $entry_customer_group; ?></label>
                 <?php foreach ($customer_groups as $customer_group) { ?>
@@ -22,27 +22,29 @@
             </div>
             <div class="form">
 
-                    <div class="col-xs-12 col-sm-4 required ">
+                    <div class="col-xs-12 col-sm-3 required ">
                         <label class="control-label" for="input-payment-firstname"><?php echo $entry_firstname; ?></label>
                         <input type="text" name="firstname"
                                value="<?php echo $firstname; ?>" placeholder="<?php echo $entry_firstname; ?>"
-                               id="input-payment-firstname" class="form-control" />
+                               id="input-payment-firstname" class="form-control">
                     </div>
-                    <div class="col-xs-12 col-sm-4 required">
-                        <label class="control-label" for="input-payment-email"><?php echo $entry_email; ?></label>
-                        <input type="text" name="email" value="<?php echo $email; ?>" placeholder="<?php echo $entry_email; ?>" id="input-payment-email" class="form-control" />
-                    </div>
-                    <div class="col-xs-12 col-sm-4 required">
-                        <label class="control-label" for="input-payment-telephone"><?php echo $entry_telephone; ?></label>
-                        <input type="text" name="telephone" value="<?php echo $telephone; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-payment-telephone" class="form-control" />
-                    </div>
+
+                <div class="col-xs-12 col-sm-3 required ">
+                    <label class="control-label" for="input-lastname"><?php echo $entry_lastname; ?></label>
+                    <input type="text" name="lastname"
+                           value="<?php echo $lastname; ?>" placeholder="<?php echo $entry_lastname; ?>"
+                           id="input-lastname" class="form-control">
                 </div>
-
-
-                    <div class="col-sm-12" style="margin-top: 10px">
-                         <label class="control-label" ><?php echo $text_comments; ?></label>
-                         <textarea name="comment" rows="8" class="form-control"><?php echo $comment; ?></textarea>
+                    <div class="col-xs-12 col-sm-3 required">
+                        <label class="control-label" for="input-payment-email"><?php echo $entry_email; ?></label>
+                        <input type="text" name="email" value="<?php echo $email; ?>" placeholder="<?php echo $entry_email; ?>" id="input-payment-email" class="form-control">
                     </div>
+                    <div class="col-xs-12 col-sm-3 required">
+                        <label class="control-label" for="input-payment-telephone"><?php echo $entry_telephone; ?></label>
+                        <input type="text" name="telephone" value="<?php echo $telephone; ?>" placeholder="<?php echo $entry_telephone; ?>" id="input-payment-telephone" class="form-control">
+                    </div>
+            </div>
+
 
             </div>
 
