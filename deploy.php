@@ -37,6 +37,20 @@ host('dev.little-house.com.ua')
     ->addSshOption('StrictHostKeyChecking', 'no')
     ->set('branch', 'dev-products_upload_from_erp');
 
+host('lhgroup.com.ua')
+	->set('deploy_path', '/home/admin/web/lhgroup.com.ua/public_html')
+	->stage('lh')
+	->hostname('192.168.102.79')
+	->user('admin')
+	->port(22)
+	// ->configFile('~/.ssh/config')
+	->identityFile('~/.ssh/id_rsa')
+	->forwardAgent(true)
+	->multiplexing(true)
+	->addSshOption('UserKnownHostsFile', '/dev/null')
+	->addSshOption('StrictHostKeyChecking', 'no')
+	->set('branch', 'dev-products_upload_from_erp');
+
 host('little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/little-house.com.ua/public_html')
     ->stage('prod')
