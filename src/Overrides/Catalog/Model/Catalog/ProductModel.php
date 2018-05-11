@@ -64,14 +64,15 @@ ORDER BY o.sort_order");
         $product_option_data = array();
 
         $options = $this->getProductSpecificationOptionsFromDatabase($product_id);
+
         foreach ($options as $option) {
-            $product_option_data[$option['option_id']]['product_option_id']     = $option['product_option_id'];
             $product_option_data[$option['option_id']]['option_id']             = $option['option_id'];
             $product_option_data[$option['option_id']]['name']                  = $option['option_name'];
             $product_option_data[$option['option_id']]['type']                  = $option['type'];
             $product_option_data[$option['option_id']]['value']                 = $option['option_value_name'];
             $product_option_data[$option['option_id']]['required']              = self::PRODUCT_OPTION_REQUIRED;
-            $product_option_data[$option['option_id']]['product_option_value'][$option['option_value_id']] = [
+            $product_option_data[$option['option_id']]['product_option_value'][$option['product_option_id']] = [
+            	'product_option_id'		  => $option['product_option_id'],
                 'product_option_value_id' => $option['option_value_id'],
                 'option_value_id'         => $option['option_value_id'],
                 'quantity'                => $option['quantity'],
@@ -87,7 +88,6 @@ ORDER BY o.sort_order");
                 'image'                   => self::PRODUCT_OPTION_IMAGE_PATH
             ];
         }
-
         return $product_option_data;
     }
 

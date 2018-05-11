@@ -9,6 +9,9 @@ require_once(DIR_OPENCART . 'catalog/controller/product/product.php');
 
 class ProductController extends \ControllerProductProduct
 {
+	const DIR_JS_FILES = 'src/app';
+
+	private $js_src_mask = ['inline', 'polyfills', 'main'];
     private $error = array();
 
     protected function generateBreadcrumbs(int $productId){
@@ -130,6 +133,8 @@ class ProductController extends \ControllerProductProduct
         }
 
         $this->load->model('catalog/product');
+
+		$data['scripts'] = $this->getScripts();
 
         $product_info = $this->model_catalog_product->getProduct($product_id);
 
@@ -357,12 +362,10 @@ class ProductController extends \ControllerProductProduct
                 }
 
                 $data['options'][] = array(
-                    'product_option_id'    => $option['product_option_id'],
                     'product_option_value' => $product_option_value_data,
                     'option_id'            => $option['option_id'],
                     'name'                 => $option['name'],
                     'type'                 => $option['type'],
-                    'value'                => $option['value'],
                     'required'             => $option['required']
                 );
             }
@@ -578,4 +581,22 @@ class ProductController extends \ControllerProductProduct
         }
         return $product_options;
     }
+
+    protected function getScripts(): array{
+		$pattern = implode('|', $this->js_src_mask);
+
+		$all_files = [];
+		$dir = PUBLIC_WEB . self::DIR_JS_FILES;
+		$f = scandir($dir);
+
+		foreach ($f as $file){
+			if(preg_match('/('.$pattern.')\.[a-z0-9]+\.bundle\.(js)$/i', $file, $matches) ){
+				$findWord = $matches[1];
+				$key = array_search($findWord, $this->js_src_mask);
+				$all_files[$key] = self::DIR_JS_FILES . DIRECTORY_SEPARATOR . $file;
+			}
+		}
+		ksort($all_files);
+		return $all_files;
+	}
 }

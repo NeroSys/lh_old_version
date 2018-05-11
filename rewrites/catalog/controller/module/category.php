@@ -77,7 +77,7 @@ class ControllerModuleCategory extends Controller {
                     '<span class="button-view ttopen">view</span>';
             }
 
-            echo '<a href="'.$category['href'].'" class="list-group-item '.$item_active_class.'"><span>'.$category['name'].'</span></a>';
+            echo '<a href="'.$category['href'].'" class="list-group-item '.$item_active_class.'"><span><b>'.$category['name'].'</b></span></a>';
 
             if($hasChildren) {
                echo in_array($category["category_id"], $this->findOutOpenedAncestors()) ?
