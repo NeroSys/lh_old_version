@@ -3959,6 +3959,8 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
 .information-shops .shop-address {
     text-align: left;
 }
+.hamburger {display: none}
+
 @media (max-width: 615px) {
     /*#search{width: 120px}*/
     /*#search input {width: 60px;}*/
@@ -5018,5 +5020,15 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
     border-color: #f5c6cb;
 }
 .alert button:hover {background-color: transparent}
-.hamburger {display: none}
 #ocfilter-mobile {display: none !important}
+.ocfilter-option .option-values label {margin-left: 0}
+.ocfilter-option .option-values label a {border: none; padding: 0 2px;}
+.ocfilter-option .option-values label a:hover {background-color: transparent; }
+.ocfilter-option label small {
+    background-color: transparent;
+    color:black;
+    border: 1px solid #0000007d;
+    border-radius: 0;
+    padding: 2px 5px 0;
+    line-height: 14px;
+}

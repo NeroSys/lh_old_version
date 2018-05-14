@@ -23,36 +23,39 @@
                 <?php if ($i%2 !== 0) { ?>
                 <div class="row list">
                 <?php } ?>
-                    <div class="col-md-3 shop-image">
-                        <?php if ($location['image']) { ?>
-                            <a class="popup-gallery mfp-iframe lightbox-added" href="https://maps.google.com/maps?q=<?php echo $location['address']; ?>&hl=ru&iframe=true"> <img alt="<?php echo $location['name']; ?>" src="<?php echo $location['image']; ?>"></a>
-                        <?php } else { ?>
-                            <img alt="<?php echo $location['name']; ?>" src="/image/no_image.png">
-                        <?php } ?>
-                    </div>
-                    <div class="col-md-3 shop-address">
-                        <strong><?php echo $location['name']; ?></strong>
-                        <address>
-                            <?php echo $location['address']; ?>
-                        </address>
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12 shop-image">
+                                <?php if ($location['image']) { ?>
+                                <a class="popup-gallery mfp-iframe lightbox-added" href="https://maps.google.com/maps?q=<?php echo $location['address']; ?>&hl=ru&iframe=true"> <img alt="<?php echo $location['name']; ?>" src="<?php echo $location['image']; ?>"></a>
+                                <?php } else { ?>
+                                <img alt="<?php echo $location['name']; ?>" src="/image/no_image.png">
+                                <?php } ?>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12 shop-address">
+                                <strong><?php echo $location['name']; ?></strong>
+                                <address>
+                                    <?php echo $location['address']; ?>
+                                </address>
 
-                        <strong><?php echo $text_telephone; ?>:</strong>
-                        <?php echo $location['telephone']; ?>
-                        <br />
-                        <?php if ($location['fax']) { ?>
-                        <strong><?php echo $text_fax; ?></strong>
-                        <?php echo $location['fax']; ?>
-                        <?php } ?>
-                        <?php if ($location['open']) { ?>
-                        <strong><?php echo $text_open; ?>:</strong>
-                        <?php echo $location['open']; ?><br />
-                        <?php } ?>
-                        <?php if ($location['comment']) { ?>
-                        <strong><?php echo $text_comment; ?>:</strong><br />
-                        <?php echo $location['comment']; ?>
-                        <?php } ?>
+                                <strong><?php echo $text_telephone; ?>:</strong>
+                                <?php echo $location['telephone']; ?>
+                                <br />
+                                <?php if ($location['fax']) { ?>
+                                <strong><?php echo $text_fax; ?></strong>
+                                <?php echo $location['fax']; ?>
+                                <?php } ?>
+                                <?php if ($location['open']) { ?>
+                                <strong><?php echo $text_open; ?>:</strong>
+                                <?php echo $location['open']; ?><br />
+                                <?php } ?>
+                                <?php if ($location['comment']) { ?>
+                                <strong><?php echo $text_comment; ?>:</strong><br />
+                                <?php echo $location['comment']; ?>
+                                <?php } ?>
+                            </div>
+                        </div>
                     </div>
-
                 <?php if ($i%2 == 0) { ?>
                 </div>
                 <?php } ?>

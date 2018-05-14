@@ -60,66 +60,73 @@
 <script src="<?php echo $script; ?>" type="text/javascript"></script>
 <?php } ?>
 
+<!--PAGE CONTAINER-->
 <div id="page">
 
-<div class="header Fixed">
-    <span id="hamburger" class="Sticky">
-        <a href="#menu" class="hamburger hamburger--collapse">
-            <span class="hamburger-box">
-                <span class="hamburger-inner"></span>
-            </span>
-        </a>
-    </span>
-    <div>
-        <div class="container">
-            <div class="row">
+    <!--HEADER-->
+    <div class="header Fixed">
+        <span id="hamburger" class="Sticky">
+            <a href="#menu" class="hamburger hamburger--collapse">
+                <span class="hamburger-box">
+                    <span class="hamburger-inner"></span>
+                </span>
+            </a>
+        </span>
+        <div>
+            <div class="container">
+                <div class="row">
 
-                <div class="col-md-9 hidden-xs hidden-sm pull-right">
-                    <ul class="list-inline links">
-                        <li class="first"><a href="/about_us"> <span>О нас</span></a></li>
-                        <li><a href="/contacts"><span>Магазины</span></a></li>
-                        <li><a href="/delivery"><span>Оплата и доставка</span></a></li>
-                        <li><a href="/our_brands"><span>Бренды</span></a></li>
-                        <li><a href="/sell_out"><span>Акции</span></a></li>
-                        <li><a href="/our-activity"><span>Пресс-центр</span></a></li>
-                        <li class="last"><a href="/opt"><span>Опт</span></a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 pull-right">
-                    <ul class="list-inline phones">
-                        <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<div class="content">
-    <div class="container subheader">
-        <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-5 col-logo">
-                <div id="logo">
-                    <?php if ($logo) { ?>
-                    <a href="<?php echo $home; ?>">
-                        <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>"
-                             class="img-responsive"/>
-                    </a>
-                    <?php } else { ?>
-                    <h1><a href="<?php echo $home; ?>"><?php echo $name; ?></a></h1>
-                    <?php } ?>
-                </div>
-            </div>
-
-            <div class="col-md-9 col-sm-5 col-xs-7">
-                <div class="cart-search">
-                    <div class="top-cart">
-                        <?php echo $cart; ?>
+                    <div class="col-md-9 hidden-xs hidden-sm pull-right">
+                        <ul class="list-inline links">
+                            <li class="first"><a href="/about_us"> <span>О нас</span></a></li>
+                            <li><a href="/contacts"><span>Магазины</span></a></li>
+                            <li><a href="/delivery"><span>Оплата и доставка</span></a></li>
+                            <li><a href="/our_brands"><span>Бренды</span></a></li>
+                            <li><a href="/sell_out"><span>Акции</span></a></li>
+                            <li><a href="/our-activity"><span>Пресс-центр</span></a></li>
+                            <li class="last"><a href="/opt"><span>Опт</span></a></li>
+                        </ul>
                     </div>
-                    <?php echo $search; ?>
+                    <div class="col-md-3 pull-right">
+                        <ul class="list-inline phones">
+                            <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-<?php include_once("menu.tpl")?>
+    <!--/HEADER-->
+
+    <!--CONTENT-->
+    <div class="content">
+
+        <!--SUBHEADER-->
+        <div class="container subheader">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-5 col-logo">
+                    <div id="logo">
+                        <?php if ($logo) { ?>
+                        <a href="<?php echo $home; ?>">
+                            <img src="<?php echo $logo; ?>" title="<?php echo $name; ?>" alt="<?php echo $name; ?>"
+                                 class="img-responsive"/>
+                        </a>
+                        <?php } else { ?>
+                        <h1><a href="<?php echo $home; ?>"><?php echo $name; ?></a></h1>
+                        <?php } ?>
+                    </div>
+                </div>
+
+                <div class="col-md-9 col-sm-5 col-xs-7">
+                    <div class="cart-search">
+                        <div class="top-cart">
+                            <?php echo $cart; ?>
+                        </div>
+                        <?php echo $search; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/SUBHEADER-->
+
+        <?php include_once("menu.tpl"); ?>
