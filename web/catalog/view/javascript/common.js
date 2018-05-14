@@ -24,7 +24,6 @@ function getURLVar(key) {
 
 $(document).ready(function() {
 
-
 	// increase number of product
 	 function minus(){
 	   if(document.getElementById('input-quantity').value <= 0) {
@@ -300,6 +299,23 @@ function display(view) {
 			return;
 		cart.info();
 	});
+
+    var spoiler = $('.spoiler');
+    if(spoiler.length > 0){
+        var spoilerTextHeight = spoiler.height();
+        var spoilerTextClass = 'h-' + Math.ceil(spoilerTextHeight/100);
+
+        spoiler.wrapInner('<div class="spoiler_wrapper '+ spoilerTextClass +'"></div>');
+        spoiler.children('.spoiler_wrapper').click(function(){
+        	var el = $(this).parent();
+            // if(el.hasClass('active')){
+            //
+			// }else {
+             //    el.addClass()
+			// }
+            $(this).toggleClass('active');
+		});
+	}
 
 });
 

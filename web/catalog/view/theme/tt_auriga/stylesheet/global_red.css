@@ -41,11 +41,13 @@ select {
 img {
     max-width: 100%;
 }
+html,
+body {
+    height: 100%;
+}
 
 html {
     overflow-y: scroll;
-    margin: 0;
-    padding: 0;
 }
 
 li {
@@ -67,9 +69,6 @@ body {
     text-align: left;
 }
 
-.text-container {
-}
-
 b, strong {
 }
 
@@ -82,6 +81,20 @@ p {
     margin: 0;
 }
 
+#page {min-height: 100%;position: relative;}
+#page .content {
+    padding-bottom: 222px;
+}
+#page .content .text-container {
+    padding-bottom: 50px;
+}
+#page footer {
+    position: absolute;
+    left: 0;
+    bottom: 40px;
+    width: 100%;
+    height: 222px;
+}
 #content h1, #content h2 {
     font-size: 24px;
     font-family: 'CaviarDreams';
@@ -1226,7 +1239,6 @@ div.required .control-label:before {
     font-weight: normal;
     text-transform: uppercase;
 }
-
 .footer .footer-content {
     margin: 10px 0 0;
     font-size: 14px;
@@ -1369,6 +1381,20 @@ div.required .control-label:before {
     padding: 0 8px !important;
     color: #666666 !important;
 }
+.row-pagination {
+    border-top: 1px solid #eeeeee;
+    border-bottom: 1px solid #eeeeee;
+    margin-bottom: 15px;
+}
+.row-pagination .text-left {
+    padding: 10px 0;
+}
+.row-pagination .pagination {
+    background-color: transparent;
+}
+/*.row-pagination .pagination li {*/
+    /*background-color: #3a3a3a;*/
+/*}*/
 
 buttons .close {
     background: none;
@@ -4994,6 +5020,7 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
 .product-category. .category-description{
     padding-top: 1em;
 }
+.category-description{text-align: justify;}
 .modal.fade.show {opacity: 1; background-color: rgba(0,0,0,0.5);}
 .modal.fade .modal-dialog {margin-top: 150px; }
 .modal-dialog button.close {position: absolute; top:15px; right: 15px}
@@ -5032,3 +5059,71 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
     padding: 2px 5px 0;
     line-height: 14px;
 }
+.swap {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column-reverse
+}
+
+.spoiler {margin-bottom: 50px}
+.spoiler_wrapper {
+    display: block;
+    overflow: hidden;
+    -webkit-transition: max-height .5s, padding .5s;
+    transition: max-height .5s, padding .5s;
+    max-height: 250px;
+}
+.spoiler_wrapper.active{
+    max-height: 500px;
+}
+.spoiler_wrapper.active {max-height: 500px;}
+.spoiler_wrapper.active.h-1 {max-height: 100px;}
+.spoiler_wrapper.active.h-2 {max-height: 200px;}
+.spoiler_wrapper.active.h-3 {max-height: 300px;}
+.spoiler_wrapper.active.h-4 {max-height: 400px;}
+.spoiler_wrapper.active.h-5 {max-height: 500px;}
+.spoiler_wrapper.active.h-6 {max-height: 600px;}
+.spoiler_wrapper.active.h-7 {max-height: 700px;}
+.spoiler_wrapper.active.h-8 {max-height: 800px;}
+.spoiler_wrapper.active.h-9 {max-height: 900px;}
+.spoiler_wrapper.active.h-10 {max-height: 1000px;}
+.spoiler_wrapper.active.h-11 {max-height: 1100px;}
+.spoiler_wrapper.active.h-12 {max-height: 1200px;}
+.spoiler_wrapper.active.h-13 {max-height: 1300px;}
+.spoiler_wrapper.active.h-14 {max-height: 1400px;}
+.spoiler_wrapper.active.h-15 {max-height: 1500px;}
+
+.spoiler_wrapper:before,
+.spoiler_wrapper:after{
+    content:"";
+    position: absolute;
+    bottom:0;
+    width:100%;
+}
+.spoiler_wrapper:before {
+    z-index: 1;
+    height:30px;
+    background-image: linear-gradient(to bottom,
+        rgba(255,255,255,0), rgba(255,255,255,1)
+    );
+}
+.spoiler_wrapper.active:before{
+    background-image: none;
+}
+.spoiler_wrapper:after {
+    z-index: 2;
+    bottom: -30px;
+    content: "Подробнее...";
+    text-align: center;
+    color: #145e7a;
+    cursor: pointer;
+}
+.spoiler_wrapper.active:after{
+    content: "Скрыть";
+}
+.spoiler_wrapper:hover:after{
+    color: #1f90bb
+}
+
