@@ -1,17 +1,7 @@
 <?php echo $header; ?>
 <div class="container text-container">
-    <ul class="breadcrumb">
-        <?php
-        $last = end($breadcrumbs);
-        foreach ($breadcrumbs as $breadcrumb) {
-            if($last === $breadcrumb){
-            ?>
-                <li><?php echo $breadcrumb['text']; ?></li>
-            <?php } else{ ?>
-                <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-            <?php }
-        }?>
-    </ul>
+    <?php $template = __DIR__ . "/../common/breadcrumb.tpl"; if(file_exists($template)){ include_once($template); } ?>
+
     <div class="row"><?php echo $column_left; ?>
         <?php if ($column_left && $column_right) { ?>
         <?php $class = 'col-sm-6'; ?>

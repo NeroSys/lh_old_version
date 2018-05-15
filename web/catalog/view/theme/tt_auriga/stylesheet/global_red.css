@@ -216,7 +216,7 @@ div.required .control-label:before {
 }
 
 #logo img {
-    /*max-width: 249px;*/
+    max-width: 260px;
 }
 
 #logo a {
@@ -556,6 +556,7 @@ div.required .control-label:before {
     bottom: -300px;
     left: 0;
     position: absolute;
+    height: 100%;
 }
 
 .banner-slider .banner-box1 .banner-hover .bg-top {
@@ -582,7 +583,7 @@ div.required .control-label:before {
 }
 
 .banner-slider .banner-box1:hover .banner-hover {
-    bottom: 0
+    bottom: -50px;
 }
 
 .banner-slider #banner-box2 {
@@ -777,6 +778,7 @@ div.required .control-label:before {
 .cart-search {
     position: relative;
     display: block;
+    height: 55px;
 }
 
 .cart-search .btn-inverse {
@@ -1324,39 +1326,103 @@ div.required .control-label:before {
 .breadcrumb {
     background: none;
     border-radius: 0;
-    margin: 30px 0 30px;
-    padding: 0 0 0px;
-}
-
-.breadcrumb i {
-    font-size: 18px;
-}
-
-.breadcrumb > li {
-    text-shadow: 0 1px 0 #FFF;
-    padding: 0 20px;
-    position: relative;
-    white-space: nowrap;
-}
-
-.breadcrumb > li + li:before {
-    content: '';
+    margin: 0 0 30px;
     padding: 0;
 }
 
-.breadcrumb > li:after {
+.breadcrumb li a{
+    color:#FFF;
+    display:block;
+    background: rgba(11, 11, 11, 1);
+    text-decoration: none;
+    position:relative;
+    height: 30px;
+    line-height:30px;
+    padding: 0 10px 0 5px;
+    text-align: center;
+    text-shadow: none;
+    margin-right: 23px;
 }
 
-.breadcrumb li {
-    background: url("../image/icon_breadcrumbs.png") no-repeat scroll center right;
-    padding: 0 20px 0 0;
-    margin: 0 10px 0 0;
-    display: inline-block;
+.breadcrumb li a:before{
+    border-left-color:transparent;
+}
+.breadcrumb li a:after{
+    border-left-color: rgba(11, 11, 11, 1);
 }
 
-.breadcrumb li:last-child {
-    background: none;
+.breadcrumb>li+li:before {
+    content: "";
 }
+
+.breadcrumb li:first-child a{
+    padding-left:15px;
+}
+.breadcrumb li:last-child a{
+    padding-right:15px;
+    background-color: rgba(11, 11, 11, 0.8);
+}
+
+.breadcrumb a:before,
+.breadcrumb a:after{
+    content: "";
+    position:absolute;
+    top: 0;
+    border:0 solid rgba(11, 11, 11, 1);
+    border-width:15px 10px;
+    width: 0;
+    height: 0;
+
+    -moz-transition: all 0.5s ease;
+    transition: all 500ms ease;
+    -webkit-transition: all 0.5s ease;
+}
+.breadcrumb a:before{
+    left:-20px;
+    border-left-color:transparent;
+}
+.breadcrumb li:first-child a{
+    padding-left: 30px;
+}
+.breadcrumb li:first-child a:before{
+    border: none;
+    content: "\f015";
+    width: 30px;
+    height: 100%;
+    display: block;
+    left: 0;
+    font: normal normal normal 14px/1 FontAwesome;
+    line-height: 30px;
+}
+
+.breadcrumb a:after{
+    left:100%;
+    border-color:transparent;
+    border-left-color: #3498db;
+}
+.breadcrumb a:hover{
+    background-color: rgba(11, 11, 11, 0.8);
+}
+
+.breadcrumb a:hover:before, .breadcrumb li:last-child a:before{
+    border-color: rgba(11, 11, 11, 0.8);
+    border-left-color:transparent;
+}
+.breadcrumb a:hover:after, .breadcrumb li:last-child a:after{
+    border-left-color:rgba(11, 11, 11, 0.8);
+}
+
+.breadcrumb a:active{
+    background-color: rgba(11, 11, 11, 0.8);
+}
+.breadcrumb a:active:before{
+    border-color: rgba(11, 11, 11, 0.8);
+    border-left-color:transparent;
+}
+.breadcrumb a:active:after{
+    border-left-color:rgba(11, 11, 11, 0.8);
+}
+
 
 .pagination {
     margin: 0;
@@ -1378,23 +1444,34 @@ div.required .control-label:before {
     border: 0 !important;
     border-radius: 0 !important;
     font-size: 14px;
-    padding: 0 8px !important;
     color: #666666 !important;
 }
 .row-pagination {
     border-top: 1px solid #eeeeee;
     border-bottom: 1px solid #eeeeee;
     margin-bottom: 15px;
+    height: 50px;
 }
-.row-pagination .text-left {
+.row-pagination > div {
     padding: 10px 0;
+    line-height: 30px;
+}
+.row-pagination .pagination>li>a,
+.row-pagination  .pagination>li>span {
+    line-height: 30px;
+    padding: 0 10px;
 }
 .row-pagination .pagination {
     background-color: transparent;
+    padding: 0;
 }
-/*.row-pagination .pagination li {*/
-    /*background-color: #3a3a3a;*/
-/*}*/
+.row-pagination .pagination li {
+    background-color: #3a3a3a;
+    color: white;
+    display: inline-block;
+    margin-left: 5px;
+    line-height: 30px;
+}
 
 buttons .close {
     background: none;
@@ -4050,11 +4127,12 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
         width: auto;
         margin: 0 auto;
     }
-
-    .hamburger {display: inline-block}
 }
 
 @media (max-width: 992px) {
+
+    #search .btn-lg {height: 55px;}
+
     .articles-list .title {
         display: none;
     }
@@ -4213,6 +4291,8 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     .product-list .add-to-links .cart {
         margin: 0 0 3px;
     }
+
+    .hamburger {display: inline-block}
 }
 
 @media (max-width: 767px) {
@@ -4264,7 +4344,6 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     }
 
     #logo {
-        text-align: center;
         width: 100%;
     }
 
@@ -4441,7 +4520,7 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
 
     .cart-search {
         display: block;
-        /*margin: 10px 0 0;*/
+        margin: 30px 0;
         bottom: 0;
         left: 0;
         width: 100%;
@@ -5040,7 +5119,7 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
 .selected-options .ocfilter-option {background: none; padding: 4px 0}
 .noUi-connect {background:#000}
 .selected-options .ocfilter-option {font-size: inherit}
-.ocfilter .list-group-item {padding: 10px 0px}
+.ocfilter .list-group-item {padding: 10px 0px; border:none;}
 .alert-error {
     color: #721c24;
     background-color: #f8d7da;
@@ -5127,3 +5206,16 @@ a.popup-ajax[href^="https://"] {border-bottom: none}
     color: #1f90bb
 }
 
+app-product-options {
+    display: block;
+    min-height: 250px;
+}
+
+app-product-options form {
+    min-height: 212px;
+    width: 100%;
+}
+
+app-product-options form > div.form-group {
+
+}

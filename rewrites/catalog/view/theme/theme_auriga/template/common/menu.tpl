@@ -3,11 +3,6 @@
     <div class="nav-container visible-lg visible-md">
         <div class="nav1">
             <div id="pt_custommenu" class="pt_custommenu">
-                <div id="pt_menu_home" class="pt_menu">
-                    <div class="pt_menu parentMenu">
-                        <a href="<?php HTTP_SERVER ?>"><span><i class="fa fa-home" aria-hidden="true"></i></span></a>
-                    </div>
-                </div>
                 <?php
                 $cat_menu_num = 0;
                 foreach ($categories as $category) { $cat_menu_num++;?>

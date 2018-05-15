@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-md-3 pull-right">
                         <ul class="list-inline phones">
-                            <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone-square"></i> (044) 593-33-53</a></li>
+                            <li><a href="tel:+38(044)593-33-53"><i class="fa fa-phone"></i> (044) 593-33-53</a></li>
                         </ul>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-9 col-sm-5 col-xs-7">
+                <div class="col-md-9 col-sm-9 col-xs-12">
                     <div class="cart-search">
                         <div class="top-cart">
                             <?php echo $cart; ?>

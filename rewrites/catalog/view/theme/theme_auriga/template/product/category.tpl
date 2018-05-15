@@ -1,10 +1,6 @@
 <?php echo $header; ?>
 <div class="container text-container">
-    <ul class="breadcrumb">
-        <?php foreach ($breadcrumbs as $breadcrumb) { ?>
-        <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
-        <?php } ?>
-    </ul>
+    <?php $template = __DIR__ . "/../common/breadcrumb.tpl"; if(file_exists($template)){ include_once($template); } ?>
 
     <div class="row swap">
         <?php if(mb_strlen($description) > 40 && $page<=1){ ?>
@@ -68,7 +64,7 @@
                     </div>
                     <div class="row products-category grid">
                         <?php foreach ($products as $product) { ?>
-                        <div class="product-layout product-list col-xs-12 ">
+                        <div class="product-layout product-grid col-lg-4 col-md-4 col-sm-6 col-xs-6 col-mobile">
                             <div class="product-container">
                                 <div class="item-inner">
                                     <div class="left-block">
