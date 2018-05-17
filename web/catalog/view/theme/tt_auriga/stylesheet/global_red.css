@@ -2606,6 +2606,7 @@ a.btn {
 .product-view #product .add-to-links .wishlist, .product-view #product .add-to-links .compare {
     float: left;
     margin: 0 1px 0 0;
+    display: none;
 }
 
 .product-view .add-to-links button {
