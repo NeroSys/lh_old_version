@@ -74,7 +74,6 @@ b, strong {
 
 h1, h2, h3, h4, h5, h6 {
     color: #2f2f2f;
-    margin: 0;
 }
 
 p {
@@ -1634,7 +1633,21 @@ a.btn {
     font-family: FontAwesome;
 }
 
-.item-inner .sale {
+/** RPODUCT ITEM**/
+.product-container {
+    position: relative;
+}
+
+.product-container * {position: relative}
+
+.product-container .item-inner {
+    overflow: hidden;
+}
+.product-container:hover .item-inner {
+    overflow: visible;
+}
+
+.item-inner .product-sale {
     background: url("../image/sale.png") no-repeat scroll 0 0;
     height: 100px;
     left: 20px;
@@ -1644,24 +1657,73 @@ a.btn {
     font-size: 0;
 }
 
-.item-inner {
-    margin: 0;
-    overflow: hidden;
-    padding-top: 3px;
-    position: relative;
-    text-align: left;
-}
-
 .item-inner .item-container {
-    background: rgba(0, 0, 0, 0.6);
     height: 100%;
     position: absolute;
     top: 100%;
     width: 100%;
 }
 
-.item-inner:hover .item-container {
-    /*top: 0;*/
+
+.product-container .product-cover {
+    position: relative;
+    z-index:2;
+}
+
+.product-container .product-caption {
+    position: relative;
+    width: 110%;
+    z-index:1;
+    opacity: 0;
+}
+
+.product-container.effect-overflow:hover .product-caption {
+    position: absolute;
+    overflow: visible;
+    background-color: white;
+    box-shadow: 1px 1px 10px 2px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    margin: -10px;
+    z-index: 3;
+    opacity: 1;
+}
+
+.product-container.effect-overflow:hover .product-caption .product-caption-inner {
+    padding: 10px;
+}
+.product-container .name {float: none}
+.product-container.effect-overflow {
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    background-color: #fff;
+}
+.product-container.effect-overflow .product-caption {
+    position: absolute;
+    top:0;
+}
+
+.product-container.effect-overflow .item-container {
+    /*background-color: #fff;*/
+    /*color:#0f0f0f;*/
+}
+
+.product-container.effect-overflow:hover .item-container {
+    z-index: 2;
+    display: block;
+    position: relative;
+}
+
+.item-inner .item-container .product-actions {
+
+}
+
+.item-inner.effect-slide-top .item-container {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.item-inner.effect-slide-top:hover .item-container {
+    top: 0;
 }
 
 .item-container .item-description {
@@ -1670,23 +1732,26 @@ a.btn {
     position: relative;
 }
 
-.item-inner .item-container .name a, .item-inner .item-container .name {
+.item-inner.effect-slide-top .item-container .product-name a,
+.item-inner.effect-slide-top .item-container .product-name {
+    color: #ffffff;
+}
+.item-inner.effect-slide-top .item-container .product-description {
     color: #ffffff;
 }
 
-.item-inner .item-container .price {
+.item-inner .item-container .product-price {
     color: #000000;
     font-size: 23px;
 }
 
-.item-inner .item-container .manufacturer {
+.item-inner .item-container .product-manufacturer {
     color: #2f2f2f;
     font-size: 14px;
 }
 
-.item-inner .item-container .description {
+.item-inner .item-container .product-description {
     border-top: 1px solid rgba(0,0,0,0.5);
-    color: #ffffff;
     font-size: 12px;
     padding: 10px 0;
     margin: 10px 0 0;
@@ -1694,20 +1759,24 @@ a.btn {
     width: 100%;
 }
 
-.item-inner .item-container .rating {
+.item-inner .item-container .product-rating {
     display: none;
 }
 
-.item-inner .item-container .actions {
+.item-inner .item-container .product-actions {
     bottom: 0;
     position: absolute;
     right: 0;
 }
 
+
+
 .item-inner .cart {
     float: left;
     margin-right: 2px;
 }
+
+/** /RPODUCT ITEM**/
 
 .product-thumb .image {
     text-align: center;
@@ -1723,6 +1792,7 @@ a.btn {
 
 .product-grid, .grid {
     margin-bottom: 20px;
+    padding-top:15px;
 }
 
 .product-grid .product-thumb .image {
@@ -1841,7 +1911,66 @@ a.btn {
 
 .products-category.grid .price {
     font-weight: bold;
+    font-size: 1.6em;
+    font-family: CaviarDreams;
 }
+
+.products-category.grid .price.sticker {
+
+    /*background-color: rgba(0,0,0,1);*/
+    display: inline-block;
+    padding: 7px 5px;
+    /*color: white;*/
+    font-size: 1.3em;
+    position: relative;
+
+    color: black;
+    background-color: white;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
+}
+.price.sticker:before, .price.sticker:after {
+    content:"";
+    position: absolute;
+    background-color: white;
+    width:6px;
+    height: 6px;
+    border-radius: 50%;
+    left:50%;
+    margin-left: -2px;
+}
+.price.sticker:before {top:-3px;}
+.price.sticker:after {bottom:-3px}
+
+.products-category.grid .price.ticket {
+    font-size: 1.3em;
+    backface-visibility: hidden;
+    transform: rotate(9deg) translateY(25%) translateZ(0);
+    transform-origin: 50% 50%;
+    top: 50%;
+    left: -8px;
+    color: white;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.4);
+    /*margin-top: -65px;*/
+    /*margin-left: -144px;*/
+    position: absolute;
+    display: inline-block;
+    padding: 10px;
+    background-image:
+            radial-gradient( ellipse closest-side at 50%  50%, hsla(0, 0%, 100%, 0.10), transparent 90%),
+            radial-gradient( circle at 0    100%, transparent 0px, #fa616d 0px),
+            radial-gradient( circle at 100% 100%, transparent 7px, #fa616d 8px),
+            radial-gradient( circle at 100% 0, transparent 7px, #fa616d 8px),
+            radial-gradient( circle at 0    0, transparent 0px, #fa616d 0px);
+    background-position: center center, bottom left, bottom right, top right, top left;
+    background-size: cover, 51% 51%, 51% 51%, 51% 51%, 51% 51%;
+    background-repeat: no-repeat;
+    border-width: 0 4px;
+    border-color: transparent;
+    border-style: solid;
+    border-image: radial-gradient(cover circle, #fa616d 0%, #fa616d 50%, transparent 51%) 0 39% / 15px 4px repeat;
+    -webkit-filter: drop-shadow(hsla(0, 0%, 0%, 0.55) 1px 1px 2px);
+}
+
 
 .product-list .rating {
     margin: 15px 0 6px;
@@ -2095,6 +2224,12 @@ a.btn {
     text-decoration: none;
     font-weight: 300;
     text-transform: uppercase;
+    height:20px;
+
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .name a:hover {

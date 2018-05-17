@@ -467,6 +467,7 @@ class CategoryController extends \Controller
             }
 
             $product_attributes = $this->model_catalog_product->getProductAttributes($result['product_id']);
+            $product_options = $this->model_catalog_product->getProductAttributes($result['product_id']);
 
 
             $products[] = array(

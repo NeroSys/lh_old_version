@@ -65,33 +65,35 @@
                     <div class="row products-category grid">
                         <?php foreach ($products as $product) { ?>
                         <div class="product-layout product-grid col-lg-4 col-md-4 col-sm-6 col-xs-6 col-mobile">
-                            <div class="product-container">
+                            <div class="product-container effect-overflow">
                                 <div class="item-inner">
-                                    <div class="left-block">
+                                    <div class="product-cover">
                                         <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" /></a></div>
-                                    </div>
-                                    <div class="right-block">
-                                        <div class="caption">
-                                            <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
-                                            <?php if ($product['price']) { ?>
-                                            <p class="price">
-                                                <?php if (!$product['special']) { ?>
-                                                <?php echo $product['price']; ?>
-                                                <?php } else { ?>
-                                                <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
-                                                <?php } ?>
-                                                <?php if ($product['tax']) { ?>
-                                                <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
-                                                <?php } ?>
-                                            </p>
+                                        <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
+                                        <?php if ($product['price']) { ?>
+                                        <div class="price ticket">
+                                            <?php if (!$product['special']) { ?>
+                                            <?php echo $product['price']; ?>
+                                            <?php } else { ?>
+                                            <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
                                             <?php } ?>
+                                            <?php if ($product['tax']) { ?>
+                                            <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+                                            <?php } ?>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="product-caption">
+                                        <div class="product-caption-inner">
+                                            <div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" title="<?php echo $product['name']; ?>" class="img-responsive" /></a></div>
+                                            <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
+
                                             <div class="item-container">
-                                                <div class="name"><a href="<?php echo $product['href']; ?>"><?php echo $product['name']; ?></a></div>
                                                 <?php if (isset($product['rating'])) { ?>
                                                 <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png"  /></div>
                                                 <?php } ?>
-                                                <p class="description"><?php echo $product['description']; ?></p>
-                                                <div class="actions">
+                                                <p class="product-description"><?php echo $product['description']; ?></p>
+                                                <div class="product-actions">
                                                     <div class="button-group">
                                                         <div class="add-to-links">
                                                             <div class="cart"><button type="button" data-toggle="tooltip" title="<?php echo $button_cart; ?>" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button></div>
