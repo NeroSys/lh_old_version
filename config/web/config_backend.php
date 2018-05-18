@@ -2,6 +2,7 @@
 require_once __DIR__."/basic.php";
 
 $appConfig->set('HTTP_SERVER',  $appConfig->get('CURRENT_HTTP_DOMAIN').'/admin_it/');
+$appConfig->set('HTTPS_SERVER',  $appConfig->get('CURRENT_HTTPS_DOMAIN').'/admin_it/');
 $appConfig->set('DIR_APPLICATION', $appConfig->get('DIR_OPENCART').'admin/');
 $appConfig->set('LOCAL_DIR_APPLICATION', $appConfig->get('DIR_MODIFICATION').'admin/');
 
