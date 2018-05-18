@@ -14,11 +14,9 @@ class ControllerCommonHeader extends Controller {
 			}
 		}
 
-		if ($this->request->server['HTTPS']) {
-			$server = $this->config->get('config_ssl');
-		} else {
-			$server = $this->config->get('config_url');
-		}
+		$https_server = $this->config->get('config_ssl') === null ? HTTP_SERVER : $this->config->get('config_ssl');
+		$http_server = $this->config->get('config_url');
+		$server = $this->request->server['HTTPS'] ? $https_server : $http_server;
 
 		if (is_file(DIR_IMAGE . $this->config->get('config_icon'))) {
 			$this->document->addLink($server . 'image/' . $this->config->get('config_icon'), 'icon');
