@@ -14,7 +14,7 @@ class ControllerCommonHeader extends Controller {
 			}
 		}
 
-		$https_server = $this->config->get('config_ssl') === null ? HTTP_SERVER : $this->config->get('config_ssl');
+		$https_server = $this->config->get('config_ssl') === null ? HTTPS_SERVER : $this->config->get('config_ssl');
 		$http_server = $this->config->get('config_url');
 		$server = $this->request->server['HTTPS'] ? $https_server : $http_server;
 

@@ -47,7 +47,8 @@
         "exists file checks rewrites": "patches/file_exists_rewrites.patch",
         "permissions file exists rewrites": "patches/user_permission_rewrites.patch",
         "psr memcached added as cache": "patches/cache_to_memcached.patch",
-	"system/library/config locator rewrite ": "patches/rewrite_config_file_exists.patch"
+	    "system/library/config locator rewrite ": "patches/rewrite_config_file_exists.patch",
+        "added SITE_SSL define": "patches/ssl_config.patch"
       },
       "byjg/migration": {
         "wrap all queries to transactions": "patches/migration_wrapped_to_transactions.patch"

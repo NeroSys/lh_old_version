@@ -19,3 +19,4 @@ require_once(DIR_SYSTEM . 'startup.php');
 
 // Application
 require_once(DIR_SYSTEM . 'framework.php');
+dump($config);

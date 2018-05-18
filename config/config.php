@@ -9,9 +9,9 @@ if(defined('WEBSITE_TYPE') && WEBSITE_TYPE === 'FRONTEND') {
 }
 
 $cache = \App\Engine\Cache\Memcached::getInstance();
-$appConfig = $cache->get($cache_key);
-
-if(!$appConfig){
+//$appConfig = $cache->get($cache_key);
+//
+//if(!$appConfig){
     $appConfig = new Vars(
         [
             __DIR__ . '/web/basic.yml',
@@ -29,7 +29,7 @@ if(!$appConfig){
         require_once __DIR__ . '/web/config_frontend.php';
     }
     $cache->set($cache_key, $appConfig);
-}
+//}
 
 opencartConfigInit($appConfig);
 
@@ -40,4 +40,3 @@ function opencartConfigInit(Vars $config)
     }
 
 }
-
