@@ -39,7 +39,7 @@ host('dev.little-house.com.ua')
 
 host('lhgroup.com.ua')
 	->set('deploy_path', '/home/admin/web/lhgroup.com.ua/public_html')
-	->stage('lh')
+	->stage('lhgroup_dev')
 	->hostname('192.168.102.79')
 	->user('admin')
 	->port(22)
@@ -49,7 +49,21 @@ host('lhgroup.com.ua')
 	->multiplexing(true)
 	->addSshOption('UserKnownHostsFile', '/dev/null')
 	->addSshOption('StrictHostKeyChecking', 'no')
-	->set('branch', 'dev-products_upload_from_erp');
+	->set('branch', 'dev');
+
+host('lhgroup.com.ua')
+	->set('deploy_path', '/home/admin/web/lhgroup.com.ua/public_html')
+	->stage('lhgroup_prod')
+	->hostname('192.168.102.147')
+	->user('admin')
+	->port(22)
+	// ->configFile('~/.ssh/config')
+	->identityFile('~/.ssh/id_rsa')
+	->forwardAgent(true)
+	->multiplexing(true)
+	->addSshOption('UserKnownHostsFile', '/dev/null')
+	->addSshOption('StrictHostKeyChecking', 'no')
+	->set('branch', 'dev');
 
 host('little-house.com.ua')
     ->set('deploy_path', '/home/admin/web/little-house.com.ua/public_html')
@@ -83,11 +97,11 @@ task('deploy', [
 ]);
 
 task('deploy:notifyDeploySuccess', function () {
-    mail("mrtimosh@gmail.com", "Deploy success", "Congrats, deploy successfuly done");
+    mail("y.tkachenko@mstsoft.org", "Deploy success", "Congrats, deploy successfuly done");
 });
 
 task('deploy:notifyDeployFailed', function () {
-    mail("mrtimosh@gmail.com", "Deploy failed", "Sorry, deploy failed");
+    mail("y.tkachenko@mstsoft.org", "Deploy failed", "Sorry, deploy failed");
 });
 
 task('deploy:clear-cache', function () {
