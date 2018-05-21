@@ -41,7 +41,7 @@ class CategoryModel extends \ModelCatalogCategory
     protected function getCategoryTreeLeavsDown(int $category_id, Node $node):void{
         $query = $this->db->query("SELECT cd.name,cd.category_id,c.parent_id FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) LEFT JOIN " . DB_PREFIX . "category_to_store c2s ON (c.category_id = c2s.category_id) WHERE c.parent_id = '" . (int) $category_id . "' AND cd.language_id = '" . (int) $this->config->get('config_language_id') . "' AND c2s.store_id = '" . (int) $this->config->get('config_store_id') . "' AND c.status = '1' ORDER BY c.sort_order ASC");
         foreach ($query->rows as $belowCategory) {
-            $belowCategory["href"] = $this->url->link('product/category', 'path=' . $belowCategory['category_id']);
+            $belowCategory["href"] = $this->url->link('product/category', 'path=' . $belowCategory['category_id'], true);
             $leavNode = new Node($belowCategory);
             $node->addChild(
                 $leavNode

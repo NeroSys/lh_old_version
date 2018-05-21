@@ -62,7 +62,7 @@ class HomeController extends \Controller
                 'name' => $info['name'],
                 'preview' => html_entity_decode($info['preview'], ENT_QUOTES, 'UTF-8'),
                 'attributes' => $info['attributes'],
-                'href' => $this->url->link('newsblog/article', 'newsblog_path=' . $data['filter_category_id'] . '&newsblog_article_id=' . $info['article_id'])
+                'href' => $this->url->link('newsblog/article', 'newsblog_path=' . $data['filter_category_id'] . '&newsblog_article_id=' . $info['article_id'], true)
             );
         }
         return $articles;

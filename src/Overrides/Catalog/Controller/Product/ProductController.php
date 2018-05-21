@@ -21,7 +21,7 @@ class ProductController extends \ControllerProductProduct
 
         $breadcrumbs[] = array(
             'text' => $this->language->get('text_home'),
-            'href' => $this->url->link('common/home')
+            'href' => $this->url->link('common/home', '', true)
         );
 
 
@@ -31,13 +31,13 @@ class ProductController extends \ControllerProductProduct
             foreach ($this->model_catalog_category->getCategoryTree($productCategory["category_id"]) as $category) {
                 $breadcrumbs[] = array(
                     'text' => $category['name'],
-                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'])
+                    'href' => $this->url->link('product/category', 'path=' . $category['category_id'], true)
                 );
             }
         }
         $breadcrumbs[] = array(
             'text' => $product_info['name'],
-            'href' => $this->url->link('product/product', '&product_id=' . $this->request->get['product_id'])
+            'href' => $this->url->link('product/product', '&product_id=' . $this->request->get['product_id'], true)
         );
 
         return $breadcrumbs;
@@ -50,7 +50,7 @@ class ProductController extends \ControllerProductProduct
         if (isset($this->request->get['manufacturer_id'])) {
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_brand'),
-                'href' => $this->url->link('product/manufacturer')
+                'href' => $this->url->link('product/manufacturer', '', true)
             );
 
             $url = '';
@@ -76,7 +76,7 @@ class ProductController extends \ControllerProductProduct
             if ($manufacturer_info) {
                 $data['breadcrumbs'][] = array(
                     'text' => $manufacturer_info['name'],
-                    'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . $url)
+                    'href' => $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] . $url, true)
                 );
             }
         }
@@ -122,7 +122,7 @@ class ProductController extends \ControllerProductProduct
 
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_search'),
-                'href' => $this->url->link('product/search', $url)
+                'href' => $this->url->link('product/search', $url, true)
             );
         }
 
@@ -243,7 +243,7 @@ class ProductController extends \ControllerProductProduct
 
             $data['product_id'] = (int)$this->request->get['product_id'];
             $data['manufacturer'] = $product_info['manufacturer'];
-            $data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id']);
+            $data['manufacturers'] = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $product_info['manufacturer_id'], true);
             $data['model'] = $product_info['model'];
             $data['reward'] = $product_info['reward'];
             $data['points'] = $product_info['points'];
@@ -400,7 +400,7 @@ class ProductController extends \ControllerProductProduct
                 $data['captcha'] = '';
             }
 
-            $data['share'] = $this->url->link('product/product', 'product_id=' . (int)$this->request->get['product_id']);
+            $data['share'] = $this->url->link('product/product', 'product_id=' . (int)$this->request->get['product_id'], true);
 
             $data['attribute_groups'] = $this->model_catalog_product->getProductAttributes($this->request->get['product_id']);
 
@@ -449,7 +449,7 @@ class ProductController extends \ControllerProductProduct
                     'tax'         => $tax,
                     'minimum'     => $result['minimum'] > 0 ? $result['minimum'] : 1,
                     'rating'      => $rating,
-                    'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])
+                    'href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'], true)
                 );
             }
 
@@ -461,7 +461,7 @@ class ProductController extends \ControllerProductProduct
                 foreach ($tags as $tag) {
                     $data['tags'][] = array(
                         'tag'  => trim($tag),
-                        'href' => $this->url->link('product/search', 'tag=' . trim($tag))
+                        'href' => $this->url->link('product/search', 'tag=' . trim($tag), true)
                     );
                 }
             }
@@ -535,7 +535,7 @@ class ProductController extends \ControllerProductProduct
 
             $data['breadcrumbs'][] = array(
                 'text' => $this->language->get('text_error'),
-                'href' => $this->url->link('product/product', $url . '&product_id=' . $product_id)
+                'href' => $this->url->link('product/product', $url . '&product_id=' . $product_id, true)
             );
 
             $this->document->setTitle($this->language->get('text_error'));
@@ -546,7 +546,7 @@ class ProductController extends \ControllerProductProduct
 
             $data['button_continue'] = $this->language->get('button_continue');
 
-            $data['continue'] = $this->url->link('common/home');
+            $data['continue'] = $this->url->link('common/home', '', true);
 
             $this->response->addHeader($this->request->server['SERVER_PROTOCOL'] . ' 404 Not Found');
 
