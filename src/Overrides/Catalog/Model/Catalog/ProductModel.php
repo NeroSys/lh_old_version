@@ -16,50 +16,6 @@ class ProductModel extends \ModelCatalogProduct
         return $this->groupingOptionsAsSpecificationID($options);
     }
 
-	public function getProductOptionsOld($product_id) {
-		$product_option_data = array();
-
-		$product_option_query = $this->db->query("
-SELECT * FROM " . DB_PREFIX . "product_option po 
-LEFT JOIN `" . DB_PREFIX . "option` o ON (po.option_id = o.option_id) 
-LEFT JOIN " . DB_PREFIX . "option_description od ON (o.option_id = od.option_id) 
-WHERE po.product_id = '" . (int)$product_id . "' AND od.language_id = '" . (int)$this->config->get('config_language_id') . "' 
-ORDER BY o.sort_order");
-
-		foreach ($product_option_query->rows as $product_option) {
-			$product_option_value_data = array();
-
-			$product_option_value_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product_option_value pov LEFT JOIN " . DB_PREFIX . "option_value ov ON (pov.option_value_id = ov.option_value_id) LEFT JOIN " . DB_PREFIX . "option_value_description ovd ON (ov.option_value_id = ovd.option_value_id) WHERE pov.product_id = '" . (int)$product_id . "' AND pov.product_option_id = '" . (int)$product_option['product_option_id'] . "' AND ovd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY ov.sort_order");
-
-			foreach ($product_option_value_query->rows as $product_option_value) {
-				$product_option_value_data[] = array(
-					'product_option_value_id' => $product_option_value['product_option_value_id'],
-					'option_value_id'         => $product_option_value['option_value_id'],
-					'name'                    => $product_option_value['name'],
-					'image'                   => $product_option_value['image'],
-					'quantity'                => $product_option_value['quantity'],
-					'subtract'                => $product_option_value['subtract'],
-					'price'                   => $product_option_value['price'],
-					'price_prefix'            => $product_option_value['price_prefix'],
-					'weight'                  => $product_option_value['weight'],
-					'weight_prefix'           => $product_option_value['weight_prefix']
-				);
-			}
-
-			$product_option_data[] = array(
-				'product_option_id'    => $product_option['product_option_id'],
-				'product_option_value' => $product_option_value_data,
-				'option_id'            => $product_option['option_id'],
-				'name'                 => $product_option['name'],
-				'type'                 => $product_option['type'],
-				'value'                => $product_option['value'],
-				'required'             => $product_option['required']
-			);
-		}
-
-		return $product_option_data;
-	}
-
     public function getProductOptions($product_id) {
         $product_option_data = array();
 
@@ -144,6 +100,12 @@ ORDER BY o.sort_order");
     }
 
     private function getProductSpecificationOptionsFromDatabase(int $product_id):?array{
+
+		$cache_key = "product_options_".$product_id;
+		if($data = $this->cache->get($cache_key)) {
+			return $data;
+		}
+
         $sql = "SELECT opog.*, opog.price_base price, 
                   ood.option_id, ood.name option_name, 
                   oo.type, oo.sort_order,
@@ -159,7 +121,10 @@ ORDER BY o.sort_order");
                   WHERE opog.product_id = $product_id
                   ORDER BY opog.product_id, option_value_name";
 
-        return $this->db->query($sql)->rows;
+		$data = $this->db->query($sql)->rows;
+		$this->cache->set($cache_key, $data);
+
+		return $data;
     }
 
     public function generateProductDescription(int $product_id):string{
@@ -335,6 +300,7 @@ ORDER BY o.sort_order");
         foreach ($query->rows as $result) {
             $product_data[$result['product_id']] = $result;
             $product_data[$result['product_id']]['price']  = ($result['discount'] ? $result['discount'] : $result['price']);
+			$product_data[$result['product_id']]['options'] = $this->getProductOptionsByUniqueName($result['product_id']);
         }
 
         return $product_data;
@@ -444,5 +410,16 @@ ORDER BY o.sort_order");
         return $query->row['total'];
     }
 
+	public function getProductOptionsByUniqueName($product_id) {
+		$product_option_data = array();
 
+		$options = $this->getProductSpecificationOptionsFromDatabase($product_id);
+
+		foreach ($options as $option) {
+			$product_option_data[$option['option_id']]['option_id']             = $option['option_id'];
+			$product_option_data[$option['option_id']]['name']                  = $option['option_name'];
+			$product_option_data[$option['option_id']]['product_option_value'][$option['option_value_id']] = $option['option_value_name'];
+		}
+		return $product_option_data;
+	}
 }

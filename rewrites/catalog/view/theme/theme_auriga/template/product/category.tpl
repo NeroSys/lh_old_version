@@ -92,7 +92,30 @@
                                                 <?php if (isset($product['rating'])) { ?>
                                                 <div class="rating"><img src="catalog/view/theme/default/image/stars-<?php echo $product['rating']; ?>.png"  /></div>
                                                 <?php } ?>
-                                                <p class="product-description"><?php echo $product['description']; ?></p>
+                                                <?php if (isset($product['options'])) { ?>
+                                                <div class="product-description">
+                                                    <?php foreach ($product['options'] as $option_group) { ?>
+                                                    <?php
+                                                    switch($option_group['name']){
+                                                        case 'Размер':
+                                                            $class_color = 'opt-style-1'; break;
+                                                        case 'Цвет':
+                                                            $class_color = 'opt-style-2'; break;
+                                                        default:
+                                                            $class_color = '';
+                                                    }
+                                                    ?>
+                                                    <div class="product-grid-options">
+                                                        <p class="optin-title"><?php echo $option_group['name']; ?></p>
+                                                        <ul class="<?php echo $class_color; ?>">
+                                                            <?php foreach ($option_group['product_option_value'] as $option) { ?>
+                                                            <li><?php echo $option; ?></li>
+                                                            <?php } ?>
+                                                        </ul>
+                                                    </div>
+                                                    <?php } ?>
+                                                </div>
+                                                <?php } ?>
                                                 <div class="product-actions">
                                                     <div class="button-group">
                                                         <div class="add-to-links">
