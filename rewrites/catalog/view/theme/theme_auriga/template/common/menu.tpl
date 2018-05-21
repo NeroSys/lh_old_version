@@ -5,7 +5,7 @@
             <div id="pt_custommenu" class="pt_custommenu">
                 <?php
                 $cat_menu_num = 0;
-                foreach ($categories as $category) { $cat_menu_num++;?>
+                foreach ($categories as $category) { $cat_menu_num++; ?>
                     <?php if ($category['children']) { ?>
                     <div id="pt_menu<?php echo $cat_menu_num?>" class="pt_menu-with-childs-child pt_menu nav-<?php echo $cat_menu_num?>">
                         <div class="parentMenu">

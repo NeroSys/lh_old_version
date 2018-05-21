@@ -1,16 +1,11 @@
-Index: vendor/opencart/opencart/upload/system/config/catalog.php
-IDEA additional info:
-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
-<+>UTF-8
-===================================================================
---- vendor/opencart/opencart/upload/system/config/catalog.php	(date 1525250572642)
-+++ vendor/opencart/opencart/upload/system/config/catalog.php	(date 1525250572642)
+--- vendor/opencart/opencart/upload/system/config/default.php	(date 1526887930446)
++++ vendor/opencart/opencart/upload/system/config/default.php	(date 1526887930446)
 @@ -1,7 +1,7 @@
  <?php
  // Site
- $_['site_base']        = substr(HTTP_SERVER, 7);
--$_['site_ssl']         = false;
-+$_['site_ssl']         = SITE_SSL;
+ $_['site_base']            = '';
+-$_['site_ssl']             = false;
++$_['site_ssl']             = SITE_SSL;
  
- // Database
- $_['db_autostart']     = true;
+ // Language
+ $_['language_default']     = 'en-gb';

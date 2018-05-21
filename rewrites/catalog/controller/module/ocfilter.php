@@ -1125,7 +1125,7 @@ class ControllerModuleOCFilter extends Controller {
       $url .= '&limit=' . (int)$this->request->get['limit'];
     }
 
-    return $this->url->link('product/category', $url);
+    return $this->url->link('product/category', $url, true);
   }
 
   public function callback() {

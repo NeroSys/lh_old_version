@@ -71,7 +71,7 @@ class ControllerCommonHeader extends Controller {
 		$data['text_category'] = $this->language->get('text_category');
 		$data['text_all'] = $this->language->get('text_all');
 
-		$data['home'] = $this->url->link('common/home');
+		$data['home'] = $this->url->link('common/home', '', true);
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
 		$data['logged'] = $this->customer->isLogged();
 		$data['account'] = $this->url->link('account/account', '', true);
@@ -81,9 +81,9 @@ class ControllerCommonHeader extends Controller {
 		$data['transaction'] = $this->url->link('account/transaction', '', true);
 		$data['download'] = $this->url->link('account/download', '', true);
 		$data['logout'] = $this->url->link('account/logout', '', true);
-		$data['shopping_cart'] = $this->url->link('checkout/cart');
+		$data['shopping_cart'] = $this->url->link('checkout/cart', '', true);
 		$data['checkout'] = $this->url->link('checkout/checkout', '', true);
-		$data['contact'] = $this->url->link('information/contact');
+		$data['contact'] = $this->url->link('information/contact', '', true);
 		$data['telephone'] = $this->config->get('config_telephone');
 
 		// Menu

@@ -13,8 +13,6 @@ class ControllerCommonNavigation  extends Controller
         // Menu
         $this->load->model('catalog/category');
 
-        $ssl = $this->request->server['HTTPS'] ? true : false;
-
         $data = array();
 
         $categories = $this->model_catalog_category->getCategories(0);
@@ -34,7 +32,7 @@ class ControllerCommonNavigation  extends Controller
 
                     $children_data[] = array(
                         'name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $this->model_catalog_product->getTotalProducts($filter_data) . ')' : ''),
-                        'href'  => $this->url->link('product/category', 'path=' . $child['category_id'], $ssl)
+                        'href'  => $this->url->link('product/category', 'path=' . $child['category_id'], true)
                     );
                 }
 
@@ -43,7 +41,7 @@ class ControllerCommonNavigation  extends Controller
                     'name'     => $category['name'],
                     'children' => $children_data,
                     'column'   => $category['column'] ? $category['column'] : 1,
-                    'href'     => $this->url->link('product/category', 'path=' . $category['category_id'], $ssl)
+                    'href'     => $this->url->link('product/category', 'path=' . $category['category_id'], true)
                 );
             }
         }

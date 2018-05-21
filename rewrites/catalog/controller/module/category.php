@@ -64,7 +64,6 @@ class ControllerModuleCategory extends Controller {
 	protected function generateHtmlTree(\Tree\Node\NodeInterface $node){
         foreach ($node->getChildren() as $nodeWithChildrens) {
             $category = $nodeWithChildrens->getValue();
-
             $hasChildren = $nodeWithChildrens->getChildren() ? true:false;
             echo $hasChildren ? "<li class='hadchild'>": "<li>";
 

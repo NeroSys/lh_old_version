@@ -23,7 +23,7 @@ class ControllerCommonMaintenance extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_maintenance'),
-			'href' => $this->url->link('common/maintenance')
+			'href' => $this->url->link('common/maintenance', '', true)
 		);
 
 		$data['message'] = $this->language->get('text_message');

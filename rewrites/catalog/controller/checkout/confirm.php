@@ -31,7 +31,7 @@ class ControllerCheckoutConfirm extends \Controller {
 
 		// Validate cart has products and has stock.
 		if ((!$this->cart->hasProducts() && empty($this->session->data['vouchers'])) || (!$this->cart->hasStock() && !$this->config->get('config_stock_checkout'))) {
-			$redirect = $this->url->link('checkout/cart');
+			$redirect = $this->url->link('checkout/cart', '', true);
 		}
 
 		// Validate minimum quantity requirements.
@@ -47,7 +47,7 @@ class ControllerCheckoutConfirm extends \Controller {
 			}
 
 			if ($product['minimum'] > $product_total) {
-				$redirect = $this->url->link('checkout/cart');
+				$redirect = $this->url->link('checkout/cart', '', true);
 
 				break;
 			}
@@ -401,7 +401,7 @@ class ControllerCheckoutConfirm extends \Controller {
 					'subtract'   => $product['subtract'],
 					'price'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']),
 					'total'      => $this->currency->format($this->tax->calculate($product['price'], $product['tax_class_id'], $this->config->get('config_tax')) * $product['quantity'], $this->session->data['currency']),
-					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'])
+					'href'       => $this->url->link('product/product', 'product_id=' . $product['product_id'], true)
 				);
 			}
 

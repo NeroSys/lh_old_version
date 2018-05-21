@@ -30,18 +30,18 @@ class ControllerCommonFooter extends Controller {
 			if ($result['bottom']) {
 				$data['informations'][] = array(
 					'title' => $result['title'],
-					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'])
+					'href'  => $this->url->link('information/information', 'information_id=' . $result['information_id'], SITE_SSL)
 				);
 			}
 		}
 
-		$data['contact'] = $this->url->link('information/contact');
+		$data['contact'] = $this->url->link('information/contact', '', true);
 		$data['return'] = $this->url->link('account/return/add', '', true);
-		$data['sitemap'] = $this->url->link('information/sitemap');
+		$data['sitemap'] = $this->url->link('information/sitemap', '', true);
 		$data['manufacturer'] = $this->url->link('product/manufacturer');
 		$data['voucher'] = $this->url->link('account/voucher', '', true);
 		$data['affiliate'] = $this->url->link('affiliate/account', '', true);
-		$data['special'] = $this->url->link('product/special');
+		$data['special'] = $this->url->link('product/special', '', true);
 		$data['account'] = $this->url->link('account/account', '', true);
 		$data['order'] = $this->url->link('account/order', '', true);
 		$data['wishlist'] = $this->url->link('account/wishlist', '', true);
