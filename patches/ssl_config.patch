@@ -21,3 +21,15 @@
 
  // Database
  $_['db_autostart']     = true;
+
+--- opencart/opencart/upload/system/library/url.php	(date 1526895889038)
++++ opencart/opencart/upload/system/library/url.php	(date 1526895889038)
+@@ -11,7 +11,7 @@
+ 		$this->rewrite[] = $rewrite;
+ 	}
+
+-	public function link($route, $args = '', $secure = false) {
++	public function link($route, $args = '', $secure = true) {
+ 		if ($this->ssl && $secure) {
+ 			$url = 'https://' . $_SERVER['HTTP_HOST'] . rtrim(dirname($_SERVER['SCRIPT_NAME']), '/.\\') . '/index.php?route=' . $route;
+ 		} else {
