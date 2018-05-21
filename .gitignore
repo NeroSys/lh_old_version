@@ -42,3 +42,4 @@ Thumbs.db
 /config/local.yml
 composer.phar
 /web/image/catalog/products
+/web/.htaccess
