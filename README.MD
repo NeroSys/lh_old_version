@@ -37,20 +37,8 @@
 - настроить ``` /config/local.yml ```
 - импортировать дамп базы
 - настроить .htaccess
-
     - Для локальной копии, разместить в папку ``` /web ``` одноименный файл 
     - Для сервера с системой деплоя - разместить в ``` ../../shared ```
-
-
-    Options -Indexes
-    RewriteEngine On
-    RewriteBase /
-    RewriteRule ^system/download/(.*) index.php?route=error/not_found [L]
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css|svg)
-    RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]>
-
 
 ### Возможные ошибки установки:
 - Не установились патчи. Проверьте ``` composer patch ```
