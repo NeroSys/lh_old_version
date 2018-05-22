@@ -1751,10 +1751,11 @@ a.btn {
 }
 
 .item-inner .item-container .product-description {
-    border-top: 1px solid rgba(0,0,0,0.5);
+    border-top: 1px solid rgba(0,0,0,0.3);
+    border-bottom: 1px solid rgba(0,0,0,0.3);
     font-size: 12px;
     padding: 10px 0;
-    margin: 10px 0 0;
+    margin: 10px 0;
     display: inline-block;
     width: 100%;
 }
@@ -1764,9 +1765,6 @@ a.btn {
 }
 
 .item-inner .item-container .product-actions {
-    bottom: 0;
-    position: absolute;
-    right: 0;
 }
 
 
@@ -2014,7 +2012,7 @@ a.btn {
 }
 
 .category {
-    margin: 33px 0 0;
+
 }
 
 .category .box-heading h3 {
@@ -3797,6 +3795,18 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     -moz-transition: top 0.5s ease;
     -webkit-transition: top 0.5s ease;
     cursor: pointer;
+}
+
+.item-inner .item-container .button-group div {
+    float: none;
+    display: inline-block;
+}
+.item-inner .item-container .button-group .price {
+    line-height: 35px;
+}
+
+.item-inner .item-container .button-group .button {
+    float: right;
 }
 
 .owl-theme .owl-controls .owl-buttons div {

@@ -1,16 +1,6 @@
-# Prevent Directoy listing
 Options -Indexes
-# SEO URL Settings
 RewriteEngine On
-# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/
 RewriteBase /
-
-#RewriteRule ^steiff/womo(.*)$ http://little-house.com.ua/steiff-dir/womo$1 [L,NC]
-#RewriteRule ^steiff/lofficiel(.*)$ http://little-house.com.ua/steiff-dir/lofficiel$1 [L,NC]
-
-#RewriteCond %{QUERY_STRING} ^route=common/home$
-#RewriteCond %{REQUEST_METHOD} !^POST$
-#RewriteRule ^index\.php$ http://%{HTTP_HOST}? [R=301,L]
 
 RewriteRule ^system/download/(.*) index.php?route=error/not_found [L]
 RewriteCond %{REQUEST_FILENAME} !-f

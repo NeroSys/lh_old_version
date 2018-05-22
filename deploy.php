@@ -14,7 +14,7 @@ set('repository', 'git@bitbucket.org:little-house/little-house.com.ua_2.2.git');
 set('git_tty', true);
 
 // Shared files/dirs between deploys 
-set('shared_files', ['config/local.yml', '.htaccess']);
+set('shared_files', ['config/local.yml', 'web/.htaccess']);
 set('shared_dirs', ['logs', 'web/image', 'web/storage']);
 
 // Writable dirs by web server 

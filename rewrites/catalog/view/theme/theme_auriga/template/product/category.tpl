@@ -98,15 +98,20 @@
                                                     <?php
                                                     switch($option_group['name']){
                                                         case 'Размер':
-                                                            $class_color = 'opt-style-1'; break;
+                                                            $class_color = 'opt-style-1';
+                                                            $option_name = 'Размеры';
+                                                            break;
                                                         case 'Цвет':
-                                                            $class_color = 'opt-style-2'; break;
+                                                            $class_color = 'opt-style-2';
+                                                            $option_name = 'Цвета';
+                                                            break;
                                                         default:
                                                             $class_color = '';
+                                                            $option_name = $option_group['name'];
                                                     }
                                                     ?>
                                                     <div class="product-grid-options">
-                                                        <p class="optin-title"><?php echo $option_group['name']; ?></p>
+                                                        <p><b><?php echo $option_name; ?>:</b></p>
                                                         <ul class="<?php echo $class_color; ?>">
                                                             <?php foreach ($option_group['product_option_value'] as $option) { ?>
                                                             <li><?php echo $option; ?></li>
@@ -118,11 +123,20 @@
                                                 <?php } ?>
                                                 <div class="product-actions">
                                                     <div class="button-group">
-                                                        <div class="add-to-links">
-                                                            <div class="cart"><button type="button" data-toggle="tooltip" title="<?php echo $button_cart; ?>" onclick="cart.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_cart; ?></span></button></div>
-                                                            <div class="wishlist"><button type="button" data-toggle="tooltip" title="<?php echo $button_wishlist; ?>" onclick="wishlist.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_wishlist; ?></span></button></div>
-                                                            <div class="compare"><button type="button" data-toggle="tooltip" title="<?php echo $button_compare; ?>" onclick="compare.add('<?php echo $product['product_id']; ?>');"><span><?php echo $button_compare; ?></span></button></div>
+                                                        <div class="price">
+                                                            <?php if (!$product['special']) { ?>
+                                                            <?php echo $product['price']; ?>
+                                                            <?php } else { ?>
+                                                            <span class="price-new"><?php echo $product['special']; ?></span> <span class="price-old"><?php echo $product['price']; ?></span>
+                                                            <?php } ?>
+                                                            <?php if ($product['tax']) { ?>
+                                                            <span class="price-tax"><?php echo $text_tax; ?> <?php echo $product['tax']; ?></span>
+                                                            <?php } ?>
                                                         </div>
+                                                        <div class="button">
+                                                            <a class="btn btn-lg btn-primary"><i class="fa fa-eye" aria-hidden="true"></i><span class="md-visible lg-visible"> Просмотр</span></a>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
