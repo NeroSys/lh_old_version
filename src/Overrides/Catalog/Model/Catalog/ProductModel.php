@@ -297,9 +297,17 @@ class ProductModel extends \ModelCatalogProduct
 
         $query = $this->db->query($sql);
 
+        $min_price = 0;
+        $max_price = 0;
+		$prices = [];
         foreach ($query->rows as $result) {
+        	$current_price = $result['discount'] ? $result['discount'] : $result['price'];
+			$min_price = ($current_price < $min_price || $min_price === 0) ? $current_price : $min_price;
+			$max_price = ($result['price'] > $max_price || $max_price === 0) ? $result['price'] : $max_price;
+			$prices = $max_price > $min_price ? ['min' => $min_price, 'max' => $max_price] : [];
             $product_data[$result['product_id']] = $result;
-            $product_data[$result['product_id']]['price']  = ($result['discount'] ? $result['discount'] : $result['price']);
+			$product_data[$result['product_id']]['price'] = $result['price'];
+            $product_data[$result['product_id']]['prices'] = $prices;
 			$product_data[$result['product_id']]['options'] = $this->getProductOptionsByUniqueName($result['product_id']);
         }
 

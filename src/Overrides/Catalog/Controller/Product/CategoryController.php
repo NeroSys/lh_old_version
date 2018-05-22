@@ -442,9 +442,17 @@ class CategoryController extends \Controller
                 $image = $this->model_tool_image->resize('placeholder.png', $this->config->get($this->config->get('config_theme') . '_image_product_width'), $this->config->get($this->config->get('config_theme') . '_image_product_height'));
             }
 
+			$prices = [];
+
             if ($this->customer->isLogged() || !$this->config->get('config_customer_price')) {
                 $price = $this->currency->format($this->tax->calculate($result['price'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
-            } else {
+                if(isset($result['prices']['min'])){
+					$prices['min'] = $this->currency->format($this->tax->calculate($result['prices']['min'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				}
+				if(isset($result['prices']['max'])){
+					$prices['max'] = $this->currency->format($this->tax->calculate($result['prices']['max'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
+				}
+			} else {
                 $price = false;
             }
 
@@ -482,6 +490,7 @@ class CategoryController extends \Controller
                 'description' => $this->model_catalog_product->generateProductDescription($result['product_id']),
                 'attributes' => $product_attributes,
                 'price' => $price,
+				'prices' => $prices,
                 'special' => $special,
                 'tax' => $tax,
                 'minimum' => $result['minimum'] > 0 ? $result['minimum'] : 1,
