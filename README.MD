@@ -42,15 +42,14 @@
     - Для сервера с системой деплоя - разместить в ``` ../../shared ```
 
 
-        Options -Indexes
-        RewriteEngine On
-        RewriteBase /
-        
-        RewriteRule ^system/download/(.*) index.php?route=error/not_found [L]
-        RewriteCond %{REQUEST_FILENAME} !-f
-        RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css|svg)
-        RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]>
+    Options -Indexes
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^system/download/(.*) index.php?route=error/not_found [L]
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} !.*\.(ico|gif|jpg|jpeg|png|js|css|svg)
+    RewriteRule ^([^?]*) index.php?_route_=$1 [L,QSA]>
 
 
 ### Возможные ошибки установки:
@@ -74,6 +73,6 @@ Deploy работает в полуавтоматическом режиме.
 
 ``` php bin/deployer.php deploy prod ```
 
-## <a name="Integration"></a> Интеграция
+## Интеграция
 
 - [Документация](https://bitbucket.org/little-house/from1ctoweb/src/master/README.MD)
