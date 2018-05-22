@@ -6,7 +6,7 @@
 - [Deploy](#Deploy)
 - [Обмен данными с 1С](#Integration)
 
-##<a name="Features"></a> Особенности
+## Особенности
 - CMS OpenCart установлена в проекте в качестве пакета
 - CMS пропатчена. См. папку  ``` /patches ```
 - Базовая функциональность CMS переопределяется в папках  ``` /rewrites ``` и ``` /src/Overrides  ```
@@ -21,7 +21,7 @@
 - Добавлена symfony-console 
 - Добавлен deployer
 
-##<a name="Requirements"></a> Технические требования
+## Технические требования
 
 - php7.1
 - apache2
@@ -30,7 +30,7 @@
 - пример [Dockerfile](/doc/docker/Dockerfile)
 
 
-##<a name="Install"></a> Установка
+## Установка
 
 - git clone git@bitbucket.org:little-house/little-house.com.ua_2.2.git
 - ``` composer install ```
@@ -59,7 +59,7 @@
 - Нет соединения с БД. Включите отображение ошибок. Настройте параметры подключения
 - Не установлен Memcached
 
-##<a name="Deploy"></a> Деплой
+## Деплой
 
 Deploy работает в полуавтоматическом режиме.
 Для выкатки сайта используется пакет deployer/deployer (https://github.com/deployphp/deployer) никаких модификаций его не делалось. читайте базовый faq по этому пакету.
@@ -74,6 +74,6 @@ Deploy работает в полуавтоматическом режиме.
 
 ``` php bin/deployer.php deploy prod ```
 
-##<a name="Integration"></a> Интеграция
+## <a name="Integration"></a> Интеграция
 
 - [Документация](https://bitbucket.org/little-house/from1ctoweb/src/master/README.MD)
