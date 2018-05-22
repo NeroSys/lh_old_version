@@ -65,7 +65,7 @@
             <?php echo $content_bottom; ?></div>
         <?php echo $column_right; ?></div>
 </div>
-<script src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCLMYSWmhRhzAMf-hLcMafs3S-E3ifStjE" type="text/javascript"></script>
+<script src="https://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCLMYSWmhRhzAMf-hLcMafs3S-E3ifStjE" type="text/javascript"></script>
 <div id="map" style="height:500px; width:100%"></div>
 <script type="text/javascript">
 

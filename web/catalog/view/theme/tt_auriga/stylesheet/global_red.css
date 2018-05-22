@@ -2079,7 +2079,8 @@ a.btn {
     padding: 0;
     background: url("../image/bg_vertical.png") repeat-x scroll 0 50%;
 }
-.category .list-group li a.active{
+.category .list-group li a.active,
+.category .list-group li a.active b{
     color: #e84c3d;
 }
 
@@ -4566,7 +4567,6 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
     .item-inner .price {
         min-height: 30px;
         display: inline-block;
-        width: 100%;
     }
 
     .product-list .button-group {
