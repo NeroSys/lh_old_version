@@ -297,17 +297,24 @@ class ProductModel extends \ModelCatalogProduct
 
         $query = $this->db->query($sql);
 
-        $min_price = 0;
-        $max_price = 0;
+        $min_price = [];
+        $max_price = [];
 		$prices = [];
         foreach ($query->rows as $result) {
-        	$current_price = $result['discount'] ? $result['discount'] : $result['price'];
-			$min_price = ($current_price < $min_price || $min_price === 0) ? $current_price : $min_price;
-			$max_price = ($result['price'] > $max_price || $max_price === 0) ? $result['price'] : $max_price;
-			$prices = $max_price > $min_price ? ['min' => $min_price, 'max' => $max_price] : [];
+        	if(!isset($max_price[$result['product_id']]))
+				$max_price[$result['product_id']] = 0;
+			if(!isset($min_price[$result['product_id']]))
+				$min_price[$result['product_id']] = 0;
+			if(!isset($current_price[$result['product_id']]))
+				$current_price[$result['product_id']] = 0;
+
+        	$current_price[$result['product_id']] = $result['discount'] ? $result['discount'] : $result['price'];
+			$min_price[$result['product_id']] = ($current_price[$result['product_id']] < $min_price[$result['product_id']] || $min_price[$result['product_id']] === 0) ? $current_price[$result['product_id']] : $min_price[$result['product_id']];
+			$max_price[$result['product_id']] = ($result['price'] > $max_price[$result['product_id']] || $max_price[$result['product_id']] === 0) ? $result['price'] : $max_price[$result['product_id']];
+			$prices[$result['product_id']] = $max_price[$result['product_id']] > $min_price[$result['product_id']] ? ['min' => $min_price[$result['product_id']], 'max' => $max_price[$result['product_id']]] : [];
             $product_data[$result['product_id']] = $result;
 			$product_data[$result['product_id']]['price'] = $result['price'];
-            $product_data[$result['product_id']]['prices'] = $prices;
+            $product_data[$result['product_id']]['prices'] = $prices[$result['product_id']];
 			$product_data[$result['product_id']]['options'] = $this->getProductOptionsByUniqueName($result['product_id']);
         }
 
