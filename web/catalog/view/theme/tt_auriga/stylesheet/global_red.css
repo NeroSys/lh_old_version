@@ -82,17 +82,17 @@ p {
 
 #page {min-height: 100%;position: relative;}
 #page .content {
-    padding-bottom: 222px;
+    padding-bottom: 252px;
 }
 #page .content .text-container {
     padding-bottom: 50px;
 }
 #page footer {
-    position: absolute;
-    left: 0;
-    bottom: 40px;
-    width: 100%;
-    height: 222px;
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	width: 100%;
+	height: 252px;
 }
 #content h1, #content h2 {
     font-size: 24px;
@@ -1223,7 +1223,7 @@ div.required .control-label:before {
 
 .footer {
     background: #3a3a3a;
-    margin: 40px 0 0;
+    margin: 0;
     padding: 30px 0 20px;
     width: 100%;
 }
@@ -1486,7 +1486,7 @@ buttons .close:hover {
 }
 
 .btn, button {
-    background: #e84c3d;
+    background: #fa616d;
     border: 0 none;
     font-size: 14px;
     line-height: 15px;
@@ -3804,10 +3804,13 @@ a:hover, .item-inner:hover, .item-inner .button-group .cart button:hover span, .
 }
 .item-inner .item-container .button-group .price {
     line-height: 35px;
+	position: relative;
+	float: left;
 }
 
 .item-inner .item-container .button-group .button {
     float: right;
+	margin-bottom: 10px;
 }
 
 .owl-theme .owl-controls .owl-buttons div {
@@ -5172,7 +5175,7 @@ button:hover.mfp-close{background-color: transparent}
 #product {min-height: 350px;}
 
 #product .form-group-actions .add-to-links {padding: 0; border-bottom: none}
-#product .form-group-actions .add-to-links .btn-group {display: inline-block; margin-left: 10px}
+#product .form-group-actions .add-to-links .btn-group {display: inline-block; margin-left: 10px; height: 46px;}
 #product .form-group-actions .add-to-links button {
     height: 46px;
     width: 46px;

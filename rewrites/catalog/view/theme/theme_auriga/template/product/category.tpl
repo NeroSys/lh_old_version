@@ -131,7 +131,7 @@
                                                             <?php } ?>
                                                         </div>
                                                         <div class="button">
-                                                            <a class="btn btn-lg btn-primary"><i class="fa fa-eye" aria-hidden="true"></i><span class="md-visible lg-visible"> Просмотр</span></a>
+                                                            <a class="btn btn-lg btn-primary" href="<?php echo $product['href']; ?>"><i class="fa fa-eye" aria-hidden="true"></i><span class="md-visible lg-visible"> Просмотр</span></a>
                                                         </div>
 
                                                     </div>
