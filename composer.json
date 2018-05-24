@@ -8,6 +8,10 @@
     {
       "type": "vcs",
       "url": "https://bitbucket.org/little-house/from1ctoweb"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/cepeus/seo-generator"
     }
   ],
   "require": {
@@ -27,7 +31,8 @@
     "apix/log": "^1.2",
     "nette/mail": "^2.4",
     "nicmart/tree": "^0.2.7",
-    "levgenij/nova-poshta-api-2": "^1.0"
+    "levgenij/nova-poshta-api-2": "^1.0",
+    "cepeus/seo-generator": "*"
   },
   "authors": [
     {
@@ -54,5 +59,8 @@
         "wrap all queries to transactions": "patches/migration_wrapped_to_transactions.patch"
       }
     }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7"
   }
 }

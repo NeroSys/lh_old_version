@@ -1,7 +1,0 @@
-<?php
-/**
- * @see https://deployer.org/docs/installation
- *
- */
-require_once dirname(__DIR__).'/vendor/deployer/deployer/bin/dep';
-
