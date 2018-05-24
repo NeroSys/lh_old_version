@@ -5376,9 +5376,6 @@ app-product-options form > div.form-group {
     padding: 1px 5px;
     display: inline-block;
     margin: 0 5px 5px 0;
-    border: #555555 1px solid;
+    border:#b2b2b2 1px solid;
 }
 .product-grid-options ul li:last-child {margin-right: 0;}
-.product-grid-options ul.opt-style-1 li{border-color: #5b7f98;}
-.product-grid-options ul.opt-style-2 li{border-color: #6da26e;}
-.product-grid-options ul.opt-style-3 li{border-color: #765388;}
