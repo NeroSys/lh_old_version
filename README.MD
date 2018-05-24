@@ -55,12 +55,12 @@ Deploy работает в полуавтоматическом режиме.
 
 Посмотреть все доступные команды: 
 
-``` php bin/deployer.php ```
+``` php bin/deployer ```
 
 Например, для выкатки на прод используйте комманду 
 
-``` php bin/deployer.php deploy prod ```
+``` php bin/deployer deploy prod ```
 
 ## Интеграция
 
-- [Документация](https://bitbucket.org/little-house/from1ctoweb/src/master/README.MD)
+- [Документация](https://bitbucket.org/little-house/from1ctoweb/)
