@@ -104,6 +104,7 @@ class ProductTreat extends AbstractTreater
             if(null === $entity->product_description){ $entity->product_description = new ProductDescription(); }
             $entity->product_description->product_id = $entity->id;
             $entity->product_description->name = $productItem->getName();
+			$entity->product_description->meta_title = $productItem->getName();
             $entity->product_description->language_id = ProductProcessor::OPENCART_LANGUAGE_ID;
             $entity->product_description->save();
 
