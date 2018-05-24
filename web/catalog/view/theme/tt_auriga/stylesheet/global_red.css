@@ -549,6 +549,7 @@ div.required .control-label:before {
 .banner-hover .bg-bottom .content {
     margin-top: 10px;
     color: #fff;
+    padding-bottom: 0 !important;
 }
 
 .banner-slider .banner-box1 .banner-hover {
@@ -1638,8 +1639,8 @@ a.btn {
     position: relative;
 }
 
-.product-container * {position: relative}
-
+.product-container * {position: relative; cursor: default}
+.product-container a * {cursor: pointer}
 .product-container .item-inner {
     overflow: hidden;
 }
@@ -5372,14 +5373,11 @@ app-product-options form > div.form-group {
 .product-grid-options .optin-title {font-weight: bold}
 .product-grid-options ul {margin: 0; padding: 0}
 .product-grid-options ul li {
-    color:#fff;
     padding: 1px 5px;
     display: inline-block;
     margin: 0 5px 5px 0;
-    background-color: #555555;
-    border-radius: 2px;
 }
-.product-grid-options ul li:last-child {margin-right: 0}
-.product-grid-options ul.opt-style-1 li{background-color: #5b7f98;}
-.product-grid-options ul.opt-style-2 li{background-color: #6da26e;}
-.product-grid-options ul.opt-style-3 li{background-color: #765388;}
+.product-grid-options ul li:last-child {margin-right: 0; border: #555555 1px solid}
+.product-grid-options ul.opt-style-1 li{border-color: #5b7f98;}
+.product-grid-options ul.opt-style-2 li{border-color: #6da26e;}
+.product-grid-options ul.opt-style-3 li{border-color: #765388;}
